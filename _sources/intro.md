@@ -1,11 +1,7 @@
-# Welcome to your Jupyter Book
+# Selamat Datang di Dokumentasi Proyek Pendata
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Halo! Saya **Fadimas Sakmal** (NIM: 240411100228), mahasiswa Teknik Informatika dari **Universitas Trunojoyo Madura**. 
 
-Check out the content pages bundled with this sample book to see more.
+Web statis ini disusun sebagai media dokumentasi untuk tugas mata kuliah **Penambangan Data**. Di sini, saya akan membagikan hasil eksplorasi data, mulai dari pengolahan dataset (seperti Iris dataset) hingga implementasi algoritma menggunakan berbagai *tools* seperti Orange, KNIME, dan PostgreSQL.
 
-```{tableofcontents}
-```
+Semoga dokumentasi ini bermanfaat!
