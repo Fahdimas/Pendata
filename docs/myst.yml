@@ -1,15 +1,5 @@
-# See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  id: 71f885c2-3e67-48fc-8078-c45c66529523
-  # title:
-  # description:
-  # keywords: []
-  # authors: []
-  github: https://github.com/Fahdimas/Pendata
-  # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
+  title: Pendata Fadimas
 site:
   template: book-theme
-  # options:
-  #   favicon: favicon.ico
-  #   logo: site_logo.png
