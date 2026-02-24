@@ -6,9 +6,9 @@ author: Fahdimas Sakmal
 execute:
   execute_notebooks: "off"
 
-# Pengaturan HTML (Logo profil normal tanpa edit CSS)
+# Pengaturan HTML (Panggil logo dari folder _static)
 html:
-  logo: logo.png
+  logo: _static/logo.png
 
 # Define the name of the latex output file for PDF builds
 latex:
