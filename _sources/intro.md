@@ -11,3 +11,7 @@ Di dalam web ini, saya mendokumentasikan berbagai hal yang sedang saya pelajari,
 * 💻 **Web Development**: Pengembangan aplikasi dan pembuatan web statis.
 
 Terima kasih sudah berkunjung! Silakan lihat-lihat menu di samping untuk detail proyek saya.
+
+Klik di sini untuk melihat [Data Understanding](docs/Data-Understanding.ipynb)
+Pilih menu di samping untuk melihat analisis data.
+update baru 
