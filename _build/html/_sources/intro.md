@@ -1,22 +1,23 @@
 # Welcome to My Data Mining Project
 
-Selamat datang di dokumentasi proyek Data Mining saya. Website ini disusun untuk memenuhi tugas praktikum dengan menggunakan dataset Iris.
+Selamat datang di dokumentasi proyek praktikum Data Mining saya. Website ini disusun untuk mendokumentasikan proses pengolahan data menggunakan dataset Iris dengan mengikuti standar industri.
 
-### Identitas Mahasiswa
-**Nama:** Fadimas Akmal  
-**NIM:** 240411100228
+## Identitas Mahasiswa
+* **Nama:** Fadimas Akmal
+* **NIM:** 240411100228
+* **Program Studi:** Teknik Informatika
+* **Instansi:** Universitas Trunojoyo Madura
 
 ---
 
-### Alur Proyek (CRISP-DM)
-Berikut adalah tahapan-tahapan yang saya lakukan dalam proyek ini. Silakan klik link di bawah untuk menuju ke setiap bab:
+## Daftar Materi
+Berikut adalah tahapan lengkap yang dibahas dalam website ini:
 
-1. [**Business Understanding**](./docs/Bussiness-Understanding.ipynb)
-2. [**Data Understanding**](./docs/Data-Understanding.ipynb)
-3. [**Data Preparation**](./docs/Data-Preparation.ipynb)
-4. [**Modeling**](./docs/Modeling.ipynb)
-5. [**Evaluation**](./docs/Evaluation.ipynb)
-6. [**Deployment**](./docs/Deployment.ipynb)
----
-
-Semoga dokumentasi ini memberikan gambaran yang jelas mengenai proses analisis data yang telah saya lakukan.
+1. [**Pengantar Data Mining**](./docs/Pengantar-Data-Mining.ipynb)
+2. [**Memahami Data**](./docs/Memahami-Data.ipynb)
+3. [**Eksplorasi Data Iris**](./docs/Eksplorasi-Data-Iris.ipynb)
+4. [**Business Understanding**](./docs/Bussiness-Understanding.ipynb)
+5. [**Data Preparation**](./docs/Data-Preparation.ipynb)
+6. [**Modeling**](./docs/Modeling.ipynb)
+7. [**Evaluation**](./docs/Evaluation.ipynb)
+8. [**Deployment**](./docs/Deployment.ipynb)

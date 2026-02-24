@@ -1,16 +1,22 @@
 # Book settings
-# Learn more at https://jupyterbook.org/customize/config.html
-
-# Project information
 title: Pendata Fadimas
 author: Fahdimas Sakmal
-logo: logo.png
+
+# Project information
+# Hapus baris logo yang di atas ini agar tidak bentrok
 
 # Execution settings
 execute:
-  execute_notebooks: "off"  # Ubah jadi "off" dulu agar build sukses tanpa me-run kode
+  execute_notebooks: "off"
 
-# ... sisa pengaturan lainnya ...
+# Pengaturan HTML (Tempat logo dan CSS yang benar)
+html:
+  logo: _static/logo.png
+  extra_css:
+    - _static/custom.css
+  favicon: _static/logo.png
+  use_repository_button: true
+  use_issues_button: true
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -23,12 +29,6 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
-  path_to_book: docs  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
-
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
-html:
-  use_issues_button: true
-  use_repository_button: true
+  url: https://github.com/Fadimas-Akmal/Pendata  # Pastikan ini link repo kamu sendiri ya
+  path_to_book: docs
+  branch: main

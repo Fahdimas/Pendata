@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Business Understanding &#8212; Pendata Fadimas</title>
+    <title>Pengantar Data Mining &#8212; Pendata Fadimas</title>
   
   
   
@@ -63,12 +63,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Bussiness-Understanding';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Pengantar-Data-Mining';</script>
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data Preparation" href="Data-Preparation.html" />
-    <link rel="prev" title="Eksplorasi Data Iris" href="Eksplorasi-Data-Iris.html" />
+    <link rel="next" title="Memahami Karakteristik Data" href="Memahami-Data.html" />
+    <link rel="prev" title="Welcome to My Data Mining Project" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -170,10 +170,10 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Memahami-Data.html">Memahami Karakteristik Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Eksplorasi-Data-Iris.html">Eksplorasi Data Iris</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Business Understanding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bussiness-Understanding.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Data-Preparation.html">Data Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Modeling.html">Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Evaluation.html">Evaluation</a></li>
@@ -249,7 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/Fadimas-Akmal/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/Bussiness-Understanding.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Fadimas-Akmal/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/Pengantar-Data-Mining.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +279,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/docs/Bussiness-Understanding.ipynb" target="_blank"
+      <li><a href="../_sources/docs/Pengantar-Data-Mining.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Business Understanding</h1>
+    <h1>Pengantar Data Mining</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,10 +373,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-bisnis-business-objectives">1. Menentukan Tujuan Bisnis (Business Objectives)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-assess-situation">2. Menilai Situasi (Assess Situation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-data-mining-data-mining-goals">3. Menentukan Tujuan Data Mining (Data Mining Goals)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-rencana-proyek-project-plan">4. Membuat Rencana Proyek (Project Plan)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">1. Apa itu Data Mining?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">2. Keunggulan Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">3. Proses Data Mining (CRISP-DM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enam-tahapan-crisp-dm">Enam Tahapan CRISP-DM:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-utama-data-mining">4. Tugas Utama Data Mining</a></li>
 </ul>
             </nav>
         </div>
@@ -388,35 +391,47 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="business-understanding">
-<h1>Business Understanding<a class="headerlink" href="#business-understanding" title="Permalink to this heading">#</a></h1>
-<p>Tahap ini merupakan fase pertama dalam metode CRISP-DM. Fokus pada tahap ini adalah memahami tujuan dan kebutuhan dari perspektif bisnis atau penelitian, kemudian menerjemahkannya ke dalam definisi masalah data mining.</p>
-<section id="menentukan-tujuan-bisnis-business-objectives">
-<h2>1. Menentukan Tujuan Bisnis (Business Objectives)<a class="headerlink" href="#menentukan-tujuan-bisnis-business-objectives" title="Permalink to this heading">#</a></h2>
-<p>Tujuan utama dari analisis dataset Iris ini adalah untuk membangun model klasifikasi yang mampu membedakan jenis bunga Iris secara akurat berdasarkan karakteristik fisiknya. Hal ini penting dalam bidang botani untuk identifikasi spesies secara otomatis.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="pengantar-data-mining">
+<h1>Pengantar Data Mining<a class="headerlink" href="#pengantar-data-mining" title="Permalink to this heading">#</a></h1>
+<p>Halaman ini berisi ringkasan konsep dasar mengenai apa itu data mining, keunggulannya, serta metodologi kerja yang digunakan dalam industri.</p>
+<section id="apa-itu-data-mining">
+<h2>1. Apa itu Data Mining?<a class="headerlink" href="#apa-itu-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Data mining adalah proses ekstraksi informasi atau pola yang penting, sebelumnya tidak diketahui, dan berpotensi memberikan manfaat dari kumpulan data yang sangat besar.</p>
+<p>Seiring dengan ledakan volume data digital, data mining menjadi solusi untuk mengubah tumpukan data mentah menjadi pengetahuan yang berguna. Proses ini sering disebut juga sebagai <strong>Knowledge Discovery in Databases (KDD)</strong>, analisis pola, atau kecerdasan bisnis.</p>
 </section>
-<section id="menilai-situasi-assess-situation">
-<h2>2. Menilai Situasi (Assess Situation)<a class="headerlink" href="#menilai-situasi-assess-situation" title="Permalink to this heading">#</a></h2>
-<p>Dataset Iris yang digunakan adalah dataset standar yang sudah teruji kualitasnya. Tantangan dalam situasi ini adalah adanya kemiripan fitur antara spesies <em>Iris-versicolor</em> dan <em>Iris-virginica</em>, sehingga diperlukan metode analisis yang tepat untuk membedakannya.</p>
+<section id="keunggulan-data-mining">
+<h2>2. Keunggulan Data Mining<a class="headerlink" href="#keunggulan-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Dibandingkan dengan analisis statistik tradisional yang lebih banyak melihat ke masa lalu, data mining menawarkan kelebihan sebagai berikut:</p>
+<ol class="arabic simple">
+<li><p><strong>Pemahaman Data yang Mendalam</strong>: Mampu menemukan pola-pola tersembunyi yang sebelumnya tidak terlihat secara manual.</p></li>
+<li><p><strong>Kemampuan Prediksi</strong>: Memungkinkan pembuatan model untuk memprediksi tren di masa depan, sehingga membantu dalam pengambilan keputusan yang lebih baik.</p></li>
+</ol>
 </section>
-<section id="menentukan-tujuan-data-mining-data-mining-goals">
-<h2>3. Menentukan Tujuan Data Mining (Data Mining Goals)<a class="headerlink" href="#menentukan-tujuan-data-mining-data-mining-goals" title="Permalink to this heading">#</a></h2>
-<p>Tujuan teknis dari proyek ini adalah:</p>
+<section id="proses-data-mining-crisp-dm">
+<h2>3. Proses Data Mining (CRISP-DM)<a class="headerlink" href="#proses-data-mining-crisp-dm" title="Permalink to this heading">#</a></h2>
+<p>Dalam praktiknya, data mining mengikuti standar proses lintas industri yang dikenal sebagai <strong>CRISP-DM</strong> (<em>Cross-Industry Standard Process for Data Mining</em>). Model ini memberikan gambaran siklus hidup suatu proyek penambangan data.</p>
+<p><img alt="Siklus CRISP-DM" src="../_images/crisp.png" />
+<em>Gambar: Siklus standar CRISP-DM yang terdiri dari 6 tahapan.</em></p>
+<section id="enam-tahapan-crisp-dm">
+<h3>Enam Tahapan CRISP-DM:<a class="headerlink" href="#enam-tahapan-crisp-dm" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Melakukan eksplorasi data untuk melihat pola penyebaran spesies.</p></li>
-<li><p>Mengidentifikasi fitur (seperti panjang/lebar mahkota) yang paling berpengaruh terhadap jenis spesies.</p></li>
-<li><p>Membangun model yang memiliki tingkat akurasi tinggi dalam klasifikasi.</p></li>
+<li><p><strong>Business Understanding</strong>: Memahami tujuan proyek dan kebutuhan dari perspektif bisnis, lalu menentukan rencana proyek.</p></li>
+<li><p><strong>Data Understanding</strong>: Memeriksa kualitas data, volume, serta melakukan eksplorasi awal untuk mengenali pola data.</p></li>
+<li><p><strong>Data Preparation</strong>: Tahap pembersihan dan pemilihan data mentah menjadi data akhir yang siap diproses.</p></li>
+<li><p><strong>Modeling</strong>: Memilih dan menerapkan teknik algoritma (seperti klasifikasi atau clustering) pada data.</p></li>
+<li><p><strong>Evaluation</strong>: Menilai hasil model untuk memastikan bahwa ia benar-benar menjawab tujuan bisnis yang ditetapkan.</p></li>
+<li><p><strong>Deployment</strong>: Menerapkan hasil analisis ke dalam operasional nyata atau sistem laporan.</p></li>
 </ul>
 </section>
-<section id="membuat-rencana-proyek-project-plan">
-<h2>4. Membuat Rencana Proyek (Project Plan)<a class="headerlink" href="#membuat-rencana-proyek-project-plan" title="Permalink to this heading">#</a></h2>
-<p>Langkah-langkah yang akan dilakukan dalam proyek ini meliputi:</p>
-<ol class="arabic simple">
-<li><p><strong>Data Understanding</strong>: Mengenal karakteristik data (Orange &amp; Python).</p></li>
-<li><p><strong>Data Preparation</strong>: Membersihkan atau memformat data jika diperlukan.</p></li>
-<li><p><strong>Modeling</strong>: Menerapkan algoritma klasifikasi.</p></li>
-<li><p><strong>Evaluation</strong>: Menghitung akurasi model.</p></li>
-</ol>
+</section>
+<section id="tugas-utama-data-mining">
+<h2>4. Tugas Utama Data Mining<a class="headerlink" href="#tugas-utama-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Aktivitas utama dalam proses penambangan data dianalogikan seperti menambang logam mulia dari lahan sumbernya. Fokus utamanya meliputi:</p>
+<ul class="simple">
+<li><p><strong>Deskripsi</strong>: Menjelaskan pola yang ada dalam data.</p></li>
+<li><p><strong>Klasifikasi</strong>: Menentukan kategori data (seperti mengelompokkan spesies bunga Iris).</p></li>
+<li><p><strong>Prediksi</strong>: Memperkirakan nilai atau kondisi di masa mendatang.</p></li>
+</ul>
 </section>
 </section>
 
@@ -451,20 +466,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Eksplorasi-Data-Iris.html"
+       href="../intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Eksplorasi Data Iris</p>
+        <p class="prev-next-title">Welcome to My Data Mining Project</p>
       </div>
     </a>
     <a class="right-next"
-       href="Data-Preparation.html"
+       href="Memahami-Data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Preparation</p>
+        <p class="prev-next-title">Memahami Karakteristik Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -484,10 +499,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-bisnis-business-objectives">1. Menentukan Tujuan Bisnis (Business Objectives)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-assess-situation">2. Menilai Situasi (Assess Situation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-data-mining-data-mining-goals">3. Menentukan Tujuan Data Mining (Data Mining Goals)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-rencana-proyek-project-plan">4. Membuat Rencana Proyek (Project Plan)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">1. Apa itu Data Mining?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">2. Keunggulan Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">3. Proses Data Mining (CRISP-DM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enam-tahapan-crisp-dm">Enam Tahapan CRISP-DM:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-utama-data-mining">4. Tugas Utama Data Mining</a></li>
 </ul>
   </nav></div>
 
