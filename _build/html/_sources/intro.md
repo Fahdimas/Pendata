@@ -3,7 +3,7 @@
 Selamat datang di dokumentasi proyek praktikum Data Mining saya. Website ini disusun untuk mendokumentasikan proses pengolahan data menggunakan dataset Iris dengan mengikuti standar industri.
 
 ## Identitas Mahasiswa
-* **Nama:** Fadimas Akmal
+* **Nama:** Fahdimas Akmal
 * **NIM:** 240411100228
 * **Program Studi:** Teknik Informatika
 * **Instansi:** Universitas Trunojoyo Madura

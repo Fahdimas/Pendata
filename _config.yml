@@ -2,21 +2,13 @@
 title: Pendata Fadimas
 author: Fahdimas Sakmal
 
-# Project information
-# Hapus baris logo yang di atas ini agar tidak bentrok
-
 # Execution settings
 execute:
   execute_notebooks: "off"
 
-# Pengaturan HTML (Tempat logo dan CSS yang benar)
+# Pengaturan HTML (Logo profil normal tanpa edit CSS)
 html:
-  logo: _static/logo.png
-  extra_css:
-    - _static/custom.css
-  favicon: _static/logo.png
-  use_repository_button: true
-  use_issues_button: true
+  logo: logo.png
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -29,6 +21,6 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/Fadimas-Akmal/Pendata  # Pastikan ini link repo kamu sendiri ya
+  url: https://github.com/Fadimas-Akmal/Pendata
   path_to_book: docs
   branch: main
