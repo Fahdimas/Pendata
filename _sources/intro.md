@@ -1,22 +1,24 @@
 # Welcome to My Data Mining Project
 
-Selamat datang di dokumentasi proyek Data Mining saya. Website ini disusun dengan menggunakan dataset Iris.
+Selamat datang di dokumentasi proyek praktikum Data Mining saya. Website ini disusun untuk mendokumentasikan proses pengolahan data menggunakan dataset Iris dengan mengikuti standar industri.
 
-### Identitas Mahasiswa
-**Nama:** Fahdimas Akmal  
-**NIM:** 240411100228
+## Identitas Mahasiswa
+* **Nama:** Fadimas Akmal
+* **NIM:** 240411100228
+* **Mata Kuliah:** Penambangan Data
+* **Program Studi:** Teknik Informatika
+
 
 ---
 
-### Alur Proyek (CRISP-DM)
-Berikut adalah tahapan-tahapan yang saya lakukan dalam proyek ini. Silakan klik link di bawah untuk menuju ke setiap bab:
+## Daftar Materi
+Berikut adalah tahapan lengkap yang dibahas dalam website ini:
 
-1. [**Business Understanding**](./docs/Bussiness-Understanding.ipynb)
-2. [**Data Understanding**](./docs/Data-Understanding.ipynb)
-3. [**Data Preparation**](./docs/Data-Preparation.ipynb)
-4. [**Modeling**](./docs/Modeling.ipynb)
-5. [**Evaluation**](./docs/Evaluation.ipynb)
-6. [**Deployment**](./docs/Deployment.ipynb)
----
-
-Semoga dokumentasi ini memberikan gambaran yang jelas mengenai proses analisis data yang telah saya lakukan.
+1. [**Pengantar Data Mining**](./docs/Pengantar-Data-Mining.ipynb) - Konsep dasar dan metodologi CRISP-DM.
+2. [**Memahami Data**](./docs/Memahami-Data.ipynb) - Teori statistik deskriptif dan rumus-rumus dasar.
+3.[**Eksplorasi Data Iris**](./docs/Eksplorasi-Data-Iris.ipynb) - Analisis visual dan statistik dataset Iris. 
+4. [**Business Understanding**](./docs/Bussiness-Understanding.ipynb) - Memahami tujuan dari analisis data.
+5. [**Data Preparation**](./docs/Data-Preparation.ipynb) - Tahap pembersihan dan penyiapan data.
+6. [**Modeling**](./docs/Modeling.ipynb) - Penerapan algoritma data mining.
+7. [**Evaluation**](./docs/Evaluation.ipynb) - Penilaian hasil model yang dibangun.
+8. [**Deployment**](./docs/Deployment.ipynb) - Implementasi hasil analisis.

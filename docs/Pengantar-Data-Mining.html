@@ -65,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Pengantar-Data-Mining';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Business Understanding" href="Bussiness-Understanding.html" />
+    <link rel="next" title="Memahami Karakteristik Data" href="Memahami-Data.html" />
     <link rel="prev" title="Welcome to My Data Mining Project" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,8 +175,8 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memahami-Data.html">Memahami Karakteristik Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bussiness-Understanding.html">Business Understanding</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Data-Understanding.html">Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Data-Preparation.html">Data Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Modeling.html">Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Evaluation.html">Evaluation</a></li>
@@ -376,11 +376,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-data-mining">1. Definisi Data Mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengapa-data-mining-penting">2. Mengapa Data Mining Penting?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-kdd-knowledge-discovery-in-databases">3. Proses KDD (Knowledge Discovery in Databases)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologi-crisp-dm">4. Metodologi CRISP-DM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-utama-data-mining">5. Fungsi Utama Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">1. Apa itu Data Mining?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">2. Keunggulan Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">3. Proses Data Mining (CRISP-DM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enam-tahapan-crisp-dm">Enam Tahapan CRISP-DM:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-utama-data-mining">4. Tugas Utama Data Mining</a></li>
 </ul>
             </nav>
         </div>
@@ -394,53 +396,44 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="pengantar-data-mining">
 <h1>Pengantar Data Mining<a class="headerlink" href="#pengantar-data-mining" title="Permalink to this heading">#</a></h1>
-<p>Halaman ini menjelaskan konsep dasar Data Mining, mengapa ia penting, dan bagaimana prosesnya dilakukan mengikut piawaian industri.</p>
-<section id="definisi-data-mining">
-<h2>1. Definisi Data Mining<a class="headerlink" href="#definisi-data-mining" title="Permalink to this heading">#</a></h2>
-<p>Data Mining adalah proses mengekstraksi informasi atau pola yang menarik dan sebelumnya tidak diketahui dari sekumpulan data yang besar. Ia sering juga disebut sebagai <strong>Knowledge Discovery in Databases (KDD)</strong>.</p>
+<p>Halaman ini berisi ringkasan konsep dasar mengenai apa itu data mining, keunggulannya, serta metodologi kerja yang digunakan dalam industri.</p>
+<section id="apa-itu-data-mining">
+<h2>1. Apa itu Data Mining?<a class="headerlink" href="#apa-itu-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Data mining adalah proses ekstraksi informasi atau pola yang penting, sebelumnya tidak diketahui, dan berpotensi memberikan manfaat dari kumpulan data yang sangat besar.</p>
+<p>Seiring dengan ledakan volume data digital, data mining menjadi solusi untuk mengubah tumpukan data mentah menjadi pengetahuan yang berguna. Proses ini sering disebut juga sebagai <strong>Knowledge Discovery in Databases (KDD)</strong>, analisis pola, atau kecerdasan bisnis.</p>
 </section>
-<section id="mengapa-data-mining-penting">
-<h2>2. Mengapa Data Mining Penting?<a class="headerlink" href="#mengapa-data-mining-penting" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Ledakan Data</strong>: Kita mempunyai terlalu banyak data tetapi kekurangan maklumat berharga.</p></li>
-<li><p><strong>Pengambilan Keputusan</strong>: Membantu organisasi membuat keputusan berdasarkan bukti data, bukan sekadar firasat.</p></li>
-<li><p><strong>Analisis Trend</strong>: Mengenal pasti corak tingkah laku pelanggan atau trend pasaran di masa depan.</p></li>
-</ul>
-</section>
-<section id="proses-kdd-knowledge-discovery-in-databases">
-<h2>3. Proses KDD (Knowledge Discovery in Databases)<a class="headerlink" href="#proses-kdd-knowledge-discovery-in-databases" title="Permalink to this heading">#</a></h2>
-<p>Proses mendapatkan pengetahuan daripada data melibatkan beberapa langkah:</p>
+<section id="keunggulan-data-mining">
+<h2>2. Keunggulan Data Mining<a class="headerlink" href="#keunggulan-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Dibandingkan dengan analisis statistik tradisional yang lebih banyak melihat ke masa lalu, data mining menawarkan kelebihan sebagai berikut:</p>
 <ol class="arabic simple">
-<li><p><strong>Data Cleaning</strong>: Membuang data yang tidak konsisten atau “noise”.</p></li>
-<li><p><strong>Data Integration</strong>: Menggabungkan data dari pelbagai sumber.</p></li>
-<li><p><strong>Data Selection</strong>: Memilih data yang relevan dengan analisis.</p></li>
-<li><p><strong>Data Transformation</strong>: Mengubah data ke dalam bentuk yang sesuai untuk diproses.</p></li>
-<li><p><strong>Data Mining</strong>: Menggunakan algoritma untuk mencari pola.</p></li>
-<li><p><strong>Pattern Evaluation</strong>: Menilai pola yang ditemui.</p></li>
-<li><p><strong>Knowledge Presentation</strong>: Mempersembahkan hasil dalam bentuk visual yang mudah difahami.</p></li>
+<li><p><strong>Pemahaman Data yang Mendalam</strong>: Mampu menemukan pola-pola tersembunyi yang sebelumnya tidak terlihat secara manual.</p></li>
+<li><p><strong>Kemampuan Prediksi</strong>: Memungkinkan pembuatan model untuk memprediksi tren di masa depan, sehingga membantu dalam pengambilan keputusan yang lebih baik.</p></li>
 </ol>
 </section>
-<section id="metodologi-crisp-dm">
-<h2>4. Metodologi CRISP-DM<a class="headerlink" href="#metodologi-crisp-dm" title="Permalink to this heading">#</a></h2>
-<p>Siklus kerja utama yang digunakan dalam projek ini adalah <strong>CRISP-DM</strong> (<em>Cross-Industry Standard Process for Data Mining</em>).</p>
-<p><img alt="Siklus CRISP-DM" src="../_images/crisp.png" /></p>
-<p>Siklus ini terdiri daripada 6 tahap utama:</p>
+<section id="proses-data-mining-crisp-dm">
+<h2>3. Proses Data Mining (CRISP-DM)<a class="headerlink" href="#proses-data-mining-crisp-dm" title="Permalink to this heading">#</a></h2>
+<p>Dalam praktiknya, data mining mengikuti standar proses lintas industri yang dikenal sebagai <strong>CRISP-DM</strong> (<em>Cross-Industry Standard Process for Data Mining</em>). Model ini memberikan gambaran siklus hidup suatu proyek penambangan data.</p>
+<p><img alt="Siklus CRISP-DM" src="../_images/crisp.png" />
+<em>Gambar: Siklus standar CRISP-DM yang terdiri dari 6 tahapan.</em></p>
+<section id="enam-tahapan-crisp-dm">
+<h3>Enam Tahapan CRISP-DM:<a class="headerlink" href="#enam-tahapan-crisp-dm" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Business Understanding</strong>: Menetapkan tujuan projek.</p></li>
-<li><p><strong>Data Understanding</strong>: Memeriksa kualiti dan ciri-ciri data.</p></li>
-<li><p><strong>Data Preparation</strong>: Membersihkan dan menukar format data.</p></li>
-<li><p><strong>Modeling</strong>: Memilih teknik seperti klasifikasi atau clustering.</p></li>
-<li><p><strong>Evaluation</strong>: Memastikan model menepati objektif awal.</p></li>
-<li><p><strong>Deployment</strong>: Menggunakan hasil analisis untuk kegunaan nyata.</p></li>
+<li><p><strong>Business Understanding</strong>: Memahami tujuan proyek dan kebutuhan dari perspektif bisnis, lalu menentukan rencana proyek.</p></li>
+<li><p><strong>Data Understanding</strong>: Memeriksa kualitas data, volume, serta melakukan eksplorasi awal untuk mengenali pola data.</p></li>
+<li><p><strong>Data Preparation</strong>: Tahap pembersihan dan pemilihan data mentah menjadi data akhir yang siap diproses.</p></li>
+<li><p><strong>Modeling</strong>: Memilih dan menerapkan teknik algoritma (seperti klasifikasi atau clustering) pada data.</p></li>
+<li><p><strong>Evaluation</strong>: Menilai hasil model untuk memastikan bahwa ia benar-benar menjawab tujuan bisnis yang ditetapkan.</p></li>
+<li><p><strong>Deployment</strong>: Menerapkan hasil analisis ke dalam operasional nyata atau sistem laporan.</p></li>
 </ul>
 </section>
-<section id="fungsi-utama-data-mining">
-<h2>5. Fungsi Utama Data Mining<a class="headerlink" href="#fungsi-utama-data-mining" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="tugas-utama-data-mining">
+<h2>4. Tugas Utama Data Mining<a class="headerlink" href="#tugas-utama-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Aktivitas utama dalam proses penambangan data dianalogikan seperti menambang logam mulia dari lahan sumbernya. Fokus utamanya meliputi:</p>
 <ul class="simple">
-<li><p><strong>Klasifikasi</strong>: Menentukan kategori bagi data baru (Contoh: Menentukan spesies bunga Iris).</p></li>
-<li><p><strong>Clustering</strong>: Mengelompokkan data berdasarkan kemiripan tanpa kategori awal.</p></li>
-<li><p><strong>Asosiasi</strong>: Menemukan hubungan antara item (Contoh: Produk yang sering dibeli bersama).</p></li>
-<li><p><strong>Regresi</strong>: Memprediksi nilai numerik (Contoh: Ramalan harga rumah).</p></li>
+<li><p><strong>Deskripsi</strong>: Menjelaskan pola yang ada dalam data.</p></li>
+<li><p><strong>Klasifikasi</strong>: Menentukan kategori data (seperti mengelompokkan spesies bunga Iris).</p></li>
+<li><p><strong>Prediksi</strong>: Memperkirakan nilai atau kondisi di masa mendatang.</p></li>
 </ul>
 </section>
 </section>
@@ -485,11 +478,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="Bussiness-Understanding.html"
+       href="Memahami-Data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Business Understanding</p>
+        <p class="prev-next-title">Memahami Karakteristik Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -509,11 +502,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-data-mining">1. Definisi Data Mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengapa-data-mining-penting">2. Mengapa Data Mining Penting?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-kdd-knowledge-discovery-in-databases">3. Proses KDD (Knowledge Discovery in Databases)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologi-crisp-dm">4. Metodologi CRISP-DM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-utama-data-mining">5. Fungsi Utama Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">1. Apa itu Data Mining?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">2. Keunggulan Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">3. Proses Data Mining (CRISP-DM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enam-tahapan-crisp-dm">Enam Tahapan CRISP-DM:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-utama-data-mining">4. Tugas Utama Data Mining</a></li>
 </ul>
   </nav></div>
 
