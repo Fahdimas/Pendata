@@ -1,0 +1,16 @@
+/* Menargetkan logo di menu samping agar berbentuk bulat */
+.site-logo {
+    border-radius: 50% !important;
+    width: 130px !important;
+    height: 130px !important;
+    object-fit: cover !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+    border: 2px solid #3498db; /* Garis tepi biru tipis agar rapi */
+}
+
+/* Mengatur agar teks judul di bawah logo berada di tengah */
+.site-title {
+    text-align: center !important;
+}
