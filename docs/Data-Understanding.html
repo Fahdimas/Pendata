@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1. Eksplorasi Data Menggunakan Orange &#8212; Pendata Fadimas</title>
+    <title>Data Understanding &#8212; Pendata Fadimas</title>
   
   
   
@@ -175,9 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Bussiness-Understanding.html">Business Understanding</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Eksplorasi Data Menggunakan Orange</a></li>
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Data-Preparation.html">Data Preparation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Modeling.html">Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Evaluation.html">Evaluation</a></li>
@@ -367,7 +365,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. Eksplorasi Data Menggunakan Orange</h1>
+    <h1>Data Understanding</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,24 +375,30 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Eksplorasi Data Menggunakan Orange</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja-workflow-orange">Alur Kerja (Workflow) Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-atribut-select-columns">Pemilihan Atribut (Select Columns)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-data-table">Analisis Data Table</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ranking-variabel">Ranking Variabel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-scatter-plot">Visualisasi Scatter Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-korelasi">Analisis Korelasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-kolom-dan-box-plot">Statistik Kolom dan Box Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot-table">Pivot Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-data-understanding">Tahapan Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collect-initial-data">1. Collect Initial Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describe-data">2. Describe Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-data">3. Explore Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-data-quality">4. Verify Data Quality</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-python">2. Eksplorasi Data Menggunakan Python</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-kolom">Deskripsi Kolom</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-orange">1. Eksplorasi Data Menggunakan Orange</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja-workflow-orange">Alur Kerja (Workflow) Orange</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-atribut-select-columns">Pemilihan Atribut (Select Columns)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-data-table">Analisis Data Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ranking-variabel">Ranking Variabel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-scatter-plot">Visualisasi Scatter Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-korelasi">Analisis Korelasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-kolom-dan-box-plot">Statistik Kolom dan Box Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot-table">Pivot Table</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-data-understanding">3. Kesimpulan Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-python">2. Eksplorasi Data Menggunakan Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-kolom">Deskripsi Kolom</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-data-understanding">3. Kesimpulan Data Understanding</a></li>
+</ul>
             </nav>
         </div>
     </div>
@@ -405,58 +409,96 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="eksplorasi-data-menggunakan-orange">
-<h1>1. Eksplorasi Data Menggunakan Orange<a class="headerlink" href="#eksplorasi-data-menggunakan-orange" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-understanding">
+<h1>Data Understanding<a class="headerlink" href="#data-understanding" title="Permalink to this heading">#</a></h1>
+<p><strong>Data Understanding</strong> adalah tahap dalam proses data mining yang bertujuan untuk mengumpulkan, memahami, dan mempelajari data yang akan digunakan sebelum dilakukan pengolahan lebih lanjut. Pada tahap ini, kita mulai berinteraksi langsung dengan data untuk mengetahui isi, kondisi, dan kualitas data tersebut. Tujuannya adalah agar kita memahami data dengan baik sehingga dapat digunakan secara tepat pada tahap berikutnya.</p>
+<section id="tahapan-data-understanding">
+<h2>Tahapan Data Understanding<a class="headerlink" href="#tahapan-data-understanding" title="Permalink to this heading">#</a></h2>
+<section id="collect-initial-data">
+<h3>1. Collect Initial Data<a class="headerlink" href="#collect-initial-data" title="Permalink to this heading">#</a></h3>
+<p>Tahap pertama adalah mengumpulkan data yang akan digunakan dalam proses data mining.</p>
+<ul class="simple">
+<li><p><strong>Penjelasan</strong>: Mengambil data dari berbagai sumber (database/file) yang relevan dengan tujuan bisnis serta membuat laporan pengumpulan data awal.</p></li>
+<li><p><strong>Contoh</strong>: Pada proyek ini, saya mengumpulkan dataset bunga Iris (IRIS.csv) yang berisi karakteristik fisik berbagai spesies.</p></li>
+</ul>
+</section>
+<section id="describe-data">
+<h3>2. Describe Data<a class="headerlink" href="#describe-data" title="Permalink to this heading">#</a></h3>
+<p>Tahap ini bertujuan untuk memahami isi dan karakteristik data yang telah dikumpulkan.</p>
+<ul class="simple">
+<li><p><strong>Penjelasan</strong>: Mengetahui jumlah data, jenis data (angka/teks), serta arti dari setiap atribut atau kolom.</p></li>
+<li><p><strong>Contoh</strong>: Dataset Iris terdiri dari 150 baris dengan kolom: <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>, dan <code class="docutils literal notranslate"><span class="pre">species</span></code>.</p></li>
+</ul>
+</section>
+<section id="explore-data">
+<h3>3. Explore Data<a class="headerlink" href="#explore-data" title="Permalink to this heading">#</a></h3>
+<p>Tahap ini bertujuan untuk mempelajari data lebih dalam dan menemukan informasi awal dari data.</p>
+<ul class="simple">
+<li><p><strong>Penjelasan</strong>: Mencari pola, hubungan, atau tren dalam data menggunakan bantuan tabel atau grafik.</p></li>
+<li><p><strong>Contoh</strong>: Menggunakan scatter plot untuk mengetahui persebaran spesies berdasarkan ukuran mahkota bunga.</p></li>
+</ul>
+</section>
+<section id="verify-data-quality">
+<h3>4. Verify Data Quality<a class="headerlink" href="#verify-data-quality" title="Permalink to this heading">#</a></h3>
+<p>Tahap ini bertujuan untuk memastikan bahwa data yang digunakan memiliki kualitas yang baik.</p>
+<ul class="simple">
+<li><p><strong>Penjelasan</strong>: Mencari data yang kosong (<em>missing values</em>), duplikat, atau salah agar data siap digunakan untuk tahap selanjutnya.</p></li>
+<li><p><strong>Contoh</strong>: Melakukan pengecekan melalui widget Orange atau fungsi Python untuk memastikan tidak ada data pelanggan atau bunga yang kosong.</p></li>
+</ul>
+</section>
+</section>
+<section id="eksplorasi-data-menggunakan-orange">
+<h2>1. Eksplorasi Data Menggunakan Orange<a class="headerlink" href="#eksplorasi-data-menggunakan-orange" title="Permalink to this heading">#</a></h2>
 <p>Kita akan memulai proses Data Understanding dengan tools visual <strong>Orange Data Mining</strong>. Orange membantu kita menganalisis data secara interaktif tanpa perlu menulis kode, namun tetap memberikan insight yang mendalam.</p>
 <section id="alur-kerja-workflow-orange">
-<h2>Alur Kerja (Workflow) Orange<a class="headerlink" href="#alur-kerja-workflow-orange" title="Permalink to this heading">#</a></h2>
+<h3>Alur Kerja (Workflow) Orange<a class="headerlink" href="#alur-kerja-workflow-orange" title="Permalink to this heading">#</a></h3>
 <p>Berikut adalah alur kerja (workflow) yang saya bangun di Orange. Alur ini menggambarkan bagaimana data mengalir dari sumber hingga proses visualisasi dan analisis statistik:</p>
 <p><img alt="Workflow Orange" src="../_images/flow_work.png" /></p>
 <p><em>Gambar di atas menunjukkan hubungan antara widget File, Select Columns, Rank, Data Table, Column Statistics, Pivot Table, Scatter Plot, Correlations, dan Box Plot.</em></p>
 </section>
 <section id="pemilihan-atribut-select-columns">
-<h2>Pemilihan Atribut (Select Columns)<a class="headerlink" href="#pemilihan-atribut-select-columns" title="Permalink to this heading">#</a></h2>
+<h3>Pemilihan Atribut (Select Columns)<a class="headerlink" href="#pemilihan-atribut-select-columns" title="Permalink to this heading">#</a></h3>
 <p>Sebelum memulai analisis, saya menggunakan widget <strong>Select Columns</strong> untuk menentukan variabel mana yang menjadi fitur dan mana yang menjadi target:</p>
 <p><img alt="Select Columns" src="../_images/select_columns.png" /></p>
 </section>
 <section id="analisis-data-table">
-<h2>Analisis Data Table<a class="headerlink" href="#analisis-data-table" title="Permalink to this heading">#</a></h2>
+<h3>Analisis Data Table<a class="headerlink" href="#analisis-data-table" title="Permalink to this heading">#</a></h3>
 <p>Berdasarkan tampilan pada <strong>Data Table</strong>, dataset ini memiliki 150 baris data dan 5 kolom variabel:</p>
 <p><img alt="Data Table" src="../_images/data_table.png" /></p>
 <p>Seluruh data dalam dataset ini lengkap tanpa adanya nilai yang kosong, sehingga dapat langsung digunakan untuk proses analisis.</p>
 </section>
 <section id="ranking-variabel">
-<h2>Ranking Variabel<a class="headerlink" href="#ranking-variabel" title="Permalink to this heading">#</a></h2>
+<h3>Ranking Variabel<a class="headerlink" href="#ranking-variabel" title="Permalink to this heading">#</a></h3>
 <p>Pada bagian <strong>Rank</strong>, dilakukan pemeringkatan variabel berdasarkan seberapa penting variabel tersebut dalam membedakan jenis bunga iris:</p>
 <p><img alt="Ranking Variabel" src="../_images/rank.png" /></p>
 <p>Variabel <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> memiliki nilai tertinggi, yang berarti kedua variabel ini paling berpengaruh dalam menentukan jenis bunga iris.</p>
 </section>
 <section id="visualisasi-scatter-plot">
-<h2>Visualisasi Scatter Plot<a class="headerlink" href="#visualisasi-scatter-plot" title="Permalink to this heading">#</a></h2>
+<h3>Visualisasi Scatter Plot<a class="headerlink" href="#visualisasi-scatter-plot" title="Permalink to this heading">#</a></h3>
 <p>Pada tahap visualisasi data menggunakan fitur <strong>Scatter Plot</strong> di Orange, ditampilkan perbandingan antar variabel. Dari grafik terlihat bahwa data Iris-setosa membentuk kelompok yang cukup terpisah:</p>
 <p><img alt="Scatter Plot Orange" src="../_images/scatter.png" /></p>
 </section>
 <section id="analisis-korelasi">
-<h2>Analisis Korelasi<a class="headerlink" href="#analisis-korelasi" title="Permalink to this heading">#</a></h2>
+<h3>Analisis Korelasi<a class="headerlink" href="#analisis-korelasi" title="Permalink to this heading">#</a></h3>
 <p>Pada tahap analisis menggunakan fitur <strong>Correlations</strong> di Orange, dilakukan perhitungan hubungan antar variabel numerik menggunakan metode Pearson correlation:</p>
 <p><img alt="Korelasi Orange" src="../_images/correlation.png" /></p>
 <p>Berdasarkan hasil, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> memiliki korelasi sangat kuat (+0.963).</p>
 </section>
 <section id="statistik-kolom-dan-box-plot">
-<h2>Statistik Kolom dan Box Plot<a class="headerlink" href="#statistik-kolom-dan-box-plot" title="Permalink to this heading">#</a></h2>
+<h3>Statistik Kolom dan Box Plot<a class="headerlink" href="#statistik-kolom-dan-box-plot" title="Permalink to this heading">#</a></h3>
 <p>Pada bagian <strong>Column Statistics</strong>, ditampilkan ringkasan statistik seperti Mean, Median, Mode, Min, Max, dan Missing values:</p>
 <p><img alt="Column Statistics" src="../_images/statistic.png" /></p>
 <p>Sedangkan <strong>Box Plot</strong> menunjukkan penyebaran data untuk variabel <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> berdasarkan tiap spesies:</p>
 <p><img alt="Box Plot Orange" src="../_images/box_plot.png" /></p>
 </section>
 <section id="pivot-table">
-<h2>Pivot Table<a class="headerlink" href="#pivot-table" title="Permalink to this heading">#</a></h2>
+<h3>Pivot Table<a class="headerlink" href="#pivot-table" title="Permalink to this heading">#</a></h3>
 <p>Pada bagian <strong>Pivot Table</strong>, ditampilkan jumlah data untuk setiap jenis bunga. Terlihat bahwa dataset ini seimbang dengan masing-masing spesies berjumlah 50 data:</p>
 <p><img alt="Pivot Table Orange" src="../_images/pivot.png" /></p>
 </section>
 </section>
 <section id="eksplorasi-data-menggunakan-python">
-<h1>2. Eksplorasi Data Menggunakan Python<a class="headerlink" href="#eksplorasi-data-menggunakan-python" title="Permalink to this heading">#</a></h1>
+<h2>2. Eksplorasi Data Menggunakan Python<a class="headerlink" href="#eksplorasi-data-menggunakan-python" title="Permalink to this heading">#</a></h2>
 <p>Setelah secara visual menggunakan Orange, kita akan memvalidasi data menggunakan library Pandas dan Seaborn di Python untuk mendapatkan statistik yang lebih presisi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -584,7 +626,7 @@ document.write(`
 </div></div></div>
 </div>
 <section id="deskripsi-kolom">
-<h2>Deskripsi Kolom<a class="headerlink" href="#deskripsi-kolom" title="Permalink to this heading">#</a></h2>
+<h3>Deskripsi Kolom<a class="headerlink" href="#deskripsi-kolom" title="Permalink to this heading">#</a></h3>
 <p>Dataset Iris terdiri dari 150 baris dengan atribut berikut:</p>
 <ul class="simple">
 <li><p><strong>Sepal Length/Width</strong>: Ukuran kelopak bunga.</p></li>
@@ -686,7 +728,7 @@ document.write(`
 </section>
 </section>
 <section id="kesimpulan-data-understanding">
-<h1>3. Kesimpulan Data Understanding<a class="headerlink" href="#kesimpulan-data-understanding" title="Permalink to this heading">#</a></h1>
+<h2>3. Kesimpulan Data Understanding<a class="headerlink" href="#kesimpulan-data-understanding" title="Permalink to this heading">#</a></h2>
 <p>Berdasarkan proses eksplorasi yang telah dilakukan menggunakan <strong>Orange Data Mining</strong> dan <strong>Python</strong>, dapat ditarik beberapa kesimpulan penting mengenai dataset Iris:</p>
 <ol class="arabic simple">
 <li><p><strong>Kualitas Data Sangat Baik</strong>: Dataset ini tidak memiliki <em>missing values</em> (0% missing), sehingga sangat siap untuk tahap pemodelan selanjutnya tanpa perlu pembersihan data yang rumit.</p></li>
@@ -699,6 +741,7 @@ document.write(`
 <li><p><strong>Fitur Paling Berpengaruh</strong>: Variabel <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> memiliki korelasi yang sangat kuat (+0.963) dan merupakan fitur kunci dalam menentukan klasifikasi spesies bunga Iris.</p></li>
 </ol>
 <p>Dengan selesainya tahap pemahaman data ini, langkah berikutnya adalah mempersiapkan data untuk proses klasifikasi menggunakan algoritma Machine Learning.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -765,24 +808,30 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Eksplorasi Data Menggunakan Orange</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja-workflow-orange">Alur Kerja (Workflow) Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-atribut-select-columns">Pemilihan Atribut (Select Columns)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-data-table">Analisis Data Table</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ranking-variabel">Ranking Variabel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-scatter-plot">Visualisasi Scatter Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-korelasi">Analisis Korelasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-kolom-dan-box-plot">Statistik Kolom dan Box Plot</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot-table">Pivot Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-data-understanding">Tahapan Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collect-initial-data">1. Collect Initial Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describe-data">2. Describe Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-data">3. Explore Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-data-quality">4. Verify Data Quality</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-python">2. Eksplorasi Data Menggunakan Python</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-kolom">Deskripsi Kolom</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-orange">1. Eksplorasi Data Menggunakan Orange</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja-workflow-orange">Alur Kerja (Workflow) Orange</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-atribut-select-columns">Pemilihan Atribut (Select Columns)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-data-table">Analisis Data Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ranking-variabel">Ranking Variabel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-scatter-plot">Visualisasi Scatter Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-korelasi">Analisis Korelasi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-kolom-dan-box-plot">Statistik Kolom dan Box Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivot-table">Pivot Table</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-data-understanding">3. Kesimpulan Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-python">2. Eksplorasi Data Menggunakan Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-kolom">Deskripsi Kolom</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-data-understanding">3. Kesimpulan Data Understanding</a></li>
+</ul>
   </nav></div>
 
 </div></div>
