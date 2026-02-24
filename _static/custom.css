@@ -1,13 +1,18 @@
+/* Membuat logo di sidebar jadi bulat sempurna */
 .site-logo {
-    border-radius: 50% !important;
-    width: 120px !important;
-    height: 120px !important;
-    object-fit: cover !important;
+    border-radius: 50% !important; /* Ini yang bikin bulat */
+    width: 120px !important;      /* Ukuran lebar */
+    height: 120px !important;     /* Ukuran tinggi harus sama agar bulat */
+    object-fit: cover !important; /* Biar muka gak ketarik/penyet */
     display: block !important;
-    margin: 10px auto !important;
-    border: 3px solid #3498db !important;
+    margin: 20px auto 10px auto !important; /* Biar di tengah & ada jarak */
+    border: 3px solid #3498db !important;   /* Garis tepi biar keren */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important; /* Efek bayangan */
 }
 
+/* Mengatur teks judul di bawah logo agar di tengah */
 .site-title {
     text-align: center !important;
+    font-size: 1.2em !important;
+    margin-bottom: 20px !important;
 }
