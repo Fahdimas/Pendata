@@ -1,5 +1,9 @@
 format: jb-book
 root: intro
 chapters:
-- file: docs/Data-Understanding
-
+- file: Business-Understanding
+- file: Data-Understanding
+- file: Data-Preparation
+- file: Modeling
+- file: Evaluation
+- file: Deployment           
