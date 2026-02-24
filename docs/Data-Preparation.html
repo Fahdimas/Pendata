@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Data Understanding: Eksplorasi Dataset Iris &#8212; Pendata Fadimas</title>
+    <title>Data Preparation &#8212; Pendata Fadimas</title>
   
   
   
@@ -62,7 +62,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Data-Understanding';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Data-Preparation';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -243,7 +243,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdocs/Data-Understanding.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdocs/Data-Preparation.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -273,7 +273,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/docs/Data-Understanding.ipynb" target="_blank"
+      <li><a href="../_sources/docs/Data-Preparation.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -357,7 +357,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data Understanding: Eksplorasi Dataset Iris</h1>
+    <h1>Data Preparation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -367,12 +367,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-orange">1. Eksplorasi Data Menggunakan Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-python">2. Eksplorasi Data Menggunakan Python</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-kolom">Deskripsi Kolom</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-data-understanding">3. Kesimpulan Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleksi-data-data-selection">1. Seleksi Data (Data Selection)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembersihan-data-data-cleaning">2. Pembersihan Data (Data Cleaning)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data-data-transformation">3. Transformasi Data (Data Transformation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pelabelan-data-data-labeling">4. Pelabelan Data (Data Labeling)</a></li>
 </ul>
             </nav>
         </div>
@@ -384,257 +382,29 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="data-understanding-eksplorasi-dataset-iris">
-<h1>Data Understanding: Eksplorasi Dataset Iris<a class="headerlink" href="#data-understanding-eksplorasi-dataset-iris" title="Permalink to this heading">#</a></h1>
-<p>Pada tahap ini, saya akan melakukan proses <strong>Data Understanding</strong> untuk mengenal lebih dalam dataset Iris. Proses ini sangat penting dalam siklus data mining agar kita memahami karakteristik, kualitas, dan pola awal yang ada pada data sebelum melangkah ke tahap pemrosesan yang lebih rumit.</p>
-<section id="eksplorasi-data-menggunakan-orange">
-<h2>1. Eksplorasi Data Menggunakan Orange<a class="headerlink" href="#eksplorasi-data-menggunakan-orange" title="Permalink to this heading">#</a></h2>
-<p>Kita akan memulai proses Data Understanding dengan tools visual <strong>Orange Data Mining</strong>. Orange membantu kita menganalisis data secara interaktif tanpa perlu menulis kode, namun tetap memberikan insight yang mendalam.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-preparation">
+<h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this heading">#</a></h1>
+<p>Tahap <strong>Data Preparation</strong> adalah langkah krusial di mana data mentah diolah sedemikian rupa agar siap dimasukkan ke dalam model algoritma. Pada tahap ini, kita melakukan pengecekan kualitas data, penanganan nilai yang hilang (missing values), hingga transformasi data jika diperlukan.</p>
+<section id="seleksi-data-data-selection">
+<h2>1. Seleksi Data (Data Selection)<a class="headerlink" href="#seleksi-data-data-selection" title="Permalink to this heading">#</a></h2>
+<p>Dalam analisis dataset Iris, semua atribut (<code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>) dianggap penting karena memiliki korelasi yang signifikan terhadap target <code class="docutils literal notranslate"><span class="pre">species</span></code>. Oleh karena itu, tidak ada kolom yang dihapus pada tahap ini.</p>
 </section>
-<section id="eksplorasi-data-menggunakan-python">
-<h2>2. Eksplorasi Data Menggunakan Python<a class="headerlink" href="#eksplorasi-data-menggunakan-python" title="Permalink to this heading">#</a></h2>
-<p>Setelah secara visual menggunakan Orange, kita akan memvalidasi data menggunakan library Pandas dan Seaborn di Python untuk mendapatkan statistik yang lebih presisi.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># Memuat dataset</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">)</span>
-
-<span class="c1"># Menampilkan 10 data pertama</span>
-<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>sepal_length</th>
-      <th>sepal_width</th>
-      <th>petal_length</th>
-      <th>petal_width</th>
-      <th>species</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>5.1</td>
-      <td>3.5</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4.9</td>
-      <td>3.0</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4.7</td>
-      <td>3.2</td>
-      <td>1.3</td>
-      <td>0.2</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4.6</td>
-      <td>3.1</td>
-      <td>1.5</td>
-      <td>0.2</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5.0</td>
-      <td>3.6</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>5.4</td>
-      <td>3.9</td>
-      <td>1.7</td>
-      <td>0.4</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>4.6</td>
-      <td>3.4</td>
-      <td>1.4</td>
-      <td>0.3</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>5.0</td>
-      <td>3.4</td>
-      <td>1.5</td>
-      <td>0.2</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>4.4</td>
-      <td>2.9</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>Iris-setosa</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>4.9</td>
-      <td>3.1</td>
-      <td>1.5</td>
-      <td>0.1</td>
-      <td>Iris-setosa</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<section id="deskripsi-kolom">
-<h3>Deskripsi Kolom<a class="headerlink" href="#deskripsi-kolom" title="Permalink to this heading">#</a></h3>
-<p>Dataset Iris terdiri dari 150 baris dengan atribut berikut:</p>
+<section id="pembersihan-data-data-cleaning">
+<h2>2. Pembersihan Data (Data Cleaning)<a class="headerlink" href="#pembersihan-data-data-cleaning" title="Permalink to this heading">#</a></h2>
+<p>Berdasarkan eksplorasi pada tahap <em>Data Understanding</em>, dataset Iris memiliki kualitas yang sangat baik:</p>
 <ul class="simple">
-<li><p><strong>Sepal Length/Width</strong>: Ukuran kelopak bunga.</p></li>
-<li><p><strong>Petal Length/Width</strong>: Ukuran mahkota bunga.</p></li>
-<li><p><strong>Species</strong>: Target klasifikasi (Setosa, Versicolor, Virginica).</p></li>
+<li><p><strong>Missing Values</strong>: Tidak ditemukan data yang kosong (0 missing values).</p></li>
+<li><p><strong>Outliers</strong>: Tidak ditemukan data pencilan yang ekstrim yang dapat mengganggu performa model.</p></li>
+<li><p><strong>Duplikasi</strong>: Pengecekan dilakukan untuk memastikan tidak ada baris data yang terduplikasi secara tidak sengaja.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung statistik deskriptif</span>
-<span class="n">stats</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
-<span class="n">stats</span><span class="p">[</span><span class="s1">&#39;median&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
-<span class="n">stats</span><span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="n">display</span><span class="p">(</span><span class="n">stats</span><span class="p">[[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>mean</th>
-      <th>median</th>
-      <th>mode</th>
-      <th>std</th>
-      <th>min</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>sepal_length</th>
-      <td>5.843333</td>
-      <td>5.80</td>
-      <td>5.0</td>
-      <td>0.828066</td>
-      <td>4.3</td>
-      <td>7.9</td>
-    </tr>
-    <tr>
-      <th>sepal_width</th>
-      <td>3.054000</td>
-      <td>3.00</td>
-      <td>3.0</td>
-      <td>0.433594</td>
-      <td>2.0</td>
-      <td>4.4</td>
-    </tr>
-    <tr>
-      <th>petal_length</th>
-      <td>3.758667</td>
-      <td>4.35</td>
-      <td>1.5</td>
-      <td>1.764420</td>
-      <td>1.0</td>
-      <td>6.9</td>
-    </tr>
-    <tr>
-      <th>petal_width</th>
-      <td>1.198667</td>
-      <td>1.30</td>
-      <td>0.2</td>
-      <td>0.763161</td>
-      <td>0.1</td>
-      <td>2.5</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;sepal_width&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Scatter Plot: Sepal Length vs Sepal Width&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/1892c7a4487ef75faccf05deba7c2299eb065ff26223e843314b9222a9298079.png" src="../_images/1892c7a4487ef75faccf05deba7c2299eb065ff26223e843314b9222a9298079.png" />
-</div>
-</div>
 </section>
+<section id="transformasi-data-data-transformation">
+<h2>3. Transformasi Data (Data Transformation)<a class="headerlink" href="#transformasi-data-data-transformation" title="Permalink to this heading">#</a></h2>
+<p>Meskipun data Iris sudah sangat rapi, terkadang kita perlu melakukan normalisasi jika menggunakan algoritma tertentu (seperti KNN). Namun, untuk algoritma berbasis pohon (Tree-based) atau Naive Bayes, data asli seringkali sudah cukup baik untuk digunakan.</p>
 </section>
-<section id="kesimpulan-data-understanding">
-<h2>3. Kesimpulan Data Understanding<a class="headerlink" href="#kesimpulan-data-understanding" title="Permalink to this heading">#</a></h2>
-<p>Berdasarkan proses eksplorasi yang telah dilakukan menggunakan <strong>Orange Data Mining</strong> dan <strong>Python</strong>, dapat ditarik beberapa kesimpulan penting mengenai dataset Iris:</p>
-<ol class="arabic simple">
-<li><p><strong>Kualitas Data Sangat Baik</strong>: Dataset ini tidak memiliki <em>missing values</em> (0% missing), sehingga sangat siap untuk tahap pemodelan selanjutnya tanpa perlu pembersihan data yang rumit.</p></li>
-<li><p><strong>Karakteristik Spesies</strong>:</p>
-<ul class="simple">
-<li><p><strong>Iris-setosa</strong> adalah spesies yang paling mudah diidentifikasi karena memiliki karakteristik fisik (ukuran petal) yang sangat berbeda dan terpisah jauh dari spesies lainnya.</p></li>
-<li><p><strong>Iris-versicolor</strong> dan <strong>Iris-virginica</strong> memiliki kemiripan ukuran fisik, terutama pada bagian sepal, sehingga memerlukan fitur petal untuk membedakannya secara lebih akurat.</p></li>
-</ul>
-</li>
-<li><p><strong>Fitur Paling Berpengaruh</strong>: Variabel <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> memiliki korelasi yang sangat kuat (+0.963) dan merupakan fitur kunci dalam menentukan klasifikasi spesies bunga Iris.</p></li>
-</ol>
-<p>Dengan selesainya tahap pemahaman data ini, langkah berikutnya adalah mempersiapkan data untuk proses klasifikasi menggunakan algoritma Machine Learning.</p>
+<section id="pelabelan-data-data-labeling">
+<h2>4. Pelabelan Data (Data Labeling)<a class="headerlink" href="#pelabelan-data-data-labeling" title="Permalink to this heading">#</a></h2>
+<p>Variabel target <code class="docutils literal notranslate"><span class="pre">species</span></code> yang bersifat kategorikal (Setosa, Versicolor, Virginica) akan diubah menjadi format yang dipahami oleh mesin jika diperlukan pada tahap modeling nanti, namun untuk tahap eksplorasi awal, label teks tetap dipertahankan untuk memudahkan interpretasi.</p>
 </section>
 </section>
 
@@ -684,12 +454,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-orange">1. Eksplorasi Data Menggunakan Orange</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-data-menggunakan-python">2. Eksplorasi Data Menggunakan Python</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-kolom">Deskripsi Kolom</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-data-understanding">3. Kesimpulan Data Understanding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleksi-data-data-selection">1. Seleksi Data (Data Selection)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembersihan-data-data-cleaning">2. Pembersihan Data (Data Cleaning)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data-data-transformation">3. Transformasi Data (Data Transformation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pelabelan-data-data-labeling">4. Pelabelan Data (Data Labeling)</a></li>
 </ul>
   </nav></div>
 
