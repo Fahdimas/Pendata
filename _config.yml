@@ -6,22 +6,14 @@ author: Fahdimas akmal
 execute:
   execute_notebooks: "off"
 
-# Pengaturan HTML
+# Pengaturan HTML (Panggil logo dari folder _static)
 html:
-  logo: _static/logo.png  # <--- TAMBAHKAN _static/ di depannya
-  favicon: ""
-  extra_navbar: ""              # Menghapus navbar tambahan jika ada
+  logo: profil.png      # Ganti jadi profil.png
   use_repository_button: true
-  use_issues_button: true
-  use_edit_page_button: true
-  google_analytics_id: ""       
 
-# Folder tempat gambar berada
-# Tambahkan ini agar Jupyter Book memproses folder _static
-extra_footer: ""
 static_path: ["_static"]
 
-# Repository settings
+# Information about where the book exists on the web
 repository:
   url: https://github.com/Fadimas-Akmal/Pendata
   path_to_book: docs
