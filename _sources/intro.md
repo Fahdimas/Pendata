@@ -1,9 +1,9 @@
 # Welcome to My Data Mining Project
 
-Selamat datang di dokumentasi proyek Data Mining saya. Website ini disusun untuk memenuhi tugas praktikum dengan menggunakan dataset Iris.
+Selamat datang di dokumentasi proyek Data Mining saya. Website ini disusun dengan menggunakan dataset Iris.
 
 ### Identitas Mahasiswa
-**Nama:** Fadimas Akmal  
+**Nama:** Fahdimas Akmal  
 **NIM:** 240411100228
 
 ---
