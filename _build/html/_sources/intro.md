@@ -14,3 +14,4 @@ Terima kasih sudah berkunjung! Silakan lihat-lihat menu di samping untuk detail 
 
 Klik di sini untuk melihat [Data Understanding](docs/Data-Understanding.ipynb)
 Pilih menu di samping untuk melihat analisis data.
+update baru 
