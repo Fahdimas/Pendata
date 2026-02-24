@@ -8,8 +8,8 @@ execute:
 
 # Pengaturan HTML
 html:
-  logo: logo.png
-  favicon: "" 
+  logo: _static/logo.png  # <--- TAMBAHKAN _static/ di depannya
+  favicon: ""
   extra_navbar: ""              # Menghapus navbar tambahan jika ada
   use_repository_button: true
   use_issues_button: true
