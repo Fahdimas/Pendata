@@ -1,6 +1,6 @@
 # Book settings
-title: Pendata Fadimas
-author: Fahdimas Sakmal
+title: Pendata Fahdimas
+author: Fahdimas akmal
 
 # Execution settings
 execute:
@@ -8,7 +8,7 @@ execute:
 
 # Pengaturan HTML (Panggil logo dari folder _static)
 html:
-  logo: _static/logo.png
+  logo: logo.png
 
 # Define the name of the latex output file for PDF builds
 latex:
