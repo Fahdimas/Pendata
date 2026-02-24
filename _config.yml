@@ -1,23 +1,27 @@
 # Book settings
 title: Pendata Fahdimas
 author: Fahdimas akmal
+copyright: "2022"
+logo: profil.png
 
 # Execution settings
 execute:
-  execute_notebooks: "off"
+  execute_nb: off
 
-# Pengaturan HTML (Panggil logo dari folder _static)
+# HTML-specific settings
 html:
-  logo: profil.png
-  extra_navbar: "Fahdimas Akmal - 240411100228"  # Tambahkan ini sebagai pemicu
   use_repository_button: true
+  use_issues_button: true
+  use_edit_page_button: true
+  repository_url: https://github.com/Fahdimas-Akmal/Pendata
+  repository_branch: main
+  extra_navbar: "Fahdimas Akmal - 240411100228"
 
-static_path: ["_static"]
-
-static_path: ["_static"]
-
-# Information about where the book exists on the web
-repository:
-  url: https://github.com/Fadimas-Akmal/Pendata
-  path_to_book: docs
-  branch: main
+# Parse settings
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - dollarmath
+    - linkify
+    - substitution
+    - tasklist
