@@ -8,8 +8,11 @@ execute:
 
 # Pengaturan HTML (Panggil logo dari folder _static)
 html:
-  logo: profil.png      # Ganti jadi profil.png
+  logo: profil.png
+  extra_navbar: "Fahdimas Akmal - 240411100228"  # Tambahkan ini sebagai pemicu
   use_repository_button: true
+
+static_path: ["_static"]
 
 static_path: ["_static"]
 
