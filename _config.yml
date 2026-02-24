@@ -6,20 +6,22 @@ author: Fahdimas akmal
 execute:
   execute_notebooks: "off"
 
-# Pengaturan HTML (Panggil logo dari folder _static)
+# Pengaturan HTML
 html:
   logo: logo.png
+  favicon: "" 
+  extra_navbar: ""              # Menghapus navbar tambahan jika ada
+  use_repository_button: true
+  use_issues_button: true
+  use_edit_page_button: true
+  google_analytics_id: ""       
 
-# Define the name of the latex output file for PDF builds
-latex:
-  latex_documents:
-    targetname: book.tex
+# Folder tempat gambar berada
+# Tambahkan ini agar Jupyter Book memproses folder _static
+extra_footer: ""
+static_path: ["_static"]
 
-# Add a bibtex file so that we can create citations
-bibtex_bibfiles:
-  - references.bib
-
-# Information about where the book exists on the web
+# Repository settings
 repository:
   url: https://github.com/Fadimas-Akmal/Pendata
   path_to_book: docs
