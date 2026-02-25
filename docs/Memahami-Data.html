@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Memahami Karakteristik Data &#8212; Pendata Fahdimas</title>
+    <title>📊 Memahami Karakteristik Data &#8212; Pendata Fahdimas</title>
   
   
   
@@ -177,7 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Memahami Karakteristik Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">📊 Memahami Karakteristik Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Eksplorasi-Data-Iris.html">Eksplorasi Data Iris</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bussiness-Understanding.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Data-Preparation.html">Data Preparation</a></li>
@@ -386,7 +386,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Memahami Karakteristik Data</h1>
+    <h1>📊 Memahami Karakteristik Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -396,13 +396,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-metrik-statistik-data">Pengertian Metrik Statistik Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-rata-rata">1. Mean (Rata-Rata)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median-nilai-tengah">2. Median (Nilai Tengah)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modus-mode-nilai-terpopuler">3. Modus/Mode (Nilai Terpopuler)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rentang-range-dan-jarak-interkuartil-iqr">4. Rentang (Range) dan Jarak Interkuartil (IQR)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variansi-dan-standar-deviasi">5. Variansi dan Standar Deviasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skewness-kemencengan">6. Skewness (Kemencengan)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-pemusatan-central-tendency">1. Ukuran Pemusatan (Central Tendency)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mean-rata-rata"><strong>A. Mean (Rata-rata)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-median-nilai-tengah"><strong>B. Median (Nilai Tengah)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-modus-mode"><strong>C. Modus (Mode)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-penyebaran-dispersion">2. Ukuran Penyebaran (Dispersion)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-range-rentang"><strong>A. Range (Rentang)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-variansi-variance"><strong>B. Variansi (Variance)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-standar-deviasi-simpangan-baku"><strong>C. Standar Deviasi (Simpangan Baku)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-bentuk-shape">3. Ukuran Bentuk (Shape)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-skewness-kemiringan"><strong>A. Skewness (Kemiringan)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kurtosis-keruncingan"><strong>B. Kurtosis (Keruncingan)</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -417,92 +425,108 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="memahami-karakteristik-data">
-<h1>Memahami Karakteristik Data<a class="headerlink" href="#memahami-karakteristik-data" title="Permalink to this heading">#</a></h1>
-<p>Halaman ini membahas mengenai teknik statistik yang digunakan untuk membedah karakteristik serta melihat kualitas dari data yang akan diolah dalam proses <em>data mining</em>.</p>
-<section id="pengertian-metrik-statistik-data">
-<h2>Pengertian Metrik Statistik Data<a class="headerlink" href="#pengertian-metrik-statistik-data" title="Permalink to this heading">#</a></h2>
-<section id="mean-rata-rata">
-<h3>1. Mean (Rata-Rata)<a class="headerlink" href="#mean-rata-rata" title="Permalink to this heading">#</a></h3>
-<p>Mean adalah angka yang mewakili nilai rata-rata dari seluruh kumpulan data yang kita miliki. Cara mendapatkannya adalah dengan menjumlahkan semua angka dalam dataset lalu membaginya dengan jumlah total datanya.</p>
-<p><strong>Rumus Mean:</strong>
+<h1>📊 Memahami Karakteristik Data<a class="headerlink" href="#memahami-karakteristik-data" title="Permalink to this heading">#</a></h1>
+<p>Dalam Data Mining, memahami karakteristik data atau <strong>Statistik Deskriptif</strong> adalah langkah awal yang krusial. Tujuannya adalah untuk mendapatkan gambaran umum tentang distribusi dan sebaran data yang kita miliki.</p>
+<hr class="docutils" />
+<section id="ukuran-pemusatan-central-tendency">
+<h2>1. Ukuran Pemusatan (Central Tendency)<a class="headerlink" href="#ukuran-pemusatan-central-tendency" title="Permalink to this heading">#</a></h2>
+<p>Ukuran pemusatan digunakan untuk menemukan satu nilai yang dapat mewakili seluruh kumpulan data.</p>
+<section id="a-mean-rata-rata">
+<h3><strong>A. Mean (Rata-rata)</strong><a class="headerlink" href="#a-mean-rata-rata" title="Permalink to this heading">#</a></h3>
+<p>Mean adalah nilai rata-rata dari seluruh data. Nilai ini sangat dipengaruhi oleh nilai ekstrem (<em>outlier</em>).</p>
+<p><strong>Rumus:</strong>
 $<span class="math notranslate nohighlight">\(\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}\)</span>$</p>
 <p><strong>Keterangan:</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Titik rata-rata (Mean).</p></li>
-<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai data pada urutan tertentu.</p></li>
-<li><p><span class="math notranslate nohighlight">\(n\)</span> : Total jumlah sampel data.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sum\)</span> : Simbol untuk menjumlahkan keseluruhan nilai.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Nilai rata-rata (Mean).</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai data ke-<span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah total data/sampel.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum\)</span> : Simbol penjumlahan.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="median-nilai-tengah">
-<h3>2. Median (Nilai Tengah)<a class="headerlink" href="#median-nilai-tengah" title="Permalink to this heading">#</a></h3>
-<p>Median adalah titik pusat dataset setelah semua angkanya disusun secara berurutan dari yang terkecil hingga terbesar. Nilai ini dianggap lebih stabil karena tidak mudah dipengaruhi oleh angka ekstrem atau pencilan (<em>outlier</em>).</p>
-<p><strong>Rumus untuk Data Tunggal:</strong></p>
-<ul class="simple">
-<li><p>Untuk jumlah data (<span class="math notranslate nohighlight">\(N\)</span>) Ganjil:
-$<span class="math notranslate nohighlight">\(Me = x_{\frac{N+1}{2}}\)</span>$</p></li>
-<li><p>Untuk jumlah data (<span class="math notranslate nohighlight">\(N\)</span>) Genap:
-$<span class="math notranslate nohighlight">\(Me = \frac{x_{\frac{N}{2}} + x_{\frac{N}{2}+1}}{2}\)</span>$</p></li>
-</ul>
+<section id="b-median-nilai-tengah">
+<h3><strong>B. Median (Nilai Tengah)</strong><a class="headerlink" href="#b-median-nilai-tengah" title="Permalink to this heading">#</a></h3>
+<p>Median adalah nilai tengah dari sekumpulan data yang telah diurutkan dari terkecil ke terbesar. Median lebih tahan terhadap pengaruh <em>outlier</em>.</p>
+<p><strong>Rumus (Data Ganjil):</strong>
+$<span class="math notranslate nohighlight">\(Me = x_{\frac{n+1}{2}}\)</span>$</p>
+<p><strong>Rumus (Data Genap):</strong>
+$<span class="math notranslate nohighlight">\(Me = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2} + 1}}{2}\)</span>$</p>
 <p><strong>Keterangan:</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(Me\)</span> : Nilai tengah (Median).</p></li>
-<li><p><span class="math notranslate nohighlight">\(x\)</span> : Posisi data tertentu.</p></li>
-<li><p><span class="math notranslate nohighlight">\(N\)</span> : Banyaknya jumlah data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Me\)</span> : Median.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> : Data pada urutan tertentu.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="modus-mode-nilai-terpopuler">
-<h3>3. Modus/Mode (Nilai Terpopuler)<a class="headerlink" href="#modus-mode-nilai-terpopuler" title="Permalink to this heading">#</a></h3>
-<p>Modus adalah angka atau kategori yang frekuensi kemunculannya paling tinggi di dalam dataset.</p>
-<p><strong>Hubungan Empiris (untuk distribusi yang tidak seimbang):</strong>
-$<span class="math notranslate nohighlight">\(\text{Mean} - \text{Modus} \approx 3(\text{Mean} - \text{Median})\)</span>$</p>
+<section id="c-modus-mode">
+<h3><strong>C. Modus (Mode)</strong><a class="headerlink" href="#c-modus-mode" title="Permalink to this heading">#</a></h3>
+<p>Modus adalah nilai yang paling sering muncul dalam suatu kumpulan data. Sebuah data bisa memiliki satu modus (unimodal), dua modus (bimodal), atau lebih (multimodal).</p>
+</section>
 </section>
 <hr class="docutils" />
-<section id="rentang-range-dan-jarak-interkuartil-iqr">
-<h3>4. Rentang (Range) dan Jarak Interkuartil (IQR)<a class="headerlink" href="#rentang-range-dan-jarak-interkuartil-iqr" title="Permalink to this heading">#</a></h3>
-<p>Dua metrik ini sangat berguna untuk melihat sebaran data secara luas serta mendeteksi apakah ada data yang tidak wajar.</p>
-<p><strong>Rumus Range:</strong>
-$<span class="math notranslate nohighlight">\(R = X_{max} - X_{min}\)</span>$</p>
-<p><strong>Rumus Interkuartil:</strong>
-$<span class="math notranslate nohighlight">\(IQR = Q_3 - Q_1\)</span>$</p>
+<section id="ukuran-penyebaran-dispersion">
+<h2>2. Ukuran Penyebaran (Dispersion)<a class="headerlink" href="#ukuran-penyebaran-dispersion" title="Permalink to this heading">#</a></h2>
+<p>Ukuran ini menunjukkan seberapa jauh data menyebar dari pusatnya.</p>
+<section id="a-range-rentang">
+<h3><strong>A. Range (Rentang)</strong><a class="headerlink" href="#a-range-rentang" title="Permalink to this heading">#</a></h3>
+<p>Selisih antara nilai terbesar dan nilai terkecil.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(Range = x_{max} - x_{min}\)</span>$</p>
+</section>
+<hr class="docutils" />
+<section id="b-variansi-variance">
+<h3><strong>B. Variansi (Variance)</strong><a class="headerlink" href="#b-variansi-variance" title="Permalink to this heading">#</a></h3>
+<p>Variansi mengukur rata-rata selisih kuadrat antara setiap titik data dengan nilai rata-ratanya.</p>
+<p><strong>Rumus (Sampel):</strong>
+$<span class="math notranslate nohighlight">\(s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}\)</span>$</p>
 <p><strong>Keterangan:</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(R\)</span> : Selisih atau rentang data.</p></li>
-<li><p><span class="math notranslate nohighlight">\(X_{max}\)</span> : Angka paling tinggi di dataset.</p></li>
-<li><p><span class="math notranslate nohighlight">\(X_{min}\)</span> : Angka paling rendah di dataset.</p></li>
-<li><p><span class="math notranslate nohighlight">\(IQR\)</span> : Jarak antara kuartil atas dan bawah.</p></li>
-<li><p><span class="math notranslate nohighlight">\(Q_1\)</span> &amp; <span class="math notranslate nohighlight">\(Q_3\)</span> : Batas data 25% (bawah) dan 75% (atas).</p></li>
+<li><p><span class="math notranslate nohighlight">\(s^2\)</span> : Variansi sampel.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai data ke-<span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Mean (rata-rata).</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah data.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="variansi-dan-standar-deviasi">
-<h3>5. Variansi dan Standar Deviasi<a class="headerlink" href="#variansi-dan-standar-deviasi" title="Permalink to this heading">#</a></h3>
-<p>Dua nilai ini menunjukkan seberapa jauh titik-titik data menyimpang dari nilai rata-ratanya.</p>
-<p><strong>Rumus Standar Deviasi (<span class="math notranslate nohighlight">\(\sigma\)</span>):</strong>
-$<span class="math notranslate nohighlight">\(\sigma = \sqrt{\frac{\sum_{i=1}^{N} (x_i - \bar{x})^2}{N}}\)</span>$</p>
+<section id="c-standar-deviasi-simpangan-baku">
+<h3><strong>C. Standar Deviasi (Simpangan Baku)</strong><a class="headerlink" href="#c-standar-deviasi-simpangan-baku" title="Permalink to this heading">#</a></h3>
+<p>Standar deviasi adalah akar kuadrat dari variansi. Nilai ini menggambarkan seberapa besar penyimpangan data dari nilai rata-ratanya.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(s = \sqrt{s^2}\)</span>$</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="ukuran-bentuk-shape">
+<h2>3. Ukuran Bentuk (Shape)<a class="headerlink" href="#ukuran-bentuk-shape" title="Permalink to this heading">#</a></h2>
+<section id="a-skewness-kemiringan">
+<h3><strong>A. Skewness (Kemiringan)</strong><a class="headerlink" href="#a-skewness-kemiringan" title="Permalink to this heading">#</a></h3>
+<p>Skewness menunjukkan tingkat ketidaksimetrisan (kemiringan) distribusi data.</p>
+<p><strong>Rumus (Koefisien Pearson):</strong>
+$<span class="math notranslate nohighlight">\(Sk = \frac{3(\bar{x} - Me)}{s}\)</span>$</p>
 <p><strong>Keterangan:</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> : Simpangan baku atau standar deviasi.</p></li>
-<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai tiap individu data.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Rata-rata dari data tersebut.</p></li>
-<li><p><span class="math notranslate nohighlight">\(N\)</span> : Jumlah keseluruhan data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Sk\)</span> : Koefisien kemiringan.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Mean.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Me\)</span> : Median.</p></li>
+<li><p><span class="math notranslate nohighlight">\(s\)</span> : Standar Deviasi.</p></li>
+</ul>
+<p><strong>Interpretasi:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Sk = 0\)</span>: Distribusi normal (simetris).</p></li>
+<li><p><span class="math notranslate nohighlight">\(Sk &gt; 0\)</span>: Ekor distribusi memanjang ke kanan (<em>positive skew</em>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(Sk &lt; 0\)</span>: Ekor distribusi memanjang ke kiri (<em>negative skew</em>).</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="skewness-kemencengan">
-<h3>6. Skewness (Kemencengan)<a class="headerlink" href="#skewness-kemencengan" title="Permalink to this heading">#</a></h3>
-<p>Skewness digunakan untuk mengukur apakah bentuk sebaran data kita miring ke satu sisi atau seimbang di tengah seperti kurva normal.</p>
-<p><strong>Rumus Koefisien Pearson:</strong>
-$<span class="math notranslate nohighlight">\(sk = \frac{3(\bar{x} - Me)}{s}\)</span>$</p>
-<p><strong>Keterangan:</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(sk\)</span> : Angka kemencengan (<em>Skewness</em>).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Nilai rata-rata.</p></li>
-<li><p><span class="math notranslate nohighlight">\(Me\)</span> : Nilai median.</p></li>
-<li><p><span class="math notranslate nohighlight">\(s\)</span> : Standar deviasi dari sampel tersebut.</p></li>
-</ul>
+<section id="b-kurtosis-keruncingan">
+<h3><strong>B. Kurtosis (Keruncingan)</strong><a class="headerlink" href="#b-kurtosis-keruncingan" title="Permalink to this heading">#</a></h3>
+<p>Kurtosis menunjukkan tingkat keruncingan atau “ketinggian” puncak distribusi data dibandingkan dengan distribusi normal.</p>
+<hr class="docutils" />
+<blockquote>
+<div><p><strong>Catatan:</strong> Memahami statistik ini sangat membantu dalam tahap <em>Data Cleaning</em> dan <em>Data Transformation</em> sebelum melakukan pemodelan mesin.</p>
+</div></blockquote>
 </section>
 </section>
 </section>
@@ -571,13 +595,21 @@ $<span class="math notranslate nohighlight">\(sk = \frac{3(\bar{x} - Me)}{s}\)</
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-metrik-statistik-data">Pengertian Metrik Statistik Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-rata-rata">1. Mean (Rata-Rata)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median-nilai-tengah">2. Median (Nilai Tengah)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modus-mode-nilai-terpopuler">3. Modus/Mode (Nilai Terpopuler)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rentang-range-dan-jarak-interkuartil-iqr">4. Rentang (Range) dan Jarak Interkuartil (IQR)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variansi-dan-standar-deviasi">5. Variansi dan Standar Deviasi</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skewness-kemencengan">6. Skewness (Kemencengan)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-pemusatan-central-tendency">1. Ukuran Pemusatan (Central Tendency)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mean-rata-rata"><strong>A. Mean (Rata-rata)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-median-nilai-tengah"><strong>B. Median (Nilai Tengah)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-modus-mode"><strong>C. Modus (Mode)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-penyebaran-dispersion">2. Ukuran Penyebaran (Dispersion)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-range-rentang"><strong>A. Range (Rentang)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-variansi-variance"><strong>B. Variansi (Variance)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-standar-deviasi-simpangan-baku"><strong>C. Standar Deviasi (Simpangan Baku)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-bentuk-shape">3. Ukuran Bentuk (Shape)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-skewness-kemiringan"><strong>A. Skewness (Kemiringan)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kurtosis-keruncingan"><strong>B. Kurtosis (Keruncingan)</strong></a></li>
 </ul>
 </li>
 </ul>
