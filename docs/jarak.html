@@ -393,7 +393,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance">2. Manhattan Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minkowski-distance">3. Minkowski Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-matriks-jarak-dari-orange">Visualisasi Matriks Jarak dari Orange</a></li>
 </ul>
             </nav>
         </div>
@@ -407,8 +406,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mengukur-jarak-tipe-data-numerik">
 <h1>Mengukur Jarak Tipe Data Numerik<a class="headerlink" href="#mengukur-jarak-tipe-data-numerik" title="Permalink to this heading">#</a></h1>
-<p>Dalam analisis data, kita perlu tahu seberapa mirip satu data dengan data lainnya. Caranya adalah dengan mengukur jaraknya. Kalau jaraknya kecil, berarti kedua data itu mirip. Karena dataset Iris isinya angka semua, kita bisa pakai 3 cara: <strong>Euclidean</strong>, <strong>Manhattan</strong>, dan <strong>Minkowski</strong>.</p>
-<p>Kita pakai contoh 2 data pertama untuk hitungan manualnya:</p>
+<p>Dalam analisis data, kita perlu tahu seberapa mirip satu data dengan data lainnya. Caranya adalah dengan mengukur jaraknya. Semakin kecil nilainya, berarti datanya makin mirip. Untuk dataset Iris, kita bakal pakai 3 metode: <strong>Euclidean</strong>, <strong>Manhattan</strong>, dan <strong>Minkowski</strong>.</p>
+<p>Contoh 2 data pertama yang kita pakai buat hitung manual:</p>
 <ul class="simple">
 <li><p><strong>Data 1 (<span class="math notranslate nohighlight">\(x_1\)</span>):</strong> (5.1, 3.5, 1.4, 0.2)</p></li>
 <li><p><strong>Data 2 (<span class="math notranslate nohighlight">\(x_2\)</span>):</strong> (4.9, 3.0, 1.4, 0.2)</p></li>
@@ -418,6 +417,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance</span>
+
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">)</span>
 <span class="n">fitur</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
@@ -478,11 +478,19 @@ document.write(`
 </div>
 <section id="euclidean-distance">
 <h2>1. Euclidean Distance<a class="headerlink" href="#euclidean-distance" title="Permalink to this heading">#</a></h2>
-<p>Ini adalah jarak garis lurus antara dua titik, metode yang paling umum digunakan.</p>
+<p>Metode ini ibarat narik garis lurus antara dua titik. Ini adalah metode yang paling umum digunakan dalam algoritma clustering.</p>
 <p><strong>Rumus:</strong>
 $<span class="math notranslate nohighlight">\(d(x,y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d(x,y)\)</span>: Jarak Euclidean antara data <span class="math notranslate nohighlight">\(x\)</span> dan data <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: Jumlah fitur (pada Iris ada 4 fitur).</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span>: Nilai fitur ke-<span class="math notranslate nohighlight">\(i\)</span> pada data <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span>: Nilai fitur ke-<span class="math notranslate nohighlight">\(i\)</span> pada data <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+</ul>
 <p><strong>Langkah Perhitungan Manual (<span class="math notranslate nohighlight">\(x_1\)</span> ke <span class="math notranslate nohighlight">\(x_2\)</span>):</strong>
-$<span class="math notranslate nohighlight">\(d(x_1,x_2) = \sqrt{(5.1-4.9)^2 + (3.5-3.0)^2 + (1.4-1.4)^2 + (0.2-0.2)^2} \approx 0.538\)</span>$</p>
+$<span class="math notranslate nohighlight">\(d(x_1,x_2) = \sqrt{(5.1-4.9)^2 + (3.5-3.0)^2 + (1.4-1.4)^2 + (0.2-0.2)^2}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(d(x_1,x_2) = \sqrt{0.04 + 0.25 + 0 + 0} = \sqrt{0.29} \approx 0.538\)</span>$</p>
 <p><strong>Implementasi Kode Python:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -511,26 +519,26 @@ $<span class="math notranslate nohighlight">\(d(x_1,x_2) = \sqrt{(5.1-4.9)^2 + (
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Data 1</th>
-      <th>Data 2</th>
-      <th>Data 3</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Data 1</th>
+      <th>D1</th>
       <td>0.000000</td>
       <td>0.538516</td>
       <td>0.509902</td>
     </tr>
     <tr>
-      <th>Data 2</th>
+      <th>D2</th>
       <td>0.538516</td>
       <td>0.000000</td>
       <td>0.300000</td>
     </tr>
     <tr>
-      <th>Data 3</th>
+      <th>D3</th>
       <td>0.509902</td>
       <td>0.300000</td>
       <td>0.000000</td>
@@ -539,16 +547,23 @@ $<span class="math notranslate nohighlight">\(d(x_1,x_2) = \sqrt{(5.1-4.9)^2 + (
 </table>
 </div></div></div>
 </div>
-<p><strong>Hasil dari Orange Data Mining:</strong>
-<img alt="Jarak Euclidean" src="../_images/euclidean.png" /></p>
+<p><strong>Hasil dari Orange Data Mining:</strong></p>
+<p><img alt="Jarak Euclidean" src="../_images/euclidean.png" /></p>
 </section>
+<hr class="docutils" />
 <section id="manhattan-distance">
 <h2>2. Manhattan Distance<a class="headerlink" href="#manhattan-distance" title="Permalink to this heading">#</a></h2>
-<p>Jarak ini menghitung selisih absolut antar koordinat, sering disebut juga jarak blok kota.</p>
+<p>Menghitung jarak dengan menjumlahkan selisih absolut antar koordinat (sering disebut jarak blok kota).</p>
 <p><strong>Rumus:</strong>
 $<span class="math notranslate nohighlight">\(d(x,y) = \sum_{i=1}^{n} |x_i - y_i|\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d(x,y)\)</span>: Jarak Manhattan antara data <span class="math notranslate nohighlight">\(x\)</span> dan data <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|x_i - y_i|\)</span>: Nilai mutlak dari selisih fitur ke-<span class="math notranslate nohighlight">\(i\)</span> antara dua data.</p></li>
+</ul>
 <p><strong>Langkah Perhitungan Manual (<span class="math notranslate nohighlight">\(x_1\)</span> ke <span class="math notranslate nohighlight">\(x_2\)</span>):</strong>
-$<span class="math notranslate nohighlight">\(d(x_1,x_2) = |5.1 - 4.9| + |3.5 - 3.0| + |1.4 - 1.4| + |0.2 - 0.2| = 0.7\)</span>$</p>
+$<span class="math notranslate nohighlight">\(d(x_1,x_2) = |5.1 - 4.9| + |3.5 - 3.0| + |1.4 - 1.4| + |0.2 - 0.2|\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(d(x_1,x_2) = 0.2 + 0.5 + 0 + 0 = 0.7\)</span>$</p>
 <p><strong>Implementasi Kode Python:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -577,26 +592,26 @@ $<span class="math notranslate nohighlight">\(d(x_1,x_2) = |5.1 - 4.9| + |3.5 - 
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Data 1</th>
-      <th>Data 2</th>
-      <th>Data 3</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Data 1</th>
+      <th>D1</th>
       <td>0.0</td>
       <td>0.7</td>
       <td>0.8</td>
     </tr>
     <tr>
-      <th>Data 2</th>
+      <th>D2</th>
       <td>0.7</td>
       <td>0.0</td>
       <td>0.5</td>
     </tr>
     <tr>
-      <th>Data 3</th>
+      <th>D3</th>
       <td>0.8</td>
       <td>0.5</td>
       <td>0.0</td>
@@ -608,13 +623,20 @@ $<span class="math notranslate nohighlight">\(d(x_1,x_2) = |5.1 - 4.9| + |3.5 - 
 <p><strong>Hasil dari Orange Data Mining:</strong>
 <img alt="Jarak Manhattan" src="../_images/manhattan.png" /></p>
 </section>
+<hr class="docutils" />
 <section id="minkowski-distance">
 <h2>3. Minkowski Distance<a class="headerlink" href="#minkowski-distance" title="Permalink to this heading">#</a></h2>
-<p>Minkowski adalah bentuk umum yang punya parameter <span class="math notranslate nohighlight">\(p\)</span>. Di sini kita pakai contoh <span class="math notranslate nohighlight">\(p=3\)</span>. Untuk bagian ini, perhitungan dilakukan sepenuhnya menggunakan Python untuk mendapatkan hasil yang lebih presisi dengan parameter kustom.</p>
+<p>Minkowski adalah bentuk generalisasi dari Euclidean dan Manhattan. Di sini kita menggunakan parameter <span class="math notranslate nohighlight">\(p=3\)</span>.</p>
 <p><strong>Rumus:</strong>
-$<span class="math notranslate nohighlight">\(d(x,y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{1/p}\)</span>$</p>
-<p><strong>Langkah Perhitungan Manual (<span class="math notranslate nohighlight">\(x_1\)</span> ke <span class="math notranslate nohighlight">\(x_2\)</span> dengan <span class="math notranslate nohighlight">\(p=3\)</span>):</strong>
-$<span class="math notranslate nohighlight">\(d(x_1,x_2) = (0.2^3 + 0.5^3 + 0 + 0)^{1/3} \approx 0.509\)</span>$</p>
+$<span class="math notranslate nohighlight">\(d(x,y) = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{\frac{1}{p}}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p\)</span>: Parameter urutan Minkowski. Jika <span class="math notranslate nohighlight">\(p=1\)</span> menjadi Manhattan, jika <span class="math notranslate nohighlight">\(p=2\)</span> menjadi Euclidean.</p></li>
+<li><p>Pada contoh ini kita menggunakan <strong><span class="math notranslate nohighlight">\(p=3\)</span></strong>.</p></li>
+</ul>
+<p><strong>Langkah Perhitungan Manual (<span class="math notranslate nohighlight">\(x_1\)</span> ke <span class="math notranslate nohighlight">\(x_2\)</span>):</strong>
+$<span class="math notranslate nohighlight">\(d(x_1,x_2) = (|5.1-4.9|^3 + |3.5-3.0|^3 + 0 + 0)^{1/3}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(d(x_1,x_2) = (0.008 + 0.125)^{1/3} = (0.133)^{1/3} \approx 0.509\)</span>$</p>
 <p><strong>Implementasi Kode Python (Matriks Jarak):</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -643,26 +665,26 @@ $<span class="math notranslate nohighlight">\(d(x_1,x_2) = (0.2^3 + 0.5^3 + 0 + 
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Data 1</th>
-      <th>Data 2</th>
-      <th>Data 3</th>
+      <th>D1</th>
+      <th>D2</th>
+      <th>D3</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Data 1</th>
+      <th>D1</th>
       <td>0.000000</td>
       <td>0.510447</td>
       <td>0.451436</td>
     </tr>
     <tr>
-      <th>Data 2</th>
+      <th>D2</th>
       <td>0.510447</td>
       <td>0.000000</td>
       <td>0.257128</td>
     </tr>
     <tr>
-      <th>Data 3</th>
+      <th>D3</th>
       <td>0.451436</td>
       <td>0.257128</td>
       <td>0.000000</td>
@@ -671,13 +693,6 @@ $<span class="math notranslate nohighlight">\(d(x_1,x_2) = (0.2^3 + 0.5^3 + 0 + 
 </table>
 </div></div></div>
 </div>
-</section>
-<section id="visualisasi-matriks-jarak-dari-orange">
-<h2>Visualisasi Matriks Jarak dari Orange<a class="headerlink" href="#visualisasi-matriks-jarak-dari-orange" title="Permalink to this heading">#</a></h2>
-<p>Biar makin yakin, ini hasil screenshot dari Orange Data Mining buat matriks jaraknya. Kita tinggal pakai widget <strong>Distances</strong> terus disambung ke <strong>Distance Matrix</strong>.</p>
-<p><img alt="Jarak Euclidean" src="../_images/euclidean.png" />
-<img alt="Jarak Manhattan" src="../_images/manhattan.png" />
-<img alt="Jarak Minkowski" src="docs/minkowski.png" /></p>
 </section>
 </section>
 
@@ -739,7 +754,6 @@ $<span class="math notranslate nohighlight">\(d(x_1,x_2) = (0.2^3 + 0.5^3 + 0 + 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#euclidean-distance">1. Euclidean Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manhattan-distance">2. Manhattan Distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minkowski-distance">3. Minkowski Distance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-matriks-jarak-dari-orange">Visualisasi Matriks Jarak dari Orange</a></li>
 </ul>
   </nav></div>
 
