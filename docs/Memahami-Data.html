@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Memahami Karakteristik Data &#8212; Pendata Fahdimas</title>
+    <title>Memahami Karakteristik Data (Data Understanding) &#8212; Pendata Fahdimas</title>
   
   
   
@@ -177,7 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Memahami Karakteristik Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Memahami Karakteristik Data (Data Understanding)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Eksplorasi-Data-Iris.html">Eksplorasi Data Iris</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Bussiness-Understanding.html">Business Understanding</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Data-Preparation.html">Data Preparation</a></li>
@@ -386,7 +386,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Memahami Karakteristik Data</h1>
+    <h1>Memahami Karakteristik Data (Data Understanding)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -404,13 +404,21 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-penyebaran-dispersion">2. Ukuran Penyebaran (Dispersion)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-range-rentang"><strong>A. Range (Rentang)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-variansi-variance"><strong>B. Variansi (Variance)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-standar-deviasi-simpangan-baku"><strong>C. Standar Deviasi (Simpangan Baku)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-standar-deviasi-simpangan-baku"><strong>B. Standar Deviasi (Simpangan Baku)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-bentuk-shape">3. Ukuran Bentuk (Shape)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-skewness-kemiringan"><strong>A. Skewness (Kemiringan)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kurtosis-keruncingan"><strong>B. Kurtosis (Keruncingan)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-dataset-iris">3. Eksplorasi Dataset Iris</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-kualitas-data"><strong>Analisis Kualitas Data</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-distance-measurement">4. Mengukur Jarak (Distance Measurement)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-formula-jarak-numerik"><strong>A. Formula Jarak Numerik</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-implementasi-distance-matrix"><strong>B. Implementasi Distance Matrix</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipe-data-campuran-integrasi-data">5. Tipe Data Campuran &amp; Integrasi Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengukuran-jarak-data-campuran"><strong>Pengukuran Jarak Data Campuran</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-sumber-data"><strong>Integrasi Sumber Data</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -424,109 +432,450 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="memahami-karakteristik-data">
-<h1>Memahami Karakteristik Data<a class="headerlink" href="#memahami-karakteristik-data" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="memahami-karakteristik-data-data-understanding">
+<h1>Memahami Karakteristik Data (Data Understanding)<a class="headerlink" href="#memahami-karakteristik-data-data-understanding" title="Permalink to this heading">#</a></h1>
 <p>Dalam Data Mining, memahami karakteristik data atau <strong>Statistik Deskriptif</strong> adalah langkah awal yang krusial. Tujuannya adalah untuk mendapatkan gambaran umum tentang distribusi dan sebaran data yang kita miliki.</p>
 <hr class="docutils" />
 <section id="ukuran-pemusatan-central-tendency">
 <h2>1. Ukuran Pemusatan (Central Tendency)<a class="headerlink" href="#ukuran-pemusatan-central-tendency" title="Permalink to this heading">#</a></h2>
-<p>Ukuran pemusatan digunakan untuk menemukan satu nilai yang dapat mewakili seluruh kumpulan data.</p>
 <section id="a-mean-rata-rata">
 <h3><strong>A. Mean (Rata-rata)</strong><a class="headerlink" href="#a-mean-rata-rata" title="Permalink to this heading">#</a></h3>
-<p>Mean adalah nilai rata-rata dari seluruh data. Nilai ini sangat dipengaruhi oleh nilai ekstrem (<em>outlier</em>).</p>
-<p><strong>Rumus:</strong>
-$<span class="math notranslate nohighlight">\(\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}\)</span>$</p>
-<p><strong>Keterangan:</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Nilai rata-rata (Mean).</p></li>
-<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai data ke-<span class="math notranslate nohighlight">\(i\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah total data/sampel.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sum\)</span> : Simbol penjumlahan.</p></li>
-</ul>
+<p>Mean adalah nilai rata-rata dari seluruh data. Nilai ini sangat dipengaruhi oleh nilai ekstrem (<em>outlier</em>).
+$<span class="math notranslate nohighlight">\(\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}\)</span><span class="math notranslate nohighlight">\(
+**Keterangan:** \)</span>\bar{x}<span class="math notranslate nohighlight">\( adalah rata-rata, \)</span>x_i<span class="math notranslate nohighlight">\( adalah data ke-\)</span>i<span class="math notranslate nohighlight">\(, dan \)</span>n$ adalah jumlah data.</p>
 </section>
-<hr class="docutils" />
 <section id="b-median-nilai-tengah">
 <h3><strong>B. Median (Nilai Tengah)</strong><a class="headerlink" href="#b-median-nilai-tengah" title="Permalink to this heading">#</a></h3>
-<p>Median adalah nilai tengah dari sekumpulan data yang telah diurutkan dari terkecil ke terbesar. Median lebih tahan terhadap pengaruh <em>outlier</em>.</p>
-<p><strong>Rumus (Data Ganjil):</strong>
-$<span class="math notranslate nohighlight">\(Me = x_{\frac{n+1}{2}}\)</span>$</p>
-<p><strong>Rumus (Data Genap):</strong>
-$<span class="math notranslate nohighlight">\(Me = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2} + 1}}{2}\)</span>$</p>
-<p><strong>Keterangan:</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(Me\)</span> : Median.</p></li>
-<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah data.</p></li>
-<li><p><span class="math notranslate nohighlight">\(x\)</span> : Data pada urutan tertentu.</p></li>
-</ul>
+<p>Median adalah nilai tengah dari sekumpulan data yang telah diurutkan.
+$<span class="math notranslate nohighlight">\(Me = x_{\frac{n+1}{2}} \text{ (Ganjil)} \quad Me = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2} + 1}}{2} \text{ (Genap)}\)</span>$</p>
 </section>
-<hr class="docutils" />
 <section id="c-modus-mode">
 <h3><strong>C. Modus (Mode)</strong><a class="headerlink" href="#c-modus-mode" title="Permalink to this heading">#</a></h3>
-<p>Modus adalah nilai yang paling sering muncul dalam suatu kumpulan data. Sebuah data bisa memiliki satu modus (unimodal), dua modus (bimodal), atau lebih (multimodal).</p>
+<p>Modus adalah nilai yang paling sering muncul dalam suatu kumpulan data.</p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="ukuran-penyebaran-dispersion">
 <h2>2. Ukuran Penyebaran (Dispersion)<a class="headerlink" href="#ukuran-penyebaran-dispersion" title="Permalink to this heading">#</a></h2>
-<p>Ukuran ini menunjukkan seberapa jauh data menyebar dari pusatnya.</p>
 <section id="a-range-rentang">
 <h3><strong>A. Range (Rentang)</strong><a class="headerlink" href="#a-range-rentang" title="Permalink to this heading">#</a></h3>
-<p>Selisih antara nilai terbesar dan nilai terkecil.</p>
-<p><strong>Rumus:</strong>
-$<span class="math notranslate nohighlight">\(Range = x_{max} - x_{min}\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[Range = x_{max} - x_{min}\]</div>
 </section>
-<hr class="docutils" />
-<section id="b-variansi-variance">
-<h3><strong>B. Variansi (Variance)</strong><a class="headerlink" href="#b-variansi-variance" title="Permalink to this heading">#</a></h3>
-<p>Variansi mengukur rata-rata selisih kuadrat antara setiap titik data dengan nilai rata-ratanya.</p>
-<p><strong>Rumus (Sampel):</strong>
-$<span class="math notranslate nohighlight">\(s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}\)</span>$</p>
-<p><strong>Keterangan:</strong></p>
+<section id="b-standar-deviasi-simpangan-baku">
+<h3><strong>B. Standar Deviasi (Simpangan Baku)</strong><a class="headerlink" href="#b-standar-deviasi-simpangan-baku" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}}\]</div>
+<p><strong>Keterangan:</strong> <span class="math notranslate nohighlight">\(s\)</span> menggambarkan seberapa besar penyimpangan data dari rata-ratanya.</p>
+</section>
+</section>
+<section id="eksplorasi-dataset-iris">
+<h2>3. Eksplorasi Dataset Iris<a class="headerlink" href="#eksplorasi-dataset-iris" title="Permalink to this heading">#</a></h2>
+<p>Dataset ini memiliki karakteristik sebagai berikut:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(s^2\)</span> : Variansi sampel.</p></li>
-<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai data ke-<span class="math notranslate nohighlight">\(i\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Mean (rata-rata).</p></li>
-<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah data.</p></li>
+<li><p><strong>Jumlah Data:</strong> 150 data (ID 1 - 150).</p></li>
+<li><p><strong>Komposisi Kelas:</strong> Terdapat 3 jenis spesies (<em>Setosa, Versicolor, Virginica</em>), masing-masing berjumlah <strong>50 data</strong>.</p></li>
+<li><p><strong>Fitur Utama:</strong> Memiliki 4 fitur numerik: <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>.</p></li>
+</ul>
+<section id="analisis-kualitas-data">
+<h3><strong>Analisis Kualitas Data</strong><a class="headerlink" href="#analisis-kualitas-data" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Missing Values:</strong> Berdasarkan pengecekan, dataset ini memiliki <strong>0 missing values</strong>. Seluruh kolom terisi lengkap.</p></li>
+<li><p><strong>Outliers (Pencilan):</strong> Identifikasi dilakukan dengan visualisasi Boxplot untuk melihat data yang menyimpang jauh dari rata-rata.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># 1. Load Data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. Statistik Deskriptif per Kelas (Spesies)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistik Deskriptif Tiap Spesies:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># 3. Visualisasi Boxplot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Identifikasi Outlier pada Fitur Iris menggunakan Boxplot&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Statistik Deskriptif Tiap Spesies:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>Iris-setosa</th>
+      <th>Iris-versicolor</th>
+      <th>Iris-virginica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="8" valign="top">sepal_length</th>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.006000</td>
+      <td>5.936000</td>
+      <td>6.588000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.352490</td>
+      <td>0.516171</td>
+      <td>0.635880</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.300000</td>
+      <td>4.900000</td>
+      <td>4.900000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>4.800000</td>
+      <td>5.600000</td>
+      <td>6.225000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.000000</td>
+      <td>5.900000</td>
+      <td>6.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>5.200000</td>
+      <td>6.300000</td>
+      <td>6.900000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>5.800000</td>
+      <td>7.000000</td>
+      <td>7.900000</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">sepal_width</th>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3.418000</td>
+      <td>2.770000</td>
+      <td>2.974000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.381024</td>
+      <td>0.313798</td>
+      <td>0.322497</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2.300000</td>
+      <td>2.000000</td>
+      <td>2.200000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>3.125000</td>
+      <td>2.525000</td>
+      <td>2.800000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>3.400000</td>
+      <td>2.800000</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.675000</td>
+      <td>3.000000</td>
+      <td>3.175000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>4.400000</td>
+      <td>3.400000</td>
+      <td>3.800000</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">petal_length</th>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1.464000</td>
+      <td>4.260000</td>
+      <td>5.552000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.173511</td>
+      <td>0.469911</td>
+      <td>0.551895</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>4.500000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.400000</td>
+      <td>4.000000</td>
+      <td>5.100000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.500000</td>
+      <td>4.350000</td>
+      <td>5.550000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1.575000</td>
+      <td>4.600000</td>
+      <td>5.875000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.900000</td>
+      <td>5.100000</td>
+      <td>6.900000</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">petal_width</th>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.244000</td>
+      <td>1.326000</td>
+      <td>2.026000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.107210</td>
+      <td>0.197753</td>
+      <td>0.274650</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.100000</td>
+      <td>1.000000</td>
+      <td>1.400000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.200000</td>
+      <td>1.200000</td>
+      <td>1.800000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.200000</td>
+      <td>1.300000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.300000</td>
+      <td>1.500000</td>
+      <td>2.300000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.600000</td>
+      <td>1.800000</td>
+      <td>2.500000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="../_images/b8ffc86bbbe6c6280e603b2742d8762c1eff859017c4de04aa213a8472ecfa8a.png" src="../_images/b8ffc86bbbe6c6280e603b2742d8762c1eff859017c4de04aa213a8472ecfa8a.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="mengukur-jarak-distance-measurement">
+<h2>4. Mengukur Jarak (Distance Measurement)<a class="headerlink" href="#mengukur-jarak-distance-measurement" title="Permalink to this heading">#</a></h2>
+<p>Mengukur jarak digunakan untuk mengetahui seberapa mirip (<em>similarity</em>) antara dua objek data.</p>
+<section id="a-formula-jarak-numerik">
+<h3><strong>A. Formula Jarak Numerik</strong><a class="headerlink" href="#a-formula-jarak-numerik" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Manhattan Distance (<span class="math notranslate nohighlight">\(L_1\)</span>):</strong>
+$<span class="math notranslate nohighlight">\(d(x,y) = \sum_{i=1}^{n} |x_i - y_i|\)</span><span class="math notranslate nohighlight">\(
+**Keterangan:** Menjumlahkan selisih absolut dari setiap fitur. Contoh: \)</span>|f1_{id1} - f1_{id2}| + |f2_{id1} - f2_{id2}|$.</p></li>
+<li><p><strong>Euclidean Distance (<span class="math notranslate nohighlight">\(L_2\)</span>):</strong>
+$<span class="math notranslate nohighlight">\(d(x,y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}\)</span>$
+<strong>Keterangan:</strong> Jarak garis lurus antar dua titik (menggunakan pangkat 2).</p></li>
+<li><p><strong>Supremum Distance (<span class="math notranslate nohighlight">\(L_\infty\)</span>):</strong>
+$<span class="math notranslate nohighlight">\(d(x,y) = \max_i |x_i - y_i|\)</span>$
+<strong>Keterangan:</strong> Mengambil nilai selisih terbesar dari satu fitur saja.</p></li>
+</ol>
+</section>
+<section id="b-implementasi-distance-matrix">
+<h3><strong>B. Implementasi Distance Matrix</strong><a class="headerlink" href="#b-implementasi-distance-matrix" title="Permalink to this heading">#</a></h3>
+<p>Matriks jarak memungkinkan kita melihat jarak antar objek secara sekaligus, seperti pada aplikasi Orange.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial</span><span class="w"> </span><span class="kn">import</span> <span class="n">distance_matrix</span>
+
+<span class="c1"># Ambil data ID 1 dan ID 2</span>
+<span class="n">id1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">id2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hasil Jarak Manhattan : </span><span class="si">{</span><span class="n">distance</span><span class="o">.</span><span class="n">cityblock</span><span class="p">(</span><span class="n">id1</span><span class="p">,</span><span class="w"> </span><span class="n">id2</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hasil Jarak Euclidean : </span><span class="si">{</span><span class="n">distance</span><span class="o">.</span><span class="n">euclidean</span><span class="p">(</span><span class="n">id1</span><span class="p">,</span><span class="w"> </span><span class="n">id2</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hasil Jarak Supremum  : </span><span class="si">{</span><span class="n">distance</span><span class="o">.</span><span class="n">chebyshev</span><span class="p">(</span><span class="n">id1</span><span class="p">,</span><span class="w"> </span><span class="n">id2</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Distance Matrix untuk 5 data pertama</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Distance Matrix (5 Data Pertama):&quot;</span><span class="p">)</span>
+<span class="n">dist_mat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]))</span>
+<span class="n">dist_mat</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">dist_mat</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;ID </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil Jarak Manhattan : 0.7000
+Hasil Jarak Euclidean : 0.5385
+Hasil Jarak Supremum  : 0.5000
+
+Distance Matrix (5 Data Pertama):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID 1</th>
+      <th>ID 2</th>
+      <th>ID 3</th>
+      <th>ID 4</th>
+      <th>ID 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ID 1</th>
+      <td>0.000000</td>
+      <td>0.538516</td>
+      <td>0.509902</td>
+      <td>0.648074</td>
+      <td>0.141421</td>
+    </tr>
+    <tr>
+      <th>ID 2</th>
+      <td>0.538516</td>
+      <td>0.000000</td>
+      <td>0.300000</td>
+      <td>0.331662</td>
+      <td>0.608276</td>
+    </tr>
+    <tr>
+      <th>ID 3</th>
+      <td>0.509902</td>
+      <td>0.300000</td>
+      <td>0.000000</td>
+      <td>0.244949</td>
+      <td>0.509902</td>
+    </tr>
+    <tr>
+      <th>ID 4</th>
+      <td>0.648074</td>
+      <td>0.331662</td>
+      <td>0.244949</td>
+      <td>0.000000</td>
+      <td>0.648074</td>
+    </tr>
+    <tr>
+      <th>ID 5</th>
+      <td>0.141421</td>
+      <td>0.608276</td>
+      <td>0.509902</td>
+      <td>0.648074</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="tipe-data-campuran-integrasi-data">
+<h2>5. Tipe Data Campuran &amp; Integrasi Data<a class="headerlink" href="#tipe-data-campuran-integrasi-data" title="Permalink to this heading">#</a></h2>
+<section id="pengukuran-jarak-data-campuran">
+<h3><strong>Pengukuran Jarak Data Campuran</strong><a class="headerlink" href="#pengukuran-jarak-data-campuran" title="Permalink to this heading">#</a></h3>
+<p>Untuk data campuran (Numerik, Kategorikal, Biner), kita menggunakan konsep <strong>Gower Distance</strong>:</p>
+<ul class="simple">
+<li><p><strong>Atribut Nominal:</strong> Jarak 0 jika sama, 1 jika beda.</p></li>
+<li><p><strong>Atribut Numerik:</strong> Jarak = <span class="math notranslate nohighlight">\(|x - y| / (max - min)\)</span>.</p></li>
+<li><p><strong>Atribut Biner:</strong> Dihitung berdasarkan kesamaan atribut (Ya/Tidak).</p></li>
 </ul>
 </section>
-<hr class="docutils" />
-<section id="c-standar-deviasi-simpangan-baku">
-<h3><strong>C. Standar Deviasi (Simpangan Baku)</strong><a class="headerlink" href="#c-standar-deviasi-simpangan-baku" title="Permalink to this heading">#</a></h3>
-<p>Standar deviasi adalah akar kuadrat dari variansi. Nilai ini menggambarkan seberapa besar penyimpangan data dari nilai rata-ratanya.</p>
-<p><strong>Rumus:</strong>
-$<span class="math notranslate nohighlight">\(s = \sqrt{s^2}\)</span>$</p>
-</section>
-</section>
-<hr class="docutils" />
-<section id="ukuran-bentuk-shape">
-<h2>3. Ukuran Bentuk (Shape)<a class="headerlink" href="#ukuran-bentuk-shape" title="Permalink to this heading">#</a></h2>
-<section id="a-skewness-kemiringan">
-<h3><strong>A. Skewness (Kemiringan)</strong><a class="headerlink" href="#a-skewness-kemiringan" title="Permalink to this heading">#</a></h3>
-<p>Skewness menunjukkan tingkat ketidaksimetrisan (kemiringan) distribusi data.</p>
-<p><strong>Rumus (Koefisien Pearson):</strong>
-$<span class="math notranslate nohighlight">\(Sk = \frac{3(\bar{x} - Me)}{s}\)</span>$</p>
-<p><strong>Keterangan:</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(Sk\)</span> : Koefisien kemiringan.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Mean.</p></li>
-<li><p><span class="math notranslate nohighlight">\(Me\)</span> : Median.</p></li>
-<li><p><span class="math notranslate nohighlight">\(s\)</span> : Standar Deviasi.</p></li>
-</ul>
-<p><strong>Interpretasi:</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(Sk = 0\)</span>: Distribusi normal (simetris).</p></li>
-<li><p><span class="math notranslate nohighlight">\(Sk &gt; 0\)</span>: Ekor distribusi memanjang ke kanan (<em>positive skew</em>).</p></li>
-<li><p><span class="math notranslate nohighlight">\(Sk &lt; 0\)</span>: Ekor distribusi memanjang ke kiri (<em>negative skew</em>).</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="b-kurtosis-keruncingan">
-<h3><strong>B. Kurtosis (Keruncingan)</strong><a class="headerlink" href="#b-kurtosis-keruncingan" title="Permalink to this heading">#</a></h3>
-<p>Kurtosis menunjukkan tingkat keruncingan atau “ketinggian” puncak distribusi data dibandingkan dengan distribusi normal.</p>
-<hr class="docutils" />
-<blockquote>
-<div><p><strong>Catatan:</strong> Memahami statistik ini sangat membantu dalam tahap <em>Data Cleaning</em> dan <em>Data Transformation</em> sebelum melakukan pemodelan mesin.</p>
-</div></blockquote>
+<section id="integrasi-sumber-data">
+<h3><strong>Integrasi Sumber Data</strong><a class="headerlink" href="#integrasi-sumber-data" title="Permalink to this heading">#</a></h3>
+<p>Data dalam eksplorasi ini ditarik dan diintegrasikan dari:</p>
+<ol class="arabic simple">
+<li><p><strong>Relational Database:</strong> Menggunakan library <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code> untuk koneksi ke <strong>PostgreSQL</strong> dan <strong>MySQL</strong>.</p></li>
+<li><p><strong>File Eksternal:</strong> Format <strong>JSON</strong> dan <strong>CSV</strong>.</p></li>
+<li><p><strong>Web Statis:</strong> Penguatan metadata melalui referensi web.</p></li>
+</ol>
 </section>
 </section>
 </section>
@@ -603,13 +952,21 @@ $<span class="math notranslate nohighlight">\(Sk = \frac{3(\bar{x} - Me)}{s}\)</
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-penyebaran-dispersion">2. Ukuran Penyebaran (Dispersion)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-range-rentang"><strong>A. Range (Rentang)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-variansi-variance"><strong>B. Variansi (Variance)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-standar-deviasi-simpangan-baku"><strong>C. Standar Deviasi (Simpangan Baku)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-standar-deviasi-simpangan-baku"><strong>B. Standar Deviasi (Simpangan Baku)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ukuran-bentuk-shape">3. Ukuran Bentuk (Shape)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-skewness-kemiringan"><strong>A. Skewness (Kemiringan)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-kurtosis-keruncingan"><strong>B. Kurtosis (Keruncingan)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eksplorasi-dataset-iris">3. Eksplorasi Dataset Iris</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-kualitas-data"><strong>Analisis Kualitas Data</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengukur-jarak-distance-measurement">4. Mengukur Jarak (Distance Measurement)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-formula-jarak-numerik"><strong>A. Formula Jarak Numerik</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-implementasi-distance-matrix"><strong>B. Implementasi Distance Matrix</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipe-data-campuran-integrasi-data">5. Tipe Data Campuran &amp; Integrasi Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengukuran-jarak-data-campuran"><strong>Pengukuran Jarak Data Campuran</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-sumber-data"><strong>Integrasi Sumber Data</strong></a></li>
 </ul>
 </li>
 </ul>
