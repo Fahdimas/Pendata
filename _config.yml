@@ -4,6 +4,12 @@ author: Fahdimas akmal
 copyright: "2022"
 logo: profil.png
 
+# Repository settings (Ini yang bikin error tadi)
+repository:
+  url: https://github.com/Fahdimas/Pendata
+  path_to_book: ""
+  branch: main
+
 # Execution settings
 execute:
   execute_nb: off
@@ -13,8 +19,6 @@ html:
   use_repository_button: true
   use_issues_button: true
   use_edit_page_button: true
-  repository_url: https://github.com/Fahdimas-Akmal/Pendata
-  repository_branch: main
   extra_navbar: "Fahdimas Akmal - 240411100228"
 
 # Parse settings
