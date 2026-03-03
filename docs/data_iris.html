@@ -387,17 +387,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-dan-sumber-data">1. Integrasi dan Sumber Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-karakteristik-dataset-overview">2. Deskripsi Karakteristik Dataset (Overview)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-kualitas-data-data-quality-check">3. Identifikasi Kualitas Data (Data Quality Check)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pengecekan-missing-values-data-yang-hilang"><strong>A. Pengecekan Missing Values (Data yang Hilang)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-identifikasi-outlier-pencilan-data"><strong>B. Identifikasi Outlier (Pencilan Data)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dan-dimensi-data">1. Struktur dan Dimensi Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validasi-kualitas-data-missing-values-outliers">2. Validasi Kualitas Data (Missing Values &amp; Outliers)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pengecekan-missing-value"><strong>A. Pengecekan Missing Value</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deteksi-outliers"><strong>B. Deteksi Outliers</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif-dari-setiap-kelas">4. Statistik Deskriptif dari Setiap Kelas</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil-statistik"><strong>Interpretasi Hasil Statistik</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gambaran-statistik-awal-describe-data">3. Gambaran Statistik Awal (Describe Data)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-singkat-hasil-statistik"><strong>Penjelasan Singkat Hasil Statistik</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-tiap-spesies-visualisasi-sebaran">4. Statistik Tiap Spesies &amp; Visualisasi Sebaran</a></li>
 </ul>
             </nav>
         </div>
@@ -411,39 +411,17 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="eksplorasi-data-iris-data-understanding">
 <h1>Eksplorasi Data Iris (Data Understanding)<a class="headerlink" href="#eksplorasi-data-iris-data-understanding" title="Permalink to this heading">#</a></h1>
-<p>Setelah memahami konsep dasar dari statistik deskriptif, langkah selanjutnya adalah menerapkannya secara langsung pada dataset nyata. Pada tahap ini, kita akan melakukan <em>Data Understanding</em> atau pemahaman data terhadap salah satu dataset paling ikonik dalam dunia <em>Data Mining</em>, yaitu <strong>Dataset Bunga Iris</strong>.</p>
-<p>Eksplorasi ini sangat penting agar kita tahu persis karakteristik, bentuk, dan kualitas dari data yang akan kita olah sebelum masuk ke tahap pembuatan model algoritma (seperti klasifikasi).</p>
+<p>Pada eksplorasi kali ini, kita akan menggunakan <strong>Dataset Iris</strong>. Dataset ini memang cukup populer dan sering dipakai untuk belajar dasar-dasar <em>Data Mining</em>, khususnya untuk kasus klasifikasi.</p>
+<p>Nah, untuk pengumpulan datanya, kita tidak sekadar <em>download</em> file mentah dari internet. Sebagai bentuk praktik integrasi data, data ini ditarik terlebih dahulu dari database relasional (<strong>PostgreSQL &amp; MySQL</strong>). Setelah itu, datanya diekspor menjadi file CSV (<code class="docutils literal notranslate"><span class="pre">IRIS.csv</span></code>) agar lebih mudah diolah di dalam Jupyter Notebook.</p>
+<p>Nantinya, hasil analisis dari <em>coding</em> kita ini juga akan kita bandingkan dengan visualisasi dari aplikasi <strong>Orange Data Mining</strong>.</p>
 <hr class="docutils" />
-<section id="integrasi-dan-sumber-data">
-<h2>1. Integrasi dan Sumber Data<a class="headerlink" href="#integrasi-dan-sumber-data" title="Permalink to this heading">#</a></h2>
-<p>Sebagai seorang <em>Data Scientist</em> atau <em>Data Engineer</em>, data jarang sekali datang hanya dari satu file yang rapi. Dalam proyek ini, data bunga Iris merupakan hasil ekstraksi dari beberapa sumber yang berbeda untuk memastikan validitasnya:</p>
-<ol class="arabic simple">
-<li><p><strong>Database Relasional (RDBMS):</strong> Sebagian besar data transaksional dan historis ditarik dari <strong>PostgreSQL</strong> dan <strong>MySQL</strong> menggunakan koneksi engine (seperti <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code>).</p></li>
-<li><p><strong>File Pertukaran Data:</strong> Untuk keperluan analisis lokal di Jupyter Notebook, data dari database tersebut diekspor ke dalam format <strong>CSV</strong> (<code class="docutils literal notranslate"><span class="pre">IRIS.csv</span></code>) dan <strong>JSON</strong> agar lebih ringan untuk diproses.</p></li>
-<li><p><strong>Web Statis:</strong> Informasi tambahan mengenai karakteristik biologis bunga divalidasi silang menggunakan referensi dari halaman web statis botani.</p></li>
-</ol>
-</section>
-<hr class="docutils" />
-<section id="deskripsi-karakteristik-dataset-overview">
-<h2>2. Deskripsi Karakteristik Dataset (Overview)<a class="headerlink" href="#deskripsi-karakteristik-dataset-overview" title="Permalink to this heading">#</a></h2>
-<p>Dataset Iris bukanlah dataset yang asal dibuat. Data ini berisi ukuran fisik dari berbagai sampel bunga. Berikut adalah rincian anatomi dari dataset ini:</p>
+<section id="struktur-dan-dimensi-data">
+<h2>1. Struktur dan Dimensi Data<a class="headerlink" href="#struktur-dan-dimensi-data" title="Permalink to this heading">#</a></h2>
+<p>Langkah paling awal di tahap <em>Data Understanding</em> tentu saja melihat langsung isi dan ukuran datanya. Dataset Iris ini mencatat ukuran fisik dari tiga jenis bunga Iris.</p>
 <ul class="simple">
-<li><p><strong>Total Observasi (Jumlah Data):</strong> Terdapat <strong>150 baris data</strong> yang mewakili 150 sampel bunga yang berbeda. Setiap sampel diberikan <strong>ID dari 1 hingga 150</strong>.</p></li>
-<li><p><strong>Distribusi Kelas (Target Klasifikasi):</strong> Data ini diklasifikasikan ke dalam <strong>3 spesies utama</strong>, yang pembagiannya sangat seimbang (<em>perfectly balanced</em>), yaitu:</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Iris-setosa</span></code> (50 data)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Iris-versicolor</span></code> (50 data)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Iris-virginica</span></code> (50 data)</p></li>
-</ol>
-</li>
-<li><p><strong>Jumlah Fitur (Variabel Input):</strong> Terdapat <strong>4 fitur bertipe numerik (Float)</strong> yang digunakan untuk mengukur ciri-ciri fisik bunga, yaitu:</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> : Panjang kelopak bunga (dalam cm)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> : Lebar kelopak bunga (dalam cm)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">petal_length</span></code> : Panjang mahkota bunga (dalam cm)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">petal_width</span></code> : Lebar mahkota bunga (dalam cm)</p></li>
-</ol>
-</li>
+<li><p><strong>Dimensi:</strong> Dataset ini memiliki <strong>150 baris</strong> data dan <strong>5 kolom</strong> (atribut).</p></li>
+<li><p><strong>Atribut Numerik (4 Fitur):</strong> <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> (panjang kelopak), <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> (lebar kelopak), <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> (panjang mahkota), dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> (lebar mahkota).</p></li>
+<li><p><strong>Atribut Kategorikal (1 Target):</strong> Kolom <code class="docutils literal notranslate"><span class="pre">species</span></code> yang berisi label jenis bunganya (<em>Iris-setosa</em>, <em>Iris-versicolor</em>, dan <em>Iris-virginica</em>). Masing-masing jenis bunga memiliki tepat 50 sampel, sehingga datanya sangat seimbang.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -452,17 +430,37 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="c1"># Memuat data dari file CSV lokal hasil integrasi database</span>
+<span class="c1"># Memuat Dataset</span>
 <span class="n">df_iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;IRIS.csv&#39;</span><span class="p">)</span>
 
-<span class="c1"># Menampilkan cuplikan data teratas untuk memastikan data masuk dengan benar</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cuplikan 5 Data Teratas Dataset Iris:&quot;</span><span class="p">)</span>
+<span class="c1"># Menampilkan informasi dimensi dan tipe data</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dimensi Dataset: </span><span class="si">{</span><span class="n">df_iris</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> baris dan </span><span class="si">{</span><span class="n">df_iris</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> kolom</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Informasi Tipe Data:&quot;</span><span class="p">)</span>
+<span class="n">df_iris</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cuplikan 5 Data Teratas:&quot;</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df_iris</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cuplikan 5 Data Teratas Dataset Iris:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensi Dataset: 150 baris dan 5 kolom
+
+Informasi Tipe Data:
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 5 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   sepal_length  150 non-null    float64
+ 1   sepal_width   150 non-null    float64
+ 2   petal_length  150 non-null    float64
+ 3   petal_width   150 non-null    float64
+ 4   species       150 non-null    object 
+dtypes: float64(4), object(1)
+memory usage: 6.0+ KB
+
+Cuplikan 5 Data Teratas:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -536,85 +534,169 @@ document.write(`
 </div></div></div>
 </div>
 </section>
-<section id="identifikasi-kualitas-data-data-quality-check">
-<h2>3. Identifikasi Kualitas Data (Data Quality Check)<a class="headerlink" href="#identifikasi-kualitas-data-data-quality-check" title="Permalink to this heading">#</a></h2>
-<p>Kualitas data akan sangat menentukan seberapa akurat algoritma kita nantinya (<em>Garbage In, Garbage Out</em>). Ada dua hal yang wajib kita cek di sini: <strong>Kekosongan Data</strong> dan <strong>Anomali Data</strong>.</p>
-<section id="a-pengecekan-missing-values-data-yang-hilang">
-<h3><strong>A. Pengecekan Missing Values (Data yang Hilang)</strong><a class="headerlink" href="#a-pengecekan-missing-values-data-yang-hilang" title="Permalink to this heading">#</a></h3>
-<p><em>Missing Values</em> terjadi ketika ada baris atau kolom yang tidak memiliki nilai (kosong / <code class="docutils literal notranslate"><span class="pre">NaN</span></code>). Jika data ini dibiarkan, perhitungan jarak (seperti <em>Euclidean</em> atau <em>Manhattan</em>) akan mengalami <em>error</em>.
-Jika ada data yang hilang, solusinya biasanya adalah membuang baris tersebut (Drop) atau mengisinya dengan nilai rata-rata (Imputasi). Mari kita periksa dataset kita.</p>
+<section id="validasi-kualitas-data-missing-values-outliers">
+<h2>2. Validasi Kualitas Data (Missing Values &amp; Outliers)<a class="headerlink" href="#validasi-kualitas-data-missing-values-outliers" title="Permalink to this heading">#</a></h2>
+<p>Sebelum datanya diolah lebih jauh, kita wajib ngecek apakah datanya sudah bersih. Ada dua hal utama yang harus dicek: data kosong (Missing Value) dan data aneh (Outlier).</p>
+<section id="a-pengecekan-missing-value">
+<h3><strong>A. Pengecekan Missing Value</strong><a class="headerlink" href="#a-pengecekan-missing-value" title="Permalink to this heading">#</a></h3>
+<p>Kita pastikan dulu nggak ada sel data yang kosong. Kalau ada yang kosong, perhitungan jarak atau pemodelan ke depannya bisa <em>error</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pengecekan jumlah data yang kosong per kolom</span>
-<span class="n">missing_info</span> <span class="o">=</span> <span class="n">df_iris</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Laporan Pengecekan Missing Values:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">missing_info</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Kesimpulan: Tidak ada missing values (0 data kosong). Dataset ini sangat berkualitas.&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Laporan Missing Values:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">df_iris</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Kesimpulan: Aman! Nggak ada data kosong di dataset ini.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Laporan Pengecekan Missing Values:
-
-sepal_length    0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Laporan Missing Values:
+ sepal_length    0
 sepal_width     0
 petal_length    0
 petal_width     0
 species         0
 dtype: int64
 
-Kesimpulan: Tidak ada missing values (0 data kosong). Dataset ini sangat berkualitas.
+Kesimpulan: Aman! Nggak ada data kosong di dataset ini.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="b-identifikasi-outlier-pencilan-data">
-<h3><strong>B. Identifikasi Outlier (Pencilan Data)</strong><a class="headerlink" href="#b-identifikasi-outlier-pencilan-data" title="Permalink to this heading">#</a></h3>
-<p><em>Outlier</em> adalah titik data yang nilainya menyimpang secara ekstrem dari mayoritas data lainnya. Misalnya, jika rata-rata lebar kelopak adalah 3 cm, tapi ada satu bunga dengan lebar 8 cm, itu adalah outlier.</p>
-<p>Untuk mengidentifikasinya tanpa harus membaca data satu per satu, kita bisa menggunakan pendekatan visual, yaitu <strong>Boxplot</strong>. Titik-titik yang berada di luar “kumis” (whiskers) pada boxplot diindikasikan sebagai outlier secara statistik.</p>
+<section id="b-deteksi-outliers">
+<h3><strong>B. Deteksi Outliers</strong><a class="headerlink" href="#b-deteksi-outliers" title="Permalink to this heading">#</a></h3>
+<p><em>Outlier</em> adalah data yang nilainya melenceng jauh dari rata-rata temannya. Biar gampang nyarinya, kita langsung pakai visualisasi <strong>Violin Plot</strong> dan <strong>Boxplot</strong>.</p>
+<p>Sebagai validasi, ini juga bisa kita cek lewat <strong>Orange Data Mining</strong> pakai widget <em>Box Plot</em>.
+<img alt="Box Plot Outlier Orange" src="docs/boxplot.png" />
+<em>(Ganti tulisan boxplot.png sesuai nama gambarmu)</em></p>
+<p>Ini versi visualisasi pakai Python-nya:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membuat visualisasi Boxplot untuk ke-4 fitur numerik</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_iris</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set2&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Visualisasi Identifikasi Outlier pada Fitur Bunga Iris&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Ukuran dalam Sentimeter (cm)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Bikin Boxplot buat ngecek titik pencilan</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_iris</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;pastel&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Deteksi Titik Outlier pada Fitur Iris&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e96bcd626b09e1555da2e2e7ebcd6795fcf9fe014374f55c49d2c6f6767997fb.png" src="../_images/e96bcd626b09e1555da2e2e7ebcd6795fcf9fe014374f55c49d2c6f6767997fb.png" />
+<img alt="../_images/6508890f4cec62b4980f9d39c38b24b145de6c2fe26efa9ad59fcdf669ddfa21.png" src="../_images/6508890f4cec62b4980f9d39c38b24b145de6c2fe26efa9ad59fcdf669ddfa21.png" />
 </div>
 </div>
-<p><strong>Hasil Analisis Outlier:</strong>
-Berdasarkan grafik di atas, fitur <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code> (lebar kelopak) memiliki beberapa titik pencilan di bagian atas dan bawah. Ini menunjukkan ada beberapa bunga yang kelopaknya sedikit lebih lebar atau lebih sempit dari biasanya. Namun, mengingat ini adalah variasi alamiah dari tumbuhan, data pencilan ini masih dianggap valid dan tidak perlu dihapus.</p>
+<p><strong>Hasil Pengecekan:</strong>
+Dari grafik di atas, kelihatan ada beberapa titik hitam di luar garis pada kolom <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>. Itu adalah data <em>outlier</em>. Tapi karena ini data ukuran bunga alami (bukan salah ketik), datanya tetap kita pakai dan nggak dibuang.</p>
 </section>
 </section>
 <hr class="docutils" />
-<section id="statistik-deskriptif-dari-setiap-kelas">
-<h2>4. Statistik Deskriptif dari Setiap Kelas<a class="headerlink" href="#statistik-deskriptif-dari-setiap-kelas" title="Permalink to this heading">#</a></h2>
-<p>Karena tujuan akhir kita adalah membedakan ketiga jenis bunga ini, kita harus melihat karakteristik unik dari masing-masing kelas. Kita akan menghitung <strong>Rata-rata (Mean)</strong>, <strong>Standar Deviasi (Std)</strong>, <strong>Nilai Minimum/Maksimum</strong>, dan <strong>Kuartil (25%, 50%, 75%)</strong> untuk <em>Setosa</em>, <em>Versicolor</em>, dan <em>Virginica</em>.</p>
+<section id="gambaran-statistik-awal-describe-data">
+<h2>3. Gambaran Statistik Awal (Describe Data)<a class="headerlink" href="#gambaran-statistik-awal-describe-data" title="Permalink to this heading">#</a></h2>
+<p>Biar kebayang karakteristik angkanya, kita hitung nilai statistik deskriptifnya. Ini mencakup <strong>Ukuran Pemusatan</strong> (Mean, Median, Modus) dan <strong>Ukuran Sebaran Data</strong> (Range, Quartil, Standar Deviasi, Variansi, dan Skewness).</p>
+<p>Buat contoh implementasinya, kita hitung detail untuk satu fitur aja, yaitu <strong><code class="docutils literal notranslate"><span class="pre">sepal_length</span></code></strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Memecah dan menampilkan statistik deskriptif khusus per spesies</span>
-<span class="n">spesies_list</span> <span class="o">=</span> <span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
 
-<span class="k">for</span> <span class="n">spesies</span> <span class="ow">in</span> <span class="n">spesies_list</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">40</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Statistik Deskriptif untuk Kelas: </span><span class="si">{</span><span class="n">spesies</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">40</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="c1"># Memfilter data berdasarkan spesies, lalu menghitung statistiknya</span>
-    <span class="n">stats</span> <span class="o">=</span> <span class="n">df_iris</span><span class="p">[</span><span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;species&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">spesies</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Statistik Deskriptif: Sepal Length ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data     : &quot;</span><span class="p">,</span> <span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rata-rata (Mean): &quot;</span><span class="p">,</span> <span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nilai Minimal   : &quot;</span><span class="p">,</span> <span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q1 (25%)        : &quot;</span><span class="p">,</span> <span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q2 (Median/50%) : &quot;</span><span class="p">,</span> <span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q3 (75%)        : &quot;</span><span class="p">,</span> <span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nilai Max       : &quot;</span><span class="p">,</span> <span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+<span class="c1"># Menghitung Modus menggunakan scipy</span>
+<span class="n">mode_val</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">],</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nilai Modus     : </span><span class="si">{}</span><span class="s2"> (muncul sebanyak </span><span class="si">{}</span><span class="s2"> kali)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mode_val</span><span class="o">.</span><span class="n">mode</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mode_val</span><span class="o">.</span><span class="n">count</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kemencengan (Skewness) : &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standar Deviasi : &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variansi        : &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">df_iris</span><span class="p">[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========================================
-Statistik Deskriptif untuk Kelas: Iris-setosa
-========================================
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- Statistik Deskriptif: Sepal Length ---
+Jumlah data     :  150
+Rata-rata (Mean):  5.843333333333334
+Nilai Minimal   :  4.3
+Q1 (25%)        :  5.1
+Q2 (Median/50%) :  5.8
+Q3 (75%)        :  6.4
+Nilai Max       :  7.9
+Nilai Modus     : 5.0 (muncul sebanyak 10 kali)
+Kemencengan (Skewness) :  0.31
+Standar Deviasi :  0.83
+Variansi        :  0.69
+</pre></div>
+</div>
+</div>
+</div>
+<section id="penjelasan-singkat-hasil-statistik">
+<h3><strong>Penjelasan Singkat Hasil Statistik</strong><a class="headerlink" href="#penjelasan-singkat-hasil-statistik" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Jenis Statistika</p></th>
+<th class="head text-left"><p>Nilai</p></th>
+<th class="head text-left"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong>Jumlah Data (n)</strong></p></td>
+<td class="text-left"><p>150</p></td>
+<td class="text-left"><p>Total baris data yang diproses.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Rata-rata (Mean)</strong></p></td>
+<td class="text-left"><p>5.84</p></td>
+<td class="text-left"><p>Nilai rata-rata panjang kelopak bunga.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Median (Q2)</strong></p></td>
+<td class="text-left"><p>5.80</p></td>
+<td class="text-left"><p>Nilai tengah datanya setelah diurutkan.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Modus (Mode)</strong></p></td>
+<td class="text-left"><p>5.0</p></td>
+<td class="text-left"><p>Ukuran panjang kelopak yang paling banyak ditemui (ada 10 bunga).</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Nilai Min - Max</strong></p></td>
+<td class="text-left"><p>4.30 - 7.90</p></td>
+<td class="text-left"><p>Rentang ukuran panjang kelopak terkecil sampai terbesar.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Kuartil 1 &amp; 3</strong></p></td>
+<td class="text-left"><p>5.10 &amp; 6.40</p></td>
+<td class="text-left"><p>Menandakan batas 25% data terbawah dan 75% data terbawah.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong>Standar Deviasi</strong></p></td>
+<td class="text-left"><p>0.83</p></td>
+<td class="text-left"><p>Makin besar nilainya, makin bervariasi ukuran kelopaknya.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong>Variansi</strong></p></td>
+<td class="text-left"><p>0.69</p></td>
+<td class="text-left"><p>Nilai kuadrat dari standar deviasi.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Visualisasi distribusi dan perhitungan seperti ini juga bisa kita dapatkan dengan gampang menggunakan widget <strong>Distributions</strong> di <strong>Orange</strong>.</p>
+<p><img alt="Histogram Orange" src="../_images/histogram.png" /></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="statistik-tiap-spesies-visualisasi-sebaran">
+<h2>4. Statistik Tiap Spesies &amp; Visualisasi Sebaran<a class="headerlink" href="#statistik-tiap-spesies-visualisasi-sebaran" title="Permalink to this heading">#</a></h2>
+<p>Nah, kalau tadi cuma ngecek data secara umum, sekarang kita kelompokin berdasarkan jenis bunganya. Ini penting banget buat algoritma klasifikasi, biar ketahuan fitur mana yang paling beda antar spesiesnya.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nampilin rata-rata dan detail lainnya, tapi dikelompokin per jenis bunga</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistik Berdasarkan Spesies:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_iris</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;species&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Statistik Berdasarkan Spesies:
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -635,235 +717,216 @@ Statistik Deskriptif untuk Kelas: Iris-setosa
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
+      <th>species</th>
+      <th>Iris-setosa</th>
+      <th>Iris-versicolor</th>
+      <th>Iris-virginica</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>sepal_length</th>
-      <td>50.0</td>
-      <td>5.006</td>
+      <th rowspan="8" valign="top">sepal_length</th>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>5.006000</td>
+      <td>5.936000</td>
+      <td>6.588000</td>
+    </tr>
+    <tr>
+      <th>std</th>
       <td>0.352490</td>
-      <td>4.3</td>
-      <td>4.800</td>
-      <td>5.0</td>
-      <td>5.200</td>
-      <td>5.8</td>
-    </tr>
-    <tr>
-      <th>sepal_width</th>
-      <td>50.0</td>
-      <td>3.418</td>
-      <td>0.381024</td>
-      <td>2.3</td>
-      <td>3.125</td>
-      <td>3.4</td>
-      <td>3.675</td>
-      <td>4.4</td>
-    </tr>
-    <tr>
-      <th>petal_length</th>
-      <td>50.0</td>
-      <td>1.464</td>
-      <td>0.173511</td>
-      <td>1.0</td>
-      <td>1.400</td>
-      <td>1.5</td>
-      <td>1.575</td>
-      <td>1.9</td>
-    </tr>
-    <tr>
-      <th>petal_width</th>
-      <td>50.0</td>
-      <td>0.244</td>
-      <td>0.107210</td>
-      <td>0.1</td>
-      <td>0.200</td>
-      <td>0.2</td>
-      <td>0.300</td>
-      <td>0.6</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========================================
-Statistik Deskriptif untuk Kelas: Iris-versicolor
-========================================
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>sepal_length</th>
-      <td>50.0</td>
-      <td>5.936</td>
       <td>0.516171</td>
-      <td>4.9</td>
-      <td>5.600</td>
-      <td>5.90</td>
-      <td>6.3</td>
-      <td>7.0</td>
-    </tr>
-    <tr>
-      <th>sepal_width</th>
-      <td>50.0</td>
-      <td>2.770</td>
-      <td>0.313798</td>
-      <td>2.0</td>
-      <td>2.525</td>
-      <td>2.80</td>
-      <td>3.0</td>
-      <td>3.4</td>
-    </tr>
-    <tr>
-      <th>petal_length</th>
-      <td>50.0</td>
-      <td>4.260</td>
-      <td>0.469911</td>
-      <td>3.0</td>
-      <td>4.000</td>
-      <td>4.35</td>
-      <td>4.6</td>
-      <td>5.1</td>
-    </tr>
-    <tr>
-      <th>petal_width</th>
-      <td>50.0</td>
-      <td>1.326</td>
-      <td>0.197753</td>
-      <td>1.0</td>
-      <td>1.200</td>
-      <td>1.30</td>
-      <td>1.5</td>
-      <td>1.8</td>
-    </tr>
-  </tbody>
-</table>
-</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>========================================
-Statistik Deskriptif untuk Kelas: Iris-virginica
-========================================
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>sepal_length</th>
-      <td>50.0</td>
-      <td>6.588</td>
       <td>0.635880</td>
-      <td>4.9</td>
-      <td>6.225</td>
-      <td>6.50</td>
-      <td>6.900</td>
-      <td>7.9</td>
     </tr>
     <tr>
-      <th>sepal_width</th>
-      <td>50.0</td>
-      <td>2.974</td>
+      <th>min</th>
+      <td>4.300000</td>
+      <td>4.900000</td>
+      <td>4.900000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>4.800000</td>
+      <td>5.600000</td>
+      <td>6.225000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.000000</td>
+      <td>5.900000</td>
+      <td>6.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>5.200000</td>
+      <td>6.300000</td>
+      <td>6.900000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>5.800000</td>
+      <td>7.000000</td>
+      <td>7.900000</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">sepal_width</th>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3.418000</td>
+      <td>2.770000</td>
+      <td>2.974000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.381024</td>
+      <td>0.313798</td>
       <td>0.322497</td>
-      <td>2.2</td>
-      <td>2.800</td>
-      <td>3.00</td>
-      <td>3.175</td>
-      <td>3.8</td>
     </tr>
     <tr>
-      <th>petal_length</th>
-      <td>50.0</td>
-      <td>5.552</td>
+      <th>min</th>
+      <td>2.300000</td>
+      <td>2.000000</td>
+      <td>2.200000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>3.125000</td>
+      <td>2.525000</td>
+      <td>2.800000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>3.400000</td>
+      <td>2.800000</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.675000</td>
+      <td>3.000000</td>
+      <td>3.175000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>4.400000</td>
+      <td>3.400000</td>
+      <td>3.800000</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">petal_length</th>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1.464000</td>
+      <td>4.260000</td>
+      <td>5.552000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.173511</td>
+      <td>0.469911</td>
       <td>0.551895</td>
-      <td>4.5</td>
-      <td>5.100</td>
-      <td>5.55</td>
-      <td>5.875</td>
-      <td>6.9</td>
     </tr>
     <tr>
-      <th>petal_width</th>
-      <td>50.0</td>
-      <td>2.026</td>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>4.500000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.400000</td>
+      <td>4.000000</td>
+      <td>5.100000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.500000</td>
+      <td>4.350000</td>
+      <td>5.550000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1.575000</td>
+      <td>4.600000</td>
+      <td>5.875000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.900000</td>
+      <td>5.100000</td>
+      <td>6.900000</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">petal_width</th>
+      <th>count</th>
+      <td>50.000000</td>
+      <td>50.000000</td>
+      <td>50.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>0.244000</td>
+      <td>1.326000</td>
+      <td>2.026000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.107210</td>
+      <td>0.197753</td>
       <td>0.274650</td>
-      <td>1.4</td>
-      <td>1.800</td>
-      <td>2.00</td>
-      <td>2.300</td>
-      <td>2.5</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.100000</td>
+      <td>1.000000</td>
+      <td>1.400000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.200000</td>
+      <td>1.200000</td>
+      <td>1.800000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>0.200000</td>
+      <td>1.300000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.300000</td>
+      <td>1.500000</td>
+      <td>2.300000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>0.600000</td>
+      <td>1.800000</td>
+      <td>2.500000</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<section id="interpretasi-hasil-statistik">
-<h3><strong>Interpretasi Hasil Statistik</strong><a class="headerlink" href="#interpretasi-hasil-statistik" title="Permalink to this heading">#</a></h3>
-<p>Berdasarkan tabel perhitungan statistik di atas, kita bisa menarik beberapa insight berharga:</p>
-<ol class="arabic simple">
-<li><p><strong>Iris-Setosa:</strong> Memiliki rata-rata ukuran mahkota (<code class="docutils literal notranslate"><span class="pre">petal_length</span></code> dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>) yang paling kecil dibandingkan yang lain. Artinya, Setosa adalah bunga yang ukurannya relatif mungil.</p></li>
-<li><p><strong>Iris-Virginica:</strong> Memiliki rata-rata ukuran mahkota yang paling besar dan panjang.</p></li>
-<li><p><strong>Iris-Versicolor:</strong> Memiliki ukuran yang berada di tengah-tengah antara Setosa dan Virginica.</p></li>
-</ol>
-<p>Dengan perbedaan statistik yang cukup mencolok ini (terutama pada fitur <em>petal</em>), algoritma klasifikasi nantinya akan lebih mudah menarik garis batas antar kelas.</p>
-</section>
+<p>Dari tabel di atas, kelihatan jelas kalau <strong>Setosa</strong> ukurannya mungil-mungil, beda jauh sama <strong>Virginica</strong> yang kelopak dan mahkotanya lebih besar.</p>
+<p>Terakhir, biar makin yakin, kita bikin <strong>Scatter Plot</strong> buat ngecek hubungan antar fitur (misal panjang mahkota vs lebar mahkota). Ini juga bisa dicek di widget Orange!</p>
+<p><img alt="Scatter Plot Orange" src="../_images/scatterplot.png" /></p>
 </section>
 </section>
 
@@ -922,17 +985,17 @@ Statistik Deskriptif untuk Kelas: Iris-virginica
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-dan-sumber-data">1. Integrasi dan Sumber Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-karakteristik-dataset-overview">2. Deskripsi Karakteristik Dataset (Overview)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identifikasi-kualitas-data-data-quality-check">3. Identifikasi Kualitas Data (Data Quality Check)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pengecekan-missing-values-data-yang-hilang"><strong>A. Pengecekan Missing Values (Data yang Hilang)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-identifikasi-outlier-pencilan-data"><strong>B. Identifikasi Outlier (Pencilan Data)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-dan-dimensi-data">1. Struktur dan Dimensi Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validasi-kualitas-data-missing-values-outliers">2. Validasi Kualitas Data (Missing Values &amp; Outliers)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pengecekan-missing-value"><strong>A. Pengecekan Missing Value</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deteksi-outliers"><strong>B. Deteksi Outliers</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif-dari-setiap-kelas">4. Statistik Deskriptif dari Setiap Kelas</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil-statistik"><strong>Interpretasi Hasil Statistik</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gambaran-statistik-awal-describe-data">3. Gambaran Statistik Awal (Describe Data)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-singkat-hasil-statistik"><strong>Penjelasan Singkat Hasil Statistik</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-tiap-spesies-visualisasi-sebaran">4. Statistik Tiap Spesies &amp; Visualisasi Sebaran</a></li>
 </ul>
   </nav></div>
 
