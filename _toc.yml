@@ -1,6 +1,8 @@
 format: jb-book
-root: docs/Pengantar-Data-Mining
+root: intro
 chapters:
+  - file: docs/Pengantar-Data-Mining
   - file: docs/Memahami-Data
   - file: docs/data_iris
   - file: docs/jarak
+  - file: docs/campuran
