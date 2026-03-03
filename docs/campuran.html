@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Mengukur Jarak Tipe Data Campuran (Studi Kasus: Travel Insurance) &#8212; Pendata Fahdimas</title>
+    <title>Mengukur Jarak Tipe Data Campuran (Gower Distance) &#8212; Pendata Fahdimas</title>
   
   
   
@@ -381,7 +381,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mengukur Jarak Tipe Data Campuran (Studi Kasus: Travel Insurance)</h1>
+    <h1>Mengukur Jarak Tipe Data Campuran (Gower Distance)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -391,20 +391,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">1. Data Understanding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut-yang-digunakan"><strong>Deskripsi Atribut yang Digunakan:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-dan-rumus-manual">1. Transformasi dan Rumus Manual</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-hitung-manual-pelanggan-1-vs-pelanggan-2"><strong>Contoh Hitung Manual (Pelanggan 1 vs Pelanggan 2):</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">2. Transformasi Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-min-max-untuk-numerik"><strong>Normalisasi Min-Max untuk Numerik</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-gower-manual">3. Perhitungan Jarak Gower (Manual)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-menghitung-selisih-per-atribut-s-ij"><strong>Langkah 1: Menghitung Selisih per Atribut (<span class="math notranslate nohighlight">\(s_{ij}\)</span>)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-menghitung-rata-rata-jarak-gower"><strong>Langkah 2: Menghitung Rata-rata Jarak Gower</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">4. Implementasi Menggunakan Orange Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-di-orange-data-mining">2. Implementasi di Orange Data Mining</a></li>
 </ul>
             </nav>
         </div>
@@ -416,37 +407,28 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mengukur-jarak-tipe-data-campuran-studi-kasus-travel-insurance">
-<h1>Mengukur Jarak Tipe Data Campuran (Studi Kasus: Travel Insurance)<a class="headerlink" href="#mengukur-jarak-tipe-data-campuran-studi-kasus-travel-insurance" title="Permalink to this heading">#</a></h1>
-<p>Dalam dunia nyata, dataset seringkali memiliki tipe data yang beragam (Mixed Data Types). Kita tidak bisa menggunakan Euclidean atau Manhattan saja jika terdapat data kategorikal. Salah satu metode yang paling efektif untuk menangani hal ini adalah <strong>Gower Distance</strong>.</p>
-<p>Pada bagian ini, kita akan menganalisis dataset <strong>Travel Insurance Prediction</strong> dari Kaggle untuk mengukur tingkat kemiripan antar pelanggan berdasarkan profil mereka.</p>
-<section id="data-understanding">
-<h2>1. Data Understanding<a class="headerlink" href="#data-understanding" title="Permalink to this heading">#</a></h2>
-<p>Dataset ini berisi informasi pelanggan perusahaan asuransi perjalanan. Tujuan utamanya adalah memprediksi apakah seorang pelanggan akan membeli asuransi atau tidak. Namun, di sini kita fokus pada bagaimana mengukur jarak (kemiripan) antar pelanggan tersebut.</p>
-<section id="deskripsi-atribut-yang-digunakan">
-<h3><strong>Deskripsi Atribut yang Digunakan:</strong><a class="headerlink" href="#deskripsi-atribut-yang-digunakan" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Age</strong> (Numerik): Umur pelanggan (rentang 25 - 35 tahun).</p></li>
-<li><p><strong>Employment Type</strong> (Kategorikal): Sektor pekerjaan (Government / Private).</p></li>
-<li><p><strong>GraduateOrNot</strong> (Biner): Status lulus kuliah (Yes / No).</p></li>
-<li><p><strong>AnnualIncome</strong> (Numerik): Pendapatan tahunan (rentang 300.000 - 1.800.000).</p></li>
-<li><p><strong>EverTravelledAbroad</strong> (Biner): Pernah ke luar negeri (Yes / No).</p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="mengukur-jarak-tipe-data-campuran-gower-distance">
+<h1>Mengukur Jarak Tipe Data Campuran (Gower Distance)<a class="headerlink" href="#mengukur-jarak-tipe-data-campuran-gower-distance" title="Permalink to this heading">#</a></h1>
+<p>Dalam analisis data mining, seringkali kita menemukan dataset yang berisi campuran antara fitur numerik (angka) dan kategorikal (teks/label). Untuk mengukur kemiripan antar objek pada tipe data ini, kita menggunakan <strong>Gower Distance</strong>.</p>
+<p>Pada bagian ini, kita menggunakan dataset <strong>Travel Insurance Prediction</strong> yang memiliki atribut campuran seperti Umur, Pendapatan, dan Status Pekerjaan.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="c1"># Load dataset yang sudah diupload</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TravelInsurancePrediction.csv&#39;</span><span class="p">)</span>
 
-<span class="c1"># Pilih 5 fitur utama dan tampilkan 3 data pertama sebagai sampel</span>
-<span class="n">df_subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Employment Type&#39;</span><span class="p">,</span> <span class="s1">&#39;GraduateOrNot&#39;</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">,</span> <span class="s1">&#39;EverTravelledAbroad&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Employment Type&#39;</span><span class="p">,</span> <span class="s1">&#39;GraduateOrNot&#39;</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">,</span> <span class="s1">&#39;EverTravelledAbroad&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sampel Data Pelanggan:&quot;</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sampel Data Pelanggan:
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -497,108 +479,78 @@ document.write(`
       <td>500000</td>
       <td>No</td>
     </tr>
+    <tr>
+      <th>3</th>
+      <td>28</td>
+      <td>Private Sector/Self Employed</td>
+      <td>Yes</td>
+      <td>700000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>28</td>
+      <td>Private Sector/Self Employed</td>
+      <td>Yes</td>
+      <td>700000</td>
+      <td>No</td>
+    </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-</section>
-</section>
-<section id="transformasi-data">
-<h2>2. Transformasi Data<a class="headerlink" href="#transformasi-data" title="Permalink to this heading">#</a></h2>
-<p>Sebelum menghitung jarak Gower, kita perlu melakukan transformasi:</p>
+<section id="transformasi-dan-rumus-manual">
+<h2>1. Transformasi dan Rumus Manual<a class="headerlink" href="#transformasi-dan-rumus-manual" title="Permalink to this heading">#</a></h2>
+<p>Untuk menghitung jarak Gower antara individu <span class="math notranslate nohighlight">\(i\)</span> dan <span class="math notranslate nohighlight">\(j\)</span>, kita menghitung rata-rata tertimbang dari perbedaan di setiap fitur:</p>
 <ol class="arabic simple">
-<li><p><strong>Numerik:</strong> Menggunakan normalisasi agar selisihnya berada di rentang 0-1.</p></li>
-<li><p><strong>Kategorikal/Biner:</strong> Menggunakan perbandingan kecocokan (Match = 0, Mismatch = 1).</p></li>
+<li><p><strong>Fitur Numerik (Age, AnnualIncome):</strong>
+Menggunakan selisih absolut dibagi dengan rentang (range) nilai fitur tersebut.
+$<span class="math notranslate nohighlight">\(s_{ij}^{(k)} = \frac{|x_{ik} - x_{jk}|}{R_k}\)</span>$</p></li>
+<li><p><strong>Fitur Kategorikal (Employment Type, Graduate, dll):</strong>
+Bernilai 0 jika kategorinya sama, dan 1 jika berbeda.</p></li>
 </ol>
-<section id="normalisasi-min-max-untuk-numerik">
-<h3><strong>Normalisasi Min-Max untuk Numerik</strong><a class="headerlink" href="#normalisasi-min-max-untuk-numerik" title="Permalink to this heading">#</a></h3>
-<p>Rumus yang digunakan:
-$<span class="math notranslate nohighlight">\(x' = \frac{|x_i - x_j|}{Range}\)</span>$
-Di mana <em>Range</em> adalah selisih nilai maksimum dan minimum pada atribut tersebut.</p>
+<section id="contoh-hitung-manual-pelanggan-1-vs-pelanggan-2">
+<h3><strong>Contoh Hitung Manual (Pelanggan 1 vs Pelanggan 2):</strong><a class="headerlink" href="#contoh-hitung-manual-pelanggan-1-vs-pelanggan-2" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Range Age:</strong> <span class="math notranslate nohighlight">\(35 - 25 = 10\)</span></p></li>
-<li><p><strong>Range AnnualIncome:</strong> <span class="math notranslate nohighlight">\(1.800.000 - 300.000 = 1.500.000\)</span></p></li>
+<li><p><strong>Age:</strong> <span class="math notranslate nohighlight">\(|31 - 31| / 10 = 0\)</span></p></li>
+<li><p><strong>Employment Type:</strong> Gov vs Private (Beda) = <span class="math notranslate nohighlight">\(1\)</span></p></li>
+<li><p><strong>AnnualIncome:</strong> <span class="math notranslate nohighlight">\(|400.000 - 1.250.000| / 1.500.000 = 0.566\)</span></p></li>
+<li><p><strong>Total Jarak:</strong> <span class="math notranslate nohighlight">\(\frac{0 + 1 + 0 + 0.566 + 0}{5} = \mathbf{0.3132}\)</span></p></li>
 </ul>
-</section>
-</section>
-<section id="perhitungan-jarak-gower-manual">
-<h2>3. Perhitungan Jarak Gower (Manual)<a class="headerlink" href="#perhitungan-jarak-gower-manual" title="Permalink to this heading">#</a></h2>
-<p>Untuk memahami bagaimana Gower Distance bekerja, kita akan menghitung jarak antara <strong>Data 1</strong> (Index 0) dan <strong>Data 2</strong> (Index 1) secara manual.</p>
-<p><strong>Profil Data:</strong></p>
-<ul class="simple">
-<li><p><strong>Data 1 (<span class="math notranslate nohighlight">\(x_1\)</span>):</strong> Age=31, Employment=Gov, Graduate=Yes, Income=400k, Abroad=No</p></li>
-<li><p><strong>Data 2 (<span class="math notranslate nohighlight">\(x_2\)</span>):</strong> Age=31, Employment=Private, Graduate=Yes, Income=1.25M, Abroad=No</p></li>
-</ul>
-<section id="langkah-1-menghitung-selisih-per-atribut-s-ij">
-<h3><strong>Langkah 1: Menghitung Selisih per Atribut (<span class="math notranslate nohighlight">\(s_{ij}\)</span>)</strong><a class="headerlink" href="#langkah-1-menghitung-selisih-per-atribut-s-ij" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Atribut Age (Numerik):</strong>
-$<span class="math notranslate nohighlight">\(s_{12}^{(Age)} = \frac{|31 - 31|}{10} = \frac{0}{10} = 0\)</span>$</p></li>
-<li><p><strong>Atribut Employment Type (Kategorikal):</strong>
-Karena ‘Government Sector’ <span class="math notranslate nohighlight">\(\neq\)</span> ‘Private Sector/Self Employed’, maka:
-$<span class="math notranslate nohighlight">\(s_{12}^{(Employment)} = 1\)</span>$</p></li>
-<li><p><strong>Atribut GraduateOrNot (Biner):</strong>
-Karena ‘Yes’ = ‘Yes’, maka:
-$<span class="math notranslate nohighlight">\(s_{12}^{(Graduate)} = 0\)</span>$</p></li>
-<li><p><strong>Atribut AnnualIncome (Numerik):</strong>
-$<span class="math notranslate nohighlight">\(s_{12}^{(Income)} = \frac{|400.000 - 1.250.000|}{1.500.000} = \frac{850.000}{1.500.000} \approx 0.566\)</span>$</p></li>
-<li><p><strong>Atribut EverTravelledAbroad (Biner):</strong>
-Karena ‘No’ = ‘No’, maka:
-$<span class="math notranslate nohighlight">\(s_{12}^{(Abroad)} = 0\)</span>$</p></li>
-</ol>
-</section>
-<section id="langkah-2-menghitung-rata-rata-jarak-gower">
-<h3><strong>Langkah 2: Menghitung Rata-rata Jarak Gower</strong><a class="headerlink" href="#langkah-2-menghitung-rata-rata-jarak-gower" title="Permalink to this heading">#</a></h3>
-<p>Rumus umum Gower Distance:
-$<span class="math notranslate nohighlight">\(d(i,j) = \frac{\sum_{k=1}^{n} w_k s_{ij}^{(k)}}{\sum_{k=1}^{n} w_k}\)</span>$</p>
-<p>Dengan bobot (<span class="math notranslate nohighlight">\(w_k\)</span>) masing-masing atribut adalah 1, maka:
-$<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.566 + 0}{5}\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(d(1,2) = \frac{1.566}{5} = \mathbf{0.3132}\)</span>$</p>
-<p><strong>Kesimpulan Manual:</strong> Tingkat ketidakmiripan antara Pelanggan 1 dan Pelanggan 2 adalah sebesar <strong>0.3132</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="c1"># 1. Pastikan data sudah dibaca</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TravelInsurancePrediction.csv&#39;</span><span class="p">)</span>
-<span class="n">df_subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Employment Type&#39;</span><span class="p">,</span> <span class="s1">&#39;GraduateOrNot&#39;</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">,</span> <span class="s1">&#39;EverTravelledAbroad&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-
-<span class="c1"># 2. Definisikan fungsi Gower</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">gower_distance</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi Perhitungan Jarak Gower secara otomatis</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_gower</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
     <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row1</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;num&#39;</span><span class="p">:</span>
-            <span class="c1"># Rumus: |x1 - x2| / Range</span>
             <span class="n">dist</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Rumus: 1 jika beda, 0 jika sama</span>
             <span class="n">dist</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">!=</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="n">dist</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">row1</span><span class="p">)</span>
 
-<span class="c1"># 3. Setting Range dan Tipe Data (Sesuai dataset Travel Insurance)</span>
+<span class="c1"># Parameter (Range: Age=10, Income=1.5M)</span>
 <span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">:</span> <span class="mi">1500000</span><span class="p">}</span>
 <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">]</span>
 
-<span class="c1"># 4. Hitung matriks jarak</span>
+<span class="c1"># Membuat Matriks Jarak</span>
 <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_subset</span><span class="p">)</span>
 <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">gower_distance</span><span class="p">(</span><span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+        <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_gower</span><span class="p">(</span><span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
 
-<span class="c1"># 5. Tampilkan hasil</span>
-<span class="n">df_gower</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> 
-                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pelanggan 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 3&#39;</span><span class="p">],</span> 
-                        <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pelanggan 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 3&#39;</span><span class="p">])</span>
+<span class="c1"># Tampilkan sebagai DataFrame</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;Pelanggan </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">df_gower</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriks Jarak Gower (3 Sampel Pelanggan):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriks Jarak Gower (Hasil Python):&quot;</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df_gower</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriks Jarak Gower (3 Sampel Pelanggan):
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriks Jarak Gower (Hasil Python):
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -622,6 +574,8 @@ $<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.566 +
       <th>Pelanggan 1</th>
       <th>Pelanggan 2</th>
       <th>Pelanggan 3</th>
+      <th>Pelanggan 4</th>
+      <th>Pelanggan 5</th>
     </tr>
   </thead>
   <tbody>
@@ -630,17 +584,39 @@ $<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.566 +
       <td>0.000000</td>
       <td>0.313333</td>
       <td>0.273333</td>
+      <td>0.300000</td>
+      <td>0.300000</td>
     </tr>
     <tr>
       <th>Pelanggan 2</th>
       <td>0.313333</td>
       <td>0.000000</td>
       <td>0.160000</td>
+      <td>0.133333</td>
+      <td>0.133333</td>
     </tr>
     <tr>
       <th>Pelanggan 3</th>
       <td>0.273333</td>
       <td>0.160000</td>
+      <td>0.000000</td>
+      <td>0.146667</td>
+      <td>0.146667</td>
+    </tr>
+    <tr>
+      <th>Pelanggan 4</th>
+      <td>0.300000</td>
+      <td>0.133333</td>
+      <td>0.146667</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>Pelanggan 5</th>
+      <td>0.300000</td>
+      <td>0.133333</td>
+      <td>0.146667</td>
+      <td>0.000000</td>
       <td>0.000000</td>
     </tr>
   </tbody>
@@ -649,18 +625,11 @@ $<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.566 +
 </div>
 </section>
 </section>
-<section id="implementasi-menggunakan-orange-data-mining">
-<h2>4. Implementasi Menggunakan Orange Data Mining<a class="headerlink" href="#implementasi-menggunakan-orange-data-mining" title="Permalink to this heading">#</a></h2>
-<p>Di Orange, kita bisa mendapatkan hasil yang sama dengan lebih cepat menggunakan widget <strong>Distances</strong>.</p>
-<p><strong>Langkah-langkah:</strong></p>
-<ol class="arabic simple">
-<li><p>Gunakan widget <strong>File</strong> untuk memuat dataset <code class="docutils literal notranslate"><span class="pre">TravelInsurancePrediction.csv</span></code>.</p></li>
-<li><p>Pastikan di <strong>Edit Domain</strong>, kolom Age dan Income bertipe <em>Numeric</em>, sedangkan yang lain <em>Categorical</em>.</p></li>
-<li><p>Tarik ke widget <strong>Distances</strong> dan pilih metrik <strong>Gower</strong>.</p></li>
-<li><p>Tampilkan di widget <strong>Distance Matrix</strong>.</p></li>
-</ol>
-<p><img alt="Workflow Orange" src="docs/workflow_campuran.png" />
-<img alt="Matriks Gower Orange" src="docs/gower_matrix.png" /></p>
+<section id="implementasi-di-orange-data-mining">
+<h2>2. Implementasi di Orange Data Mining<a class="headerlink" href="#implementasi-di-orange-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Karena keterbatasan beberapa versi tools dalam mendeteksi metrik Gower secara otomatis, perhitungan utama dilakukan menggunakan Python. Berikut adalah alur kerja (workflow) di Orange untuk memvalidasi pemrosesan data campuran:</p>
+<p><img alt="Workflow Orange" src="../_images/workflow_campuran.png" /></p>
+<p><img alt="Gower Matrix" src="../_images/gower_matrix.png" /></p>
 </section>
 </section>
 
@@ -710,20 +679,11 @@ $<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.566 +
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">1. Data Understanding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut-yang-digunakan"><strong>Deskripsi Atribut yang Digunakan:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-dan-rumus-manual">1. Transformasi dan Rumus Manual</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-hitung-manual-pelanggan-1-vs-pelanggan-2"><strong>Contoh Hitung Manual (Pelanggan 1 vs Pelanggan 2):</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">2. Transformasi Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-min-max-untuk-numerik"><strong>Normalisasi Min-Max untuk Numerik</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-gower-manual">3. Perhitungan Jarak Gower (Manual)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-menghitung-selisih-per-atribut-s-ij"><strong>Langkah 1: Menghitung Selisih per Atribut (<span class="math notranslate nohighlight">\(s_{ij}\)</span>)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-menghitung-rata-rata-jarak-gower"><strong>Langkah 2: Menghitung Rata-rata Jarak Gower</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">4. Implementasi Menggunakan Orange Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-di-orange-data-mining">2. Implementasi di Orange Data Mining</a></li>
 </ul>
   </nav></div>
 
