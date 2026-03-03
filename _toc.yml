@@ -1,11 +1,6 @@
 format: jb-book
-root: intro
+root: docs/Pengantar-Data-Mining
 chapters:
-- file: docs/Pengantar-Data-Mining
-- file: docs/Memahami-Data
-- file: docs/Eksplorasi-Data-Iris    # Sekarang ini jadi nomor 3
-- file: docs/Bussiness-Understanding # Sekarang ini jadi nomor 4
-- file: docs/Data-Preparation
-- file: docs/Modeling
-- file: docs/Evaluation
-- file: docs/Deployment
+  - file: docs/Memahami-Data
+  - file: docs/data_iris
+  - file: docs/jarak
