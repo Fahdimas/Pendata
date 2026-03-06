@@ -1,0 +1,1117 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Mengukur Jarak Tipe Data Campuran (Gower Distance) &#8212; Pendata Fahdimas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/campuran1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/profil.png" class="logo__image only-light" alt="Pendata Fahdimas - Home"/>
+    <script>document.write(`<img src="../_static/profil.png" class="logo__image only-dark" alt="Pendata Fahdimas - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to My Data Mining Project
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memahami-Data.html">Memahami Karakteristik Data (Data Understanding)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_iris.html">Data Iris (Data Understanding)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="jarak.html">Mengukur Jarak Data Iris</a></li>
+<li class="toctree-l2"><a class="reference internal" href="campuran.html">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Fahdimas/Pendata" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Fahdimas/Pendata/edit/main/docs/campuran1.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Fahdimas/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/campuran1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/campuran1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mengukur Jarak Tipe Data Campuran (Gower Distance)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-perhitungan-jarak">Tujuan Perhitungan Jarak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut">Deskripsi Atribut</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perlakuan-tipe-data-rumus">Perlakuan Tipe Data &amp; Rumus</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value-dan-penanganan">Missing Value dan Penanganan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Tujuan Perhitungan Jarak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Deskripsi Atribut</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Missing Value dan Penanganan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-perhitungan-gower-distance">Metode Perhitungan: Gower Distance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aturan-perhitungan-skor-s-ij-k">Aturan Perhitungan Skor (<span class="math notranslate nohighlight">\(s_{ij}^{(k)}\)</span>):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-pelanggan-1-vs-pelanggan-2">Contoh Perhitungan Manual (Pelanggan 1 vs Pelanggan 2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil">Interpretasi Hasil</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">Implementasi Menggunakan Orange Data Mining</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mengukur-jarak-tipe-data-campuran-gower-distance">
+<h1>Mengukur Jarak Tipe Data Campuran (Gower Distance)<a class="headerlink" href="#mengukur-jarak-tipe-data-campuran-gower-distance" title="Permalink to this heading">#</a></h1>
+<section id="tujuan-perhitungan-jarak">
+<h2>Tujuan Perhitungan Jarak<a class="headerlink" href="#tujuan-perhitungan-jarak" title="Permalink to this heading">#</a></h2>
+<p>Tujuan utama dari perhitungan jarak pada dataset ini adalah untuk mengukur tingkat kemiripan (<em>similarity</em>) atau ketidakmiripan (<em>dissimilarity</em>) antar pelanggan asuransi perjalanan. Analisis ini sangat berguna untuk:</p>
+<ol class="arabic simple">
+<li><p><strong>Segmentasi Pelanggan</strong>: Mengelompokkan pelanggan yang memiliki profil risiko atau latar belakang ekonomi serupa.</p></li>
+<li><p><strong>Sistem Rekomendasi</strong>: Memberikan penawaran paket asuransi yang tepat berdasarkan kemiripan profil pelanggan baru dengan pelanggan lama.</p></li>
+<li><p><strong>Analisis Karakteristik</strong>: Memahami fitur dominan yang membedakan satu kelompok pelanggan dengan pelanggan lainnya.</p></li>
+</ol>
+</section>
+<section id="data-understanding">
+<h2>Data Understanding<a class="headerlink" href="#data-understanding" title="Permalink to this heading">#</a></h2>
+<p>Dataset <strong>Travel Insurance Prediction</strong> digunakan untuk menganalisis karakteristik pelanggan. Dataset ini memiliki tipe data campuran (<strong>Numerik</strong>, <strong>Nominal/Kategorikal</strong>, dan <strong>Ordinal</strong>).</p>
+<section id="deskripsi-atribut">
+<h3>Deskripsi Atribut<a class="headerlink" href="#deskripsi-atribut" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>Atribut</p></th>
+<th class="head"><p>Tipe Data</p></th>
+<th class="head"><p>Alasan Penggunaan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Age</p></td>
+<td><p>Numerik</p></td>
+<td><p>Menunjukkan usia pelanggan untuk melihat pola kedekatan umur.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>AnnualIncome</p></td>
+<td><p>Numerik</p></td>
+<td><p>Mewakili tingkat pendapatan tahunan pelanggan.</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Employment Type</p></td>
+<td><p>Nominal</p></td>
+<td><p>Membedakan sektor pekerjaan (Government/Private).</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>EverTravelledAbroad</p></td>
+<td><p>Nominal</p></td>
+<td><p>Menunjukkan pengalaman perjalanan internasional pelanggan.</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>FamilyMembers</p></td>
+<td><p><strong>Ordinal</strong></p></td>
+<td><p>Menunjukkan jumlah anggota keluarga yang memiliki urutan logis.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="perlakuan-tipe-data-rumus">
+<h3>Perlakuan Tipe Data &amp; Rumus<a class="headerlink" href="#perlakuan-tipe-data-rumus" title="Permalink to this heading">#</a></h3>
+<p>Gower Distance menggabungkan berbagai tipe data dengan rumus:
+$<span class="math notranslate nohighlight">\(d(i,j) = \frac{\sum_{k=1}^{n} s_{ij}^{(k)}}{n}\)</span>$</p>
+<ol class="arabic simple">
+<li><p><strong>Nominal (Kategorikal)</strong>: Skor <span class="math notranslate nohighlight">\(0\)</span> jika sama, <span class="math notranslate nohighlight">\(1\)</span> jika berbeda.</p></li>
+<li><p><strong>Numerik</strong>: Skor dihitung berdasarkan selisih absolut dibagi rentang: <span class="math notranslate nohighlight">\(s_{ij}^{(k)} = \frac{|x_{ik} - x_{jk}|}{R_k}\)</span>.</p></li>
+<li><p><strong>Ordinal</strong>: Data diubah menjadi numerik (Ranking) terlebih dahulu melalui proses normalisasi agar nilainya berada di skala <span class="math notranslate nohighlight">\(0\)</span> sampai <span class="math notranslate nohighlight">\(1\)</span>:
+$<span class="math notranslate nohighlight">\(z_{ik} = \frac{r_{ik} - r_{min}}{r_{max} - r_{min}}\)</span>$
+Setelah dikonversi, fitur ordinal diperlakukan sama seperti fitur numerik.</p></li>
+</ol>
+</section>
+<section id="missing-value-dan-penanganan">
+<h3>Missing Value dan Penanganan<a class="headerlink" href="#missing-value-dan-penanganan" title="Permalink to this heading">#</a></h3>
+<p>Pengecekan <em>missing value</em> penting dilakukan karena metode perhitungan jarak tidak dapat memproses nilai kosong (NaN).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># --- STEP 1: LOAD DATA ---</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TravelInsurancePrediction.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># --- STEP 2: PENANGANAN MISSING VALUE ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah Missing Value per Kolom:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="c1"># --- STEP 3: KONVERSI ORDINAL KE NUMERIK ---</span>
+<span class="c1"># Kita gunakan FamilyMembers sebagai data Ordinal.</span>
+<span class="c1"># Rumus: (Nilai - Min) / (Max - Min) agar skala menjadi 0 sampai 1</span>
+<span class="n">min_fam</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;FamilyMembers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">max_fam</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;FamilyMembers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;FamilyMembers_Scaled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;FamilyMembers&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">min_fam</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_fam</span> <span class="o">-</span> <span class="n">min_fam</span><span class="p">)</span>
+
+<span class="c1"># --- STEP 4: PREPARASI SAMPEL ---</span>
+<span class="c1"># Mengambil 5 baris pertama untuk contoh perhitungan matriks</span>
+<span class="c1"># Kolom: Age(Num), AnnualIncome(Num), Employment Type(Nom), EverTravelledAbroad(Nom), FamilyMembers_Scaled(Ord)</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">,</span> <span class="s1">&#39;Employment Type&#39;</span><span class="p">,</span> <span class="s1">&#39;EverTravelledAbroad&#39;</span><span class="p">,</span> <span class="s1">&#39;FamilyMembers_Scaled&#39;</span><span class="p">]</span>
+<span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;nom&#39;</span><span class="p">,</span> <span class="s1">&#39;nom&#39;</span><span class="p">,</span> <span class="s1">&#39;ord&#39;</span><span class="p">]</span> 
+<span class="n">df_subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># --- STEP 5: HITUNG RANGE (Rk) ---</span>
+<span class="c1"># Range dari populasi data asli untuk normalisasi fitur numerik &amp; ordinal</span>
+<span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;AnnualIncome&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;AnnualIncome&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="s1">&#39;FamilyMembers_Scaled&#39;</span><span class="p">:</span> <span class="mf">1.0</span> <span class="c1"># Nilai sudah 0-1, maka range maksimalnya 1</span>
+<span class="p">}</span>
+
+<span class="c1"># --- STEP 6: FUNGSI GOWER DISTANCE ---</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_gower</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">,</span> <span class="n">columns</span><span class="p">):</span>
+    <span class="n">total_score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;num&#39;</span> <span class="ow">or</span> <span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ord&#39;</span><span class="p">:</span>
+            <span class="c1"># Rumus Numerik &amp; Ordinal: |xi - xj| / Range</span>
+            <span class="n">total_score</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Rumus Nominal: 0 jika sama, 1 jika beda</span>
+            <span class="n">total_score</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">!=</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+            
+    <span class="k">return</span> <span class="n">total_score</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># --- STEP 7: GENERATE MATRIKS JARAK ---</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_subset</span><span class="p">)</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_gower</span><span class="p">(</span><span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>
+
+<span class="c1"># Membuat DataFrame hasil matriks agar rapi</span>
+<span class="n">df_gower</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> 
+                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)],</span> 
+                        <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data 5 Sampel (Setelah Skalasi Ordinal):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_subset</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Matriks Jarak Gower (Campuran):&quot;</span><span class="p">)</span>
+<span class="n">df_gower</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah Missing Value per Kolom:
+Unnamed: 0             0
+Age                    0
+Employment Type        0
+GraduateOrNot          0
+AnnualIncome           0
+FamilyMembers          0
+ChronicDiseases        0
+FrequentFlyer          0
+EverTravelledAbroad    0
+TravelInsurance        0
+dtype: int64
+
+Data 5 Sampel (Setelah Skalasi Ordinal):
+   Age  AnnualIncome               Employment Type EverTravelledAbroad  \
+0   31        400000             Government Sector                  No   
+1   31       1250000  Private Sector/Self Employed                  No   
+2   34        500000  Private Sector/Self Employed                  No   
+3   28        700000  Private Sector/Self Employed                  No   
+4   28        700000  Private Sector/Self Employed                  No   
+
+   FamilyMembers_Scaled  
+0              0.571429  
+1              0.714286  
+2              0.285714  
+3              0.142857  
+4              0.857143  
+
+Matriks Jarak Gower (Campuran):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>P1</th>
+      <th>P2</th>
+      <th>P3</th>
+      <th>P4</th>
+      <th>P5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>P1</th>
+      <td>0.000000</td>
+      <td>0.341905</td>
+      <td>0.330476</td>
+      <td>0.385714</td>
+      <td>0.357143</td>
+    </tr>
+    <tr>
+      <th>P2</th>
+      <td>0.341905</td>
+      <td>0.000000</td>
+      <td>0.245714</td>
+      <td>0.247619</td>
+      <td>0.161905</td>
+    </tr>
+    <tr>
+      <th>P3</th>
+      <td>0.330476</td>
+      <td>0.245714</td>
+      <td>0.000000</td>
+      <td>0.175238</td>
+      <td>0.260952</td>
+    </tr>
+    <tr>
+      <th>P4</th>
+      <td>0.385714</td>
+      <td>0.247619</td>
+      <td>0.175238</td>
+      <td>0.000000</td>
+      <td>0.142857</td>
+    </tr>
+    <tr>
+      <th>P5</th>
+      <td>0.357143</td>
+      <td>0.161905</td>
+      <td>0.260952</td>
+      <td>0.142857</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Mengukur Jarak Tipe Data Campuran (Gower Distance)<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>Tujuan Perhitungan Jarak<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Tujuan utama dari perhitungan jarak pada dataset ini adalah untuk mengukur tingkat kemiripan (<em>similarity</em>) atau ketidakmiripan (<em>dissimilarity</em>) antar pelanggan asuransi perjalanan. Analisis ini sangat berguna untuk:</p>
+<ol class="arabic simple">
+<li><p><strong>Segmentasi Pelanggan</strong>: Mengelompokkan pelanggan yang memiliki profil risiko atau latar belakang ekonomi serupa.</p></li>
+<li><p><strong>Sistem Rekomendasi</strong>: Memberikan penawaran paket asuransi yang tepat berdasarkan kemiripan profil pelanggan baru dengan pelanggan lama.</p></li>
+<li><p><strong>Analisis Karakteristik</strong>: Memahami fitur dominan yang membedakan satu kelompok pelanggan dengan pelanggan lainnya.</p></li>
+</ol>
+</section>
+<section id="id3">
+<h2>Data Understanding<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>Dataset <strong>Travel Insurance Prediction</strong> digunakan untuk menganalisis karakteristik pelanggan. Dataset ini memiliki tipe data campuran (Numerik dan Kategorikal).</p>
+<section id="id4">
+<h3>Deskripsi Atribut<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>Atribut</p></th>
+<th class="head"><p>Tipe Data</p></th>
+<th class="head"><p>Alasan Penggunaan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Age</p></td>
+<td><p>Numerik</p></td>
+<td><p>Menunjukkan usia pelanggan untuk melihat pola kedekatan umur</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Employment Type</p></td>
+<td><p>Kategorikal</p></td>
+<td><p>Membedakan sektor pekerjaan (Government/Private)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>GraduateOrNot</p></td>
+<td><p>Kategorikal</p></td>
+<td><p>Menunjukkan status pendidikan terakhir pelanggan</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>AnnualIncome</p></td>
+<td><p>Numerik</p></td>
+<td><p>Mewakili tingkat pendapatan tahunan pelanggan</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>EverTravelledAbroad</p></td>
+<td><p>Kategorikal</p></td>
+<td><p>Menunjukkan pengalaman perjalanan internasional pelanggan</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id5">
+<h3>Missing Value dan Penanganan<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>Pengecekan <em>missing value</em> penting dilakukan karena metode perhitungan jarak tidak dapat memproses nilai kosong (NaN).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Load Dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TravelInsurancePrediction.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Seleksi fitur utama</span>
+<span class="n">selected_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Employment Type&#39;</span><span class="p">,</span> <span class="s1">&#39;GraduateOrNot&#39;</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">,</span> <span class="s1">&#39;EverTravelledAbroad&#39;</span><span class="p">]</span>
+<span class="n">df_check</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">selected_features</span><span class="p">]</span>
+
+<span class="c1"># Cek Missing Value</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil Pengecekan Missing Value per Kolom:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_check</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="c1"># Menampilkan 5 data pertama untuk sampel</span>
+<span class="n">df_subset</span> <span class="o">=</span> <span class="n">df_check</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sampel 5 Data Pertama:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_subset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil Pengecekan Missing Value per Kolom:
+Age                    0
+Employment Type        0
+GraduateOrNot          0
+AnnualIncome           0
+EverTravelledAbroad    0
+dtype: int64
+
+Sampel 5 Data Pertama:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Employment Type</th>
+      <th>GraduateOrNot</th>
+      <th>AnnualIncome</th>
+      <th>EverTravelledAbroad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>31</td>
+      <td>Government Sector</td>
+      <td>Yes</td>
+      <td>400000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>31</td>
+      <td>Private Sector/Self Employed</td>
+      <td>Yes</td>
+      <td>1250000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>34</td>
+      <td>Private Sector/Self Employed</td>
+      <td>Yes</td>
+      <td>500000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>28</td>
+      <td>Private Sector/Self Employed</td>
+      <td>Yes</td>
+      <td>700000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>28</td>
+      <td>Private Sector/Self Employed</td>
+      <td>Yes</td>
+      <td>700000</td>
+      <td>No</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="metode-perhitungan-gower-distance">
+<h2>Metode Perhitungan: Gower Distance<a class="headerlink" href="#metode-perhitungan-gower-distance" title="Permalink to this heading">#</a></h2>
+<p>Gower Distance menghitung rata-rata dari perbedaan pada setiap fitur <span class="math notranslate nohighlight">\(k\)</span> antara dua objek <span class="math notranslate nohighlight">\(i\)</span> dan <span class="math notranslate nohighlight">\(j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[d(i,j) = \frac{\sum_{k=1}^{n} s_{ij}^{(k)}}{n}\]</div>
+<section id="aturan-perhitungan-skor-s-ij-k">
+<h3>Aturan Perhitungan Skor (<span class="math notranslate nohighlight">\(s_{ij}^{(k)}\)</span>):<a class="headerlink" href="#aturan-perhitungan-skor-s-ij-k" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Fitur Numerik (Age, AnnualIncome):</strong>
+Dihitung dengan membagi selisih absolut dengan rentang (range) nilai fitur tersebut:
+$<span class="math notranslate nohighlight">\(s_{ij}^{(k)} = \frac{|x_{ik} - x_{jk}|}{R_k}\)</span>$</p></li>
+<li><p><strong>Fitur Kategorikal (Employment, Graduate, Abroad):</strong>
+Bernilai <strong>0</strong> jika kategorinya sama, dan <strong>1</strong> jika berbeda.</p></li>
+</ol>
+</section>
+<section id="contoh-perhitungan-manual-pelanggan-1-vs-pelanggan-2">
+<h3>Contoh Perhitungan Manual (Pelanggan 1 vs Pelanggan 2)<a class="headerlink" href="#contoh-perhitungan-manual-pelanggan-1-vs-pelanggan-2" title="Permalink to this heading">#</a></h3>
+<p>Berdasarkan data sampel di atas:</p>
+<ul class="simple">
+<li><p><strong>Age:</strong> <span class="math notranslate nohighlight">\(|31 - 31| / 10 = 0\)</span></p></li>
+<li><p><strong>Employment Type:</strong> Gov vs Private (Beda) = <span class="math notranslate nohighlight">\(1\)</span></p></li>
+<li><p><strong>GraduateOrNot:</strong> Yes vs Yes (Sama) = <span class="math notranslate nohighlight">\(0\)</span></p></li>
+<li><p><strong>AnnualIncome:</strong> <span class="math notranslate nohighlight">\(|400.000 - 1.250.000| / 1.500.000 = 0.5667\)</span></p></li>
+<li><p><strong>EverTravelledAbroad:</strong> No vs No (Sama) = <span class="math notranslate nohighlight">\(0\)</span></p></li>
+</ul>
+<p><strong>Total Jarak Gower:</strong>
+$<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.5667 + 0}{5} = \mathbf{0.3133}\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_gower</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row1</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;num&#39;</span><span class="p">:</span>
+            <span class="n">dist</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dist</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">!=</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">dist</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">row1</span><span class="p">)</span>
+
+<span class="c1"># Parameter (Range: Age=10, Income=1.500.000)</span>
+<span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">:</span> <span class="mi">1500000</span><span class="p">}</span>
+<span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">]</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_subset</span><span class="p">)</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_gower</span><span class="p">(</span><span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
+
+<span class="n">df_gower</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> 
+                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pelanggan 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 4&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 5&#39;</span><span class="p">],</span> 
+                        <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pelanggan 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 4&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 5&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriks Jarak Gower (Output Python):&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_gower</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriks Jarak Gower (Output Python):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pelanggan 1</th>
+      <th>Pelanggan 2</th>
+      <th>Pelanggan 3</th>
+      <th>Pelanggan 4</th>
+      <th>Pelanggan 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Pelanggan 1</th>
+      <td>0.000000</td>
+      <td>0.313333</td>
+      <td>0.273333</td>
+      <td>0.300000</td>
+      <td>0.300000</td>
+    </tr>
+    <tr>
+      <th>Pelanggan 2</th>
+      <td>0.313333</td>
+      <td>0.000000</td>
+      <td>0.160000</td>
+      <td>0.133333</td>
+      <td>0.133333</td>
+    </tr>
+    <tr>
+      <th>Pelanggan 3</th>
+      <td>0.273333</td>
+      <td>0.160000</td>
+      <td>0.000000</td>
+      <td>0.146667</td>
+      <td>0.146667</td>
+    </tr>
+    <tr>
+      <th>Pelanggan 4</th>
+      <td>0.300000</td>
+      <td>0.133333</td>
+      <td>0.146667</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>Pelanggan 5</th>
+      <td>0.300000</td>
+      <td>0.133333</td>
+      <td>0.146667</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="interpretasi-hasil">
+<h3>Interpretasi Hasil<a class="headerlink" href="#interpretasi-hasil" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Nilai Diagonal (0.0000)</strong>: Menunjukkan jarak objek terhadap dirinya sendiri adalah nol (simetris).</p></li>
+<li><p><strong>Skala Jarak</strong>: Semakin mendekati 0, kedua pelanggan semakin <strong>mirip</strong>. Semakin mendekati 1, kedua pelanggan semakin <strong>berbeda</strong>.</p></li>
+<li><p><strong>Hasil Analisis</strong>: Pelanggan 1 dan Pelanggan 2 memiliki jarak 0.3133, yang menunjukkan ketidakmiripan moderat yang dipengaruhi oleh perbedaan sektor pekerjaan dan pendapatan tahunan.</p></li>
+</ol>
+</section>
+</section>
+<section id="implementasi-menggunakan-orange-data-mining">
+<h2>Implementasi Menggunakan Orange Data Mining<a class="headerlink" href="#implementasi-menggunakan-orange-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Berikut adalah validasi alur kerja menggunakan Orange Data Mining:</p>
+<p><img alt="Workflow Orange" src="../_images/workflow_campuran.png" /></p>
+<p><img alt="Gower Matrix" src="../_images/gower_matrix.png" /></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-perhitungan-jarak">Tujuan Perhitungan Jarak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut">Deskripsi Atribut</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perlakuan-tipe-data-rumus">Perlakuan Tipe Data &amp; Rumus</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value-dan-penanganan">Missing Value dan Penanganan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Tujuan Perhitungan Jarak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Data Understanding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Deskripsi Atribut</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Missing Value dan Penanganan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-perhitungan-gower-distance">Metode Perhitungan: Gower Distance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aturan-perhitungan-skor-s-ij-k">Aturan Perhitungan Skor (<span class="math notranslate nohighlight">\(s_{ij}^{(k)}\)</span>):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-pelanggan-1-vs-pelanggan-2">Contoh Perhitungan Manual (Pelanggan 1 vs Pelanggan 2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil">Interpretasi Hasil</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">Implementasi Menggunakan Orange Data Mining</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fahdimas akmal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
