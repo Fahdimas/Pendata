@@ -4,7 +4,7 @@ author: Fahdimas akmal
 copyright: "2022"
 logo: profil.png
 
-# Repository settings (Ini yang bikin error tadi)
+# Repository settings
 repository:
   url: https://github.com/Fahdimas/Pendata
   path_to_book: ""
@@ -20,6 +20,10 @@ html:
   use_issues_button: true
   use_edit_page_button: true
   extra_navbar: "Fahdimas Akmal - 240411100228"
+  # Bagian ini yang ditambahkan untuk mengaktifkan panah sidebar
+  home_page_in_toc: true
+  collapse_navigation: true
+  show_navbar_depth: 1
 
 # Parse settings
 parse:

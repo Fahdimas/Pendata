@@ -4,5 +4,9 @@ chapters:
   - file: docs/Pengantar-Data-Mining
   - file: docs/Memahami-Data
   - file: docs/data_iris
-  - file: docs/jarak
-  - file: docs/campuran
+    sections:
+      - file: docs/jarak
+      - file: docs/campuran
+  - file: docs/pengantar_knn
+    sections:
+      - file: docs/missing

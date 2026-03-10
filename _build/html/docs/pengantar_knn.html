@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Pengantar Data Mining &#8212; Pendata Fahdimas</title>
+    <title>Pengantar Algoritma k-Nearest Neighbors (k-NN) &#8212; Pendata Fahdimas</title>
   
   
   
@@ -62,11 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Pengantar-Data-Mining';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/pengantar_knn';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Memahami Karakteristik Data (Data Understanding)" href="Memahami-Data.html" />
-    <link rel="prev" title="Data Diri" href="../intro.html" />
+    <link rel="next" title="Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)" href="missing.html" />
+    <link rel="prev" title="Mengukur Jarak Tipe Data Campuran (Gower Distance)" href="campuran.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,14 +176,14 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Memahami-Data.html">Memahami Karakteristik Data (Data Understanding)</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="data_iris.html">Data Iris (Data Understanding)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="jarak.html">Mengukur Jarak Data Iris</a></li>
 <li class="toctree-l2"><a class="reference internal" href="campuran.html">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="pengantar_knn.html">Pengantar Algoritma k-Nearest Neighbors (k-NN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Pengantar Algoritma k-Nearest Neighbors (k-NN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="missing.html">Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</a></li>
 </ul>
 </details></li>
@@ -256,7 +258,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/Fahdimas/Pendata/edit/main/docs/Pengantar-Data-Mining.ipynb" target="_blank"
+      <li><a href="https://github.com/Fahdimas/Pendata/edit/main/docs/pengantar_knn.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -273,7 +275,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/Fahdimas/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/Pengantar-Data-Mining.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Fahdimas/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/pengantar_knn.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -303,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/docs/Pengantar-Data-Mining.ipynb" target="_blank"
+      <li><a href="../_sources/docs/pengantar_knn.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -387,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pengantar Data Mining</h1>
+    <h1>Pengantar Algoritma k-Nearest Neighbors (k-NN)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -397,13 +399,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">1. Apa itu Data Mining?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">2. Keunggulan Data Mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">3. Proses Data Mining (CRISP-DM)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enam-tahapan-crisp-dm">Enam Tahapan CRISP-DM:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-k-nn">1. Konsep Dasar k-NN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-dan-implementasi-k-nn">2. Fungsi dan Implementasi k-NN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrik-pengukuran-jarak-distance-metrics-beserta-rumus">3. Metrik Pengukuran Jarak (Distance Metrics) beserta Rumus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-jarak-euclidean-euclidean-distance">A. Jarak Euclidean (Euclidean Distance)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-jarak-manhattan-manhattan-distance">B. Jarak Manhattan (Manhattan Distance)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-utama-data-mining">4. Tugas Utama Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-nilai-k-jumlah-tetangga">4. Menentukan Nilai <span class="math notranslate nohighlight">\(k\)</span> (Jumlah Tetangga)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja-algoritma-k-nn">5. Alur Kerja (Algoritma) k-NN</a></li>
 </ul>
             </nav>
         </div>
@@ -415,48 +419,89 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pengantar-data-mining">
-<h1>Pengantar Data Mining<a class="headerlink" href="#pengantar-data-mining" title="Permalink to this heading">#</a></h1>
-<p>Halaman ini berisi ringkasan konsep dasar mengenai apa itu data mining, keunggulannya, serta metodologi kerja yang digunakan dalam industri.</p>
-<section id="apa-itu-data-mining">
-<h2>1. Apa itu Data Mining?<a class="headerlink" href="#apa-itu-data-mining" title="Permalink to this heading">#</a></h2>
-<p>Data mining adalah proses ekstraksi informasi atau pola yang penting, sebelumnya tidak diketahui, dan berpotensi memberikan manfaat dari kumpulan data yang sangat besar.</p>
-<p>Seiring dengan ledakan volume data digital, data mining menjadi solusi untuk mengubah tumpukan data mentah menjadi pengetahuan yang berguna. Proses ini sering disebut juga sebagai <strong>Knowledge Discovery in Databases (KDD)</strong>, analisis pola, atau kecerdasan bisnis.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="pengantar-algoritma-k-nearest-neighbors-k-nn">
+<h1>Pengantar Algoritma k-Nearest Neighbors (k-NN)<a class="headerlink" href="#pengantar-algoritma-k-nearest-neighbors-k-nn" title="Permalink to this heading">#</a></h1>
+<section id="konsep-dasar-k-nn">
+<h2>1. Konsep Dasar k-NN<a class="headerlink" href="#konsep-dasar-k-nn" title="Permalink to this heading">#</a></h2>
+<p><strong>k-Nearest Neighbors (k-NN)</strong> adalah salah satu algoritma <em>Machine Learning</em> yang paling fundamental, sederhana, namun sangat efektif. Algoritma ini beroperasi berdasarkan prinsip ketetanggaan: <strong>“Objek yang memiliki karakteristik serupa akan cenderung berada berdekatan satu sama lain dalam ruang multidimensi.”</strong></p>
+<p>k-NN memiliki dua sifat utama yang membedakannya dari algoritma lain:</p>
+<ul class="simple">
+<li><p><strong>Non-Parametric (Non-Parametrik):</strong> k-NN tidak membuat asumsi apa pun tentang distribusi data yang mendasarinya. Algoritma ini sangat berguna di dunia nyata di mana data jarang mengikuti distribusi teoretis yang sempurna (seperti distribusi normal).</p></li>
+<li><p><strong>Lazy Learning (Pembelajaran Malas):</strong> Berbeda dengan algoritma <em>Eager Learning</em> (seperti <em>Decision Tree</em> atau <em>Neural Network</em>) yang membangun model di awal, k-NN tidak memiliki fase pelatihan (<em>training phase</em>) yang eksplisit. Algoritma ini hanya menghafal <em>dataset</em> latih dan baru melakukan komputasi berat secara <em>real-time</em> saat ada data baru yang masuk untuk diuji.</p></li>
+</ul>
 </section>
-<section id="keunggulan-data-mining">
-<h2>2. Keunggulan Data Mining<a class="headerlink" href="#keunggulan-data-mining" title="Permalink to this heading">#</a></h2>
-<p>Dibandingkan dengan analisis statistik tradisional yang lebih banyak melihat ke masa lalu, data mining menawarkan kelebihan sebagai berikut:</p>
+<section id="fungsi-dan-implementasi-k-nn">
+<h2>2. Fungsi dan Implementasi k-NN<a class="headerlink" href="#fungsi-dan-implementasi-k-nn" title="Permalink to this heading">#</a></h2>
+<p>Meskipun k-NN sangat terkenal untuk masalah pengelompokan, fungsinya mencakup tiga ranah utama dalam <em>Data Science</em>:</p>
 <ol class="arabic simple">
-<li><p><strong>Pemahaman Data yang Mendalam</strong>: Mampu menemukan pola-pola tersembunyi yang sebelumnya tidak terlihat secara manual.</p></li>
-<li><p><strong>Kemampuan Prediksi</strong>: Memungkinkan pembuatan model untuk memprediksi tren di masa depan, sehingga membantu dalam pengambilan keputusan yang lebih baik.</p></li>
+<li><p><strong>Klasifikasi (Classification):</strong> Menentukan label kategori untuk data baru berdasarkan mayoritas label dari <span class="math notranslate nohighlight">\(k\)</span> tetangga terdekatnya.</p></li>
+<li><p><strong>Regresi (Regression):</strong> Memprediksi nilai numerik kontinu dengan menghitung rata-rata (mean) atau median dari <span class="math notranslate nohighlight">\(k\)</span> tetangga terdekatnya.</p></li>
+<li><p><strong>Imputasi (Missing Value Handling):</strong> Mengisi kekosongan data (<em>missing data</em>) dengan mengestimasi nilai berdasarkan karakteristik objek-objek terdekat yang datanya lengkap.</p></li>
 </ol>
 </section>
-<section id="proses-data-mining-crisp-dm">
-<h2>3. Proses Data Mining (CRISP-DM)<a class="headerlink" href="#proses-data-mining-crisp-dm" title="Permalink to this heading">#</a></h2>
-<p>Dalam praktiknya, data mining mengikuti standar proses lintas industri yang dikenal sebagai <strong>CRISP-DM</strong> (<em>Cross-Industry Standard Process for Data Mining</em>). Model ini memberikan gambaran siklus hidup suatu proyek penambangan data.</p>
-<p><img alt="Siklus CRISP-DM" src="../_images/crisp.png" />
-<em>Gambar: Siklus standar CRISP-DM yang terdiri dari 6 tahapan.</em></p>
-<section id="enam-tahapan-crisp-dm">
-<h3>Enam Tahapan CRISP-DM:<a class="headerlink" href="#enam-tahapan-crisp-dm" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<section id="metrik-pengukuran-jarak-distance-metrics-beserta-rumus">
+<h2>3. Metrik Pengukuran Jarak (Distance Metrics) beserta Rumus<a class="headerlink" href="#metrik-pengukuran-jarak-distance-metrics-beserta-rumus" title="Permalink to this heading">#</a></h2>
+<p>Karena k-NN sangat bergantung pada definisi “kedekatan”, metrik jarak adalah inti dari algoritma ini. Berikut adalah rumus yang paling umum digunakan beserta penjabaran variabelnya:</p>
+<section id="a-jarak-euclidean-euclidean-distance">
+<h3>A. Jarak Euclidean (Euclidean Distance)<a class="headerlink" href="#a-jarak-euclidean-euclidean-distance" title="Permalink to this heading">#</a></h3>
+<p>Ini adalah metrik jarak yang paling umum digunakan untuk data kontinu (numerik). Euclidean menghitung jarak garis lurus terpendek antara dua titik.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(d(x, y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}\)</span>$</p>
+<p><strong>Keterangan Variabel:</strong></p>
 <ul class="simple">
-<li><p><strong>Business Understanding</strong>: Memahami tujuan proyek dan kebutuhan dari perspektif bisnis, lalu menentukan rencana proyek.</p></li>
-<li><p><strong>Data Understanding</strong>: Memeriksa kualitas data, volume, serta melakukan eksplorasi awal untuk mengenali pola data.</p></li>
-<li><p><strong>Data Preparation</strong>: Tahap pembersihan dan pemilihan data mentah menjadi data akhir yang siap diproses.</p></li>
-<li><p><strong>Modeling</strong>: Memilih dan menerapkan teknik algoritma (seperti klasifikasi atau clustering) pada data.</p></li>
-<li><p><strong>Evaluation</strong>: Menilai hasil model untuk memastikan bahwa ia benar-benar menjawab tujuan bisnis yang ditetapkan.</p></li>
-<li><p><strong>Deployment</strong>: Menerapkan hasil analisis ke dalam operasional nyata atau sistem laporan.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d(x,y)\)</span> : Jarak Euclidean antara data target <span class="math notranslate nohighlight">\(x\)</span> dan data referensi <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah total fitur atau atribut (dimensi data) yang digunakan dalam perhitungan.</p></li>
+<li><p><span class="math notranslate nohighlight">\(i\)</span> : Indeks fitur ke-<span class="math notranslate nohighlight">\(i\)</span> (mulai dari fitur 1 hingga fitur ke-<span class="math notranslate nohighlight">\(n\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai fitur ke-<span class="math notranslate nohighlight">\(i\)</span> pada data uji / data target (data yang ingin diprediksi).</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span> : Nilai fitur ke-<span class="math notranslate nohighlight">\(i\)</span> pada data latih / data referensi (data tetangga).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum\)</span> : Simbol Sigma, yang berarti menjumlahkan seluruh hasil perhitungan dari fitur pertama hingga fitur ke-<span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ul>
+</section>
+<section id="b-jarak-manhattan-manhattan-distance">
+<h3>B. Jarak Manhattan (Manhattan Distance)<a class="headerlink" href="#b-jarak-manhattan-manhattan-distance" title="Permalink to this heading">#</a></h3>
+<p>Sering disebut <em>City Block Distance</em>, jarak ini menghitung total selisih absolut antar fitur. Sangat cocok jika data memiliki banyak <em>outlier</em> (pencilan) atau berdimensi tinggi.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(d(x, y) = \sum_{i=1}^{n} |x_i - y_i|\)</span>$</p>
+<p><strong>Keterangan Variabel Tambahan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(|x_i - y_i|\)</span> : Nilai absolut dari selisih fitur ke-<span class="math notranslate nohighlight">\(i\)</span> (nilai negatif akan diubah menjadi positif).</p></li>
 </ul>
 </section>
 </section>
-<section id="tugas-utama-data-mining">
-<h2>4. Tugas Utama Data Mining<a class="headerlink" href="#tugas-utama-data-mining" title="Permalink to this heading">#</a></h2>
-<p>Aktivitas utama dalam proses penambangan data dianalogikan seperti menambang logam mulia dari lahan sumbernya. Fokus utamanya meliputi:</p>
+<hr class="docutils" />
+<section id="menentukan-nilai-k-jumlah-tetangga">
+<h2>4. Menentukan Nilai <span class="math notranslate nohighlight">\(k\)</span> (Jumlah Tetangga)<a class="headerlink" href="#menentukan-nilai-k-jumlah-tetangga" title="Permalink to this heading">#</a></h2>
+<p>Pemilihan nilai parameter <span class="math notranslate nohighlight">\(k\)</span> (jumlah tetangga terdekat yang dievaluasi) sangat menentukan performa model:</p>
 <ul class="simple">
-<li><p><strong>Deskripsi</strong>: Menjelaskan pola yang ada dalam data.</p></li>
-<li><p><strong>Klasifikasi</strong>: Menentukan kategori data (seperti mengelompokkan spesies bunga Iris).</p></li>
-<li><p><strong>Prediksi</strong>: Memperkirakan nilai atau kondisi di masa mendatang.</p></li>
+<li><p><strong>Jika <span class="math notranslate nohighlight">\(k\)</span> terlalu kecil (misal <span class="math notranslate nohighlight">\(k=1\)</span>):</strong> Model akan sangat sensitif terhadap <em>noise</em> atau <em>outlier</em> (cenderung <em>Overfitting</em>).</p></li>
+<li><p><strong>Jika <span class="math notranslate nohighlight">\(k\)</span> terlalu besar:</strong> Model akan terlalu kaku dan mengabaikan pola lokal yang detail (cenderung <em>Underfitting</em>), serta memakan waktu komputasi yang jauh lebih lama.</p></li>
 </ul>
+<p><strong>Aturan Emas (Rule of Thumb) dalam memilih <span class="math notranslate nohighlight">\(k\)</span>:</strong></p>
+<ol class="arabic simple">
+<li><p>Gunakan nilai <span class="math notranslate nohighlight">\(k\)</span> ganjil (seperti 3, 5, atau 7) pada kasus klasifikasi biner untuk mencegah terjadinya hasil seri (<em>tie / draw</em>) saat proses <em>voting</em>.</p></li>
+<li><p>Nilai <span class="math notranslate nohighlight">\(k\)</span> yang optimal seringkali didapatkan dari nilai akar kuadrat dari total jumlah sampel data <span class="math notranslate nohighlight">\(\sqrt{N}\)</span>.</p></li>
+</ol>
 </section>
+<hr class="docutils" />
+<section id="alur-kerja-algoritma-k-nn">
+<h2>5. Alur Kerja (Algoritma) k-NN<a class="headerlink" href="#alur-kerja-algoritma-k-nn" title="Permalink to this heading">#</a></h2>
+<p>Secara sistematis, algoritma k-NN mengeksekusi langkah-langkah berikut ketika menerima data baru:</p>
+<ol class="arabic simple">
+<li><p><strong>Inisialisasi</strong> nilai <span class="math notranslate nohighlight">\(k\)</span> yang diinginkan.</p></li>
+<li><p><strong>Hitung Jarak</strong> antara data baru tersebut dengan <em>seluruh</em> data yang ada di <em>dataset</em> referensi menggunakan metrik jarak (misalnya Euclidean).</p></li>
+<li><p><strong>Urutkan</strong> hasil perhitungan jarak dari nilai terkecil (paling dekat) hingga terbesar (paling jauh).</p></li>
+<li><p><strong>Saring</strong> dan ambil sejumlah <span class="math notranslate nohighlight">\(k\)</span> data teratas yang memiliki jarak terkecil.</p></li>
+<li><p><strong>Agregasi Hasil</strong>:</p>
+<ul class="simple">
+<li><p>Jika untuk klasifikasi: Ambil <em>mode</em> (nilai yang paling sering muncul).</p></li>
+<li><p>Jika untuk imputasi/regresi: Hitung <em>mean</em> (rata-rata) dari nilai tetangga tersebut.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -490,20 +535,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro.html"
+       href="campuran.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Diri</p>
+        <p class="prev-next-title">Mengukur Jarak Tipe Data Campuran (Gower Distance)</p>
       </div>
     </a>
     <a class="right-next"
-       href="Memahami-Data.html"
+       href="missing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Memahami Karakteristik Data (Data Understanding)</p>
+        <p class="prev-next-title">Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -523,13 +568,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-mining">1. Apa itu Data Mining?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#keunggulan-data-mining">2. Keunggulan Data Mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm">3. Proses Data Mining (CRISP-DM)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enam-tahapan-crisp-dm">Enam Tahapan CRISP-DM:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar-k-nn">1. Konsep Dasar k-NN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fungsi-dan-implementasi-k-nn">2. Fungsi dan Implementasi k-NN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metrik-pengukuran-jarak-distance-metrics-beserta-rumus">3. Metrik Pengukuran Jarak (Distance Metrics) beserta Rumus</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-jarak-euclidean-euclidean-distance">A. Jarak Euclidean (Euclidean Distance)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-jarak-manhattan-manhattan-distance">B. Jarak Manhattan (Manhattan Distance)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-utama-data-mining">4. Tugas Utama Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-nilai-k-jumlah-tetangga">4. Menentukan Nilai <span class="math notranslate nohighlight">\(k\)</span> (Jumlah Tetangga)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alur-kerja-algoritma-k-nn">5. Alur Kerja (Algoritma) k-NN</a></li>
 </ul>
   </nav></div>
 

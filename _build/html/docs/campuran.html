@@ -67,7 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/campuran';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Mengukur Jarak Tipe Data Numerik" href="jarak.html" />
+    <link rel="next" title="Pengantar Algoritma k-Nearest Neighbors (k-NN)" href="pengantar_knn.html" />
+    <link rel="prev" title="Mengukur Jarak Data Iris" href="jarak.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -170,16 +171,22 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome to My Data Mining Project
+                    Data Diri
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Memahami-Data.html">Memahami Karakteristik Data (Data Understanding)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_iris.html">Eksplorasi Data Iris (Data Understanding)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jarak.html">Mengukur Jarak Tipe Data Numerik</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="data_iris.html">Data Iris (Data Understanding)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="jarak.html">Mengukur Jarak Data Iris</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pengantar_knn.html">Pengantar Algoritma k-Nearest Neighbors (k-NN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="missing.html">Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -392,19 +399,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-perhitungan-jarak">Tujuan Perhitungan Jarak</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut">Deskripsi Atribut</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value-dan-penanganan">Missing Value dan Penanganan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subset-dataset-telco-churn-4-tipe-data">1. Subset Dataset Telco Churn (4 Tipe Data)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-manual-pelanggan-1-c1-ke-pelanggan-2-c2">2. Perhitungan Jarak Manual: Pelanggan 1 (C1) ke Pelanggan 2 (C2)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-jarak-fitur-1-monthlycharges-numerik"><strong>A. Jarak Fitur 1: MonthlyCharges (Numerik)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-jarak-fitur-2-churn-biner"><strong>B. Jarak Fitur 2: Churn (Biner)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-jarak-fitur-3-paymentmethod-kategori-nominal"><strong>C. Jarak Fitur 3: PaymentMethod (Kategori/Nominal)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-jarak-fitur-4-contract-ordinal"><strong>D. Jarak Fitur 4: Contract (Ordinal)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-perhitungan-gower-distance">Metode Perhitungan: Gower Distance</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aturan-perhitungan-skor-s-ij-k">Aturan Perhitungan Skor (<span class="math notranslate nohighlight">\(s_{ij}^{(k)}\)</span>):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-pelanggan-1-vs-pelanggan-2">Contoh Perhitungan Manual (Pelanggan 1 vs Pelanggan 2)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil">Interpretasi Hasil</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">Implementasi Menggunakan Orange Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-jarak-campuran-c1-vs-c2">3. Total Jarak Campuran C1 vs C2</a></li>
 </ul>
             </nav>
         </div>
@@ -418,314 +421,133 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mengukur-jarak-tipe-data-campuran-gower-distance">
 <h1>Mengukur Jarak Tipe Data Campuran (Gower Distance)<a class="headerlink" href="#mengukur-jarak-tipe-data-campuran-gower-distance" title="Permalink to this heading">#</a></h1>
-<section id="tujuan-perhitungan-jarak">
-<h2>Tujuan Perhitungan Jarak<a class="headerlink" href="#tujuan-perhitungan-jarak" title="Permalink to this heading">#</a></h2>
-<p>Tujuan utama dari perhitungan jarak pada dataset ini adalah untuk mengukur tingkat kemiripan (<em>similarity</em>) atau ketidakmiripan (<em>dissimilarity</em>) antar pelanggan asuransi perjalanan. Analisis ini sangat berguna untuk:</p>
-<ol class="arabic simple">
-<li><p><strong>Segmentasi Pelanggan</strong>: Mengelompokkan pelanggan yang memiliki profil risiko atau latar belakang ekonomi serupa.</p></li>
-<li><p><strong>Sistem Rekomendasi</strong>: Memberikan penawaran paket asuransi yang tepat berdasarkan kemiripan profil pelanggan baru dengan pelanggan lama.</p></li>
-<li><p><strong>Analisis Karakteristik</strong>: Memahami fitur dominan yang membedakan satu kelompok pelanggan dengan pelanggan lainnya.</p></li>
-</ol>
-</section>
-<section id="data-understanding">
-<h2>Data Understanding<a class="headerlink" href="#data-understanding" title="Permalink to this heading">#</a></h2>
-<p>Dataset <strong>Travel Insurance Prediction</strong> digunakan untuk menganalisis karakteristik pelanggan. Dataset ini memiliki tipe data campuran (Numerik dan Kategorikal).</p>
-<section id="deskripsi-atribut">
-<h3>Deskripsi Atribut<a class="headerlink" href="#deskripsi-atribut" title="Permalink to this heading">#</a></h3>
+<p>Untuk mendemonstrasikan perhitungan jarak pada tipe data campuran secara manual, kita menggunakan subset dari dataset publik. Dataset yang digunakan adalah <strong>Telco Customer Churn</strong> yang dapat diakses melalui tautan berikut:
+🔗 <strong><a class="reference external" href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn">Kaggle Dataset: Telco Customer Churn</a></strong>.</p>
+<p>Kita mengambil tepat 4 kolom yang mewakili 4 tipe data yang berbeda agar perhitungannya dapat diurai secara spesifik.</p>
+<section id="subset-dataset-telco-churn-4-tipe-data">
+<h2>1. Subset Dataset Telco Churn (4 Tipe Data)<a class="headerlink" href="#subset-dataset-telco-churn-4-tipe-data" title="Permalink to this heading">#</a></h2>
+<p>Berikut adalah 3 sampel data pelanggan yang akan kita hitung jaraknya:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>No</p></th>
-<th class="head"><p>Atribut</p></th>
-<th class="head"><p>Tipe Data</p></th>
-<th class="head"><p>Alasan Penggunaan</p></th>
+<tr class="row-odd"><th class="head"><p>CustomerID</p></th>
+<th class="head"><p>MonthlyCharges (Numerik)</p></th>
+<th class="head"><p>Churn (Biner)</p></th>
+<th class="head"><p>PaymentMethod (Kategori)</p></th>
+<th class="head"><p>Contract (Ordinal)</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>Age</p></td>
-<td><p>Numerik</p></td>
-<td><p>Menunjukkan usia pelanggan untuk melihat pola kedekatan umur</p></td>
+<tr class="row-even"><td><p><strong>C1</strong></p></td>
+<td><p>20.0</p></td>
+<td><p>No</p></td>
+<td><p>Mailed check</p></td>
+<td><p>Month-to-month (1)</p></td>
 </tr>
-<tr class="row-odd"><td><p>2</p></td>
-<td><p>Employment Type</p></td>
-<td><p>Kategorikal</p></td>
-<td><p>Membedakan sektor pekerjaan (Government/Private)</p></td>
+<tr class="row-odd"><td><p><strong>C2</strong></p></td>
+<td><p>70.0</p></td>
+<td><p>Yes</p></td>
+<td><p>Electronic check</p></td>
+<td><p>Two year (3)</p></td>
 </tr>
-<tr class="row-even"><td><p>3</p></td>
-<td><p>GraduateOrNot</p></td>
-<td><p>Kategorikal</p></td>
-<td><p>Menunjukkan status pendidikan terakhir pelanggan</p></td>
-</tr>
-<tr class="row-odd"><td><p>4</p></td>
-<td><p>AnnualIncome</p></td>
-<td><p>Numerik</p></td>
-<td><p>Mewakili tingkat pendapatan tahunan pelanggan</p></td>
-</tr>
-<tr class="row-even"><td><p>5</p></td>
-<td><p>EverTravelledAbroad</p></td>
-<td><p>Kategorikal</p></td>
-<td><p>Menunjukkan pengalaman perjalanan internasional pelanggan</p></td>
+<tr class="row-even"><td><p><strong>C3</strong></p></td>
+<td><p>25.0</p></td>
+<td><p>No</p></td>
+<td><p>Mailed check</p></td>
+<td><p>One year (2)</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</section>
-<section id="missing-value-dan-penanganan">
-<h3>Missing Value dan Penanganan<a class="headerlink" href="#missing-value-dan-penanganan" title="Permalink to this heading">#</a></h3>
-<p>Pengecekan <em>missing value</em> penting dilakukan karena metode perhitungan jarak tidak dapat memproses nilai kosong (NaN).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="c1"># Load Dataset</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;TravelInsurancePrediction.csv&#39;</span><span class="p">)</span>
-
-<span class="c1"># Seleksi fitur utama</span>
-<span class="n">selected_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Employment Type&#39;</span><span class="p">,</span> <span class="s1">&#39;GraduateOrNot&#39;</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">,</span> <span class="s1">&#39;EverTravelledAbroad&#39;</span><span class="p">]</span>
-<span class="n">df_check</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">selected_features</span><span class="p">]</span>
-
-<span class="c1"># Cek Missing Value</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil Pengecekan Missing Value per Kolom:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df_check</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-
-<span class="c1"># Menampilkan 5 data pertama untuk sampel</span>
-<span class="n">df_subset</span> <span class="o">=</span> <span class="n">df_check</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sampel 5 Data Pertama:&quot;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">df_subset</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hasil Pengecekan Missing Value per Kolom:
-Age                    0
-Employment Type        0
-GraduateOrNot          0
-AnnualIncome           0
-EverTravelledAbroad    0
-dtype: int64
-
-Sampel 5 Data Pertama:
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Age</th>
-      <th>Employment Type</th>
-      <th>GraduateOrNot</th>
-      <th>AnnualIncome</th>
-      <th>EverTravelledAbroad</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>31</td>
-      <td>Government Sector</td>
-      <td>Yes</td>
-      <td>400000</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>31</td>
-      <td>Private Sector/Self Employed</td>
-      <td>Yes</td>
-      <td>1250000</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>34</td>
-      <td>Private Sector/Self Employed</td>
-      <td>Yes</td>
-      <td>500000</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>28</td>
-      <td>Private Sector/Self Employed</td>
-      <td>Yes</td>
-      <td>700000</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>28</td>
-      <td>Private Sector/Self Employed</td>
-      <td>Yes</td>
-      <td>700000</td>
-      <td>No</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</section>
-</section>
-<section id="metode-perhitungan-gower-distance">
-<h2>Metode Perhitungan: Gower Distance<a class="headerlink" href="#metode-perhitungan-gower-distance" title="Permalink to this heading">#</a></h2>
-<p>Gower Distance menghitung rata-rata dari perbedaan pada setiap fitur <span class="math notranslate nohighlight">\(k\)</span> antara dua objek <span class="math notranslate nohighlight">\(i\)</span> dan <span class="math notranslate nohighlight">\(j\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[d(i,j) = \frac{\sum_{k=1}^{n} s_{ij}^{(k)}}{n}\]</div>
-<section id="aturan-perhitungan-skor-s-ij-k">
-<h3>Aturan Perhitungan Skor (<span class="math notranslate nohighlight">\(s_{ij}^{(k)}\)</span>):<a class="headerlink" href="#aturan-perhitungan-skor-s-ij-k" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Fitur Numerik (Age, AnnualIncome):</strong>
-Dihitung dengan membagi selisih absolut dengan rentang (range) nilai fitur tersebut:
-$<span class="math notranslate nohighlight">\(s_{ij}^{(k)} = \frac{|x_{ik} - x_{jk}|}{R_k}\)</span>$</p></li>
-<li><p><strong>Fitur Kategorikal (Employment, Graduate, Abroad):</strong>
-Bernilai <strong>0</strong> jika kategorinya sama, dan <strong>1</strong> jika berbeda.</p></li>
-</ol>
-</section>
-<section id="contoh-perhitungan-manual-pelanggan-1-vs-pelanggan-2">
-<h3>Contoh Perhitungan Manual (Pelanggan 1 vs Pelanggan 2)<a class="headerlink" href="#contoh-perhitungan-manual-pelanggan-1-vs-pelanggan-2" title="Permalink to this heading">#</a></h3>
-<p>Berdasarkan data sampel di atas:</p>
+<p><strong>Informasi Rentang (Range) Keseluruhan Data:</strong></p>
 <ul class="simple">
-<li><p><strong>Age:</strong> <span class="math notranslate nohighlight">\(|31 - 31| / 10 = 0\)</span></p></li>
-<li><p><strong>Employment Type:</strong> Gov vs Private (Beda) = <span class="math notranslate nohighlight">\(1\)</span></p></li>
-<li><p><strong>GraduateOrNot:</strong> Yes vs Yes (Sama) = <span class="math notranslate nohighlight">\(0\)</span></p></li>
-<li><p><strong>AnnualIncome:</strong> <span class="math notranslate nohighlight">\(|400.000 - 1.250.000| / 1.500.000 = 0.5667\)</span></p></li>
-<li><p><strong>EverTravelledAbroad:</strong> No vs No (Sama) = <span class="math notranslate nohighlight">\(0\)</span></p></li>
+<li><p><strong>MonthlyCharges (Numerik):</strong> Asumsi tagihan maksimal 120 dan minimal 20, maka <span class="math notranslate nohighlight">\(Range = 100\)</span>.</p></li>
+<li><p><strong>Contract (Ordinal):</strong> Kontrak terlama adalah tingkat 3, terpendek tingkat 1, maka <span class="math notranslate nohighlight">\(Range = 3 - 1 = 2\)</span>.</p></li>
 </ul>
-<p><strong>Total Jarak Gower:</strong>
-$<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.5667 + 0}{5} = \mathbf{0.3133}\)</span>$</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_gower</span><span class="p">(</span><span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">):</span>
-    <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row1</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">types</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;num&#39;</span><span class="p">:</span>
-            <span class="n">dist</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">/</span> <span class="n">ranges</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">dist</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">row1</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">!=</span> <span class="n">row2</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">dist</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">row1</span><span class="p">)</span>
-
-<span class="c1"># Parameter (Range: Age=10, Income=1.500.000)</span>
-<span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Age&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;AnnualIncome&#39;</span><span class="p">:</span> <span class="mi">1500000</span><span class="p">}</span>
-<span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">]</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_subset</span><span class="p">)</span>
-<span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_gower</span><span class="p">(</span><span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">df_subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">types</span><span class="p">,</span> <span class="n">ranges</span><span class="p">)</span>
-
-<span class="n">df_gower</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> 
-                        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pelanggan 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 4&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 5&#39;</span><span class="p">],</span> 
-                        <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pelanggan 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 4&#39;</span><span class="p">,</span> <span class="s1">&#39;Pelanggan 5&#39;</span><span class="p">])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriks Jarak Gower (Output Python):&quot;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">df_gower</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriks Jarak Gower (Output Python):
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Pelanggan 1</th>
-      <th>Pelanggan 2</th>
-      <th>Pelanggan 3</th>
-      <th>Pelanggan 4</th>
-      <th>Pelanggan 5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Pelanggan 1</th>
-      <td>0.000000</td>
-      <td>0.313333</td>
-      <td>0.273333</td>
-      <td>0.300000</td>
-      <td>0.300000</td>
-    </tr>
-    <tr>
-      <th>Pelanggan 2</th>
-      <td>0.313333</td>
-      <td>0.000000</td>
-      <td>0.160000</td>
-      <td>0.133333</td>
-      <td>0.133333</td>
-    </tr>
-    <tr>
-      <th>Pelanggan 3</th>
-      <td>0.273333</td>
-      <td>0.160000</td>
-      <td>0.000000</td>
-      <td>0.146667</td>
-      <td>0.146667</td>
-    </tr>
-    <tr>
-      <th>Pelanggan 4</th>
-      <td>0.300000</td>
-      <td>0.133333</td>
-      <td>0.146667</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>Pelanggan 5</th>
-      <td>0.300000</td>
-      <td>0.133333</td>
-      <td>0.146667</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
 </section>
-<section id="interpretasi-hasil">
-<h3>Interpretasi Hasil<a class="headerlink" href="#interpretasi-hasil" title="Permalink to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Nilai Diagonal (0.0000)</strong>: Menunjukkan jarak objek terhadap dirinya sendiri adalah nol (simetris).</p></li>
-<li><p><strong>Skala Jarak</strong>: Semakin mendekati 0, kedua pelanggan semakin <strong>mirip</strong>. Semakin mendekati 1, kedua pelanggan semakin <strong>berbeda</strong>.</p></li>
-<li><p><strong>Hasil Analisis</strong>: Pelanggan 1 dan Pelanggan 2 memiliki jarak 0.3133, yang menunjukkan ketidakmiripan moderat yang dipengaruhi oleh perbedaan sektor pekerjaan dan pendapatan tahunan.</p></li>
-</ol>
+<hr class="docutils" />
+<section id="perhitungan-jarak-manual-pelanggan-1-c1-ke-pelanggan-2-c2">
+<h2>2. Perhitungan Jarak Manual: Pelanggan 1 (C1) ke Pelanggan 2 (C2)<a class="headerlink" href="#perhitungan-jarak-manual-pelanggan-1-c1-ke-pelanggan-2-c2" title="Permalink to this heading">#</a></h2>
+<p>Berdasarkan formula Gower, kita menghitung jarak (ketidakmiripan) antar fitur satu per satu berdasarkan tipe datanya, kemudian menjumlahkannya.</p>
+<section id="a-jarak-fitur-1-monthlycharges-numerik">
+<h3><strong>A. Jarak Fitur 1: MonthlyCharges (Numerik)</strong><a class="headerlink" href="#a-jarak-fitur-1-monthlycharges-numerik" title="Permalink to this heading">#</a></h3>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(d_{ij}^{(f)} = \frac{|x_{if} - x_{jf}|}{R_f}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_{if}\)</span>: Nilai fitur pelanggan pertama (C1).</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{jf}\)</span>: Nilai fitur pelanggan kedua (C2).</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_f\)</span>: Rentang (range) maksimal dari fitur tersebut.</p></li>
+</ul>
+<p><strong>Perhitungan:</strong></p>
+<ul class="simple">
+<li><p>Nilai C1 = 20.0, C2 = 70.0, <span class="math notranslate nohighlight">\(R_f = 100\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_1 = \frac{|20.0 - 70.0|}{100} = \frac{50}{100} = 0.5\)</span></p></li>
+</ul>
+</section>
+<section id="b-jarak-fitur-2-churn-biner">
+<h3><strong>B. Jarak Fitur 2: Churn (Biner)</strong><a class="headerlink" href="#b-jarak-fitur-2-churn-biner" title="Permalink to this heading">#</a></h3>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(d_{ij}^{(f)} = \begin{cases} 0, &amp; \text{jika } x_{if} = x_{jf} \\ 1, &amp; \text{jika } x_{if} \neq x_{jf} \end{cases}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p>Jarak bernilai <span class="math notranslate nohighlight">\(0\)</span> jika status binernya sama.</p></li>
+<li><p>Jarak bernilai <span class="math notranslate nohighlight">\(1\)</span> jika status binernya berbeda.</p></li>
+</ul>
+<p><strong>Perhitungan:</strong></p>
+<ul class="simple">
+<li><p>Nilai C1 = No, C2 = Yes</p></li>
+<li><p>Karena berbeda, maka <span class="math notranslate nohighlight">\(d_2 = 1\)</span></p></li>
+</ul>
+</section>
+<section id="c-jarak-fitur-3-paymentmethod-kategori-nominal">
+<h3><strong>C. Jarak Fitur 3: PaymentMethod (Kategori/Nominal)</strong><a class="headerlink" href="#c-jarak-fitur-3-paymentmethod-kategori-nominal" title="Permalink to this heading">#</a></h3>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(d_{ij}^{(f)} = \begin{cases} 0, &amp; \text{jika } x_{if} = x_{jf} \\ 1, &amp; \text{jika } x_{if} \neq x_{jf} \end{cases}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p>Jarak bernilai <span class="math notranslate nohighlight">\(0\)</span> jika kategorinya persis sama.</p></li>
+<li><p>Jarak bernilai <span class="math notranslate nohighlight">\(1\)</span> jika kategorinya berbeda (tidak ada tingkatan antar kategori).</p></li>
+</ul>
+<p><strong>Perhitungan:</strong></p>
+<ul class="simple">
+<li><p>Nilai C1 = Mailed check, C2 = Electronic check</p></li>
+<li><p>Karena berbeda, maka <span class="math notranslate nohighlight">\(d_3 = 1\)</span></p></li>
+</ul>
+</section>
+<section id="d-jarak-fitur-4-contract-ordinal">
+<h3><strong>D. Jarak Fitur 4: Contract (Ordinal)</strong><a class="headerlink" href="#d-jarak-fitur-4-contract-ordinal" title="Permalink to this heading">#</a></h3>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(d_{ij}^{(f)} = \frac{|z_{if} - z_{jf}|}{R_f}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z_{if}\)</span>: Nilai peringkat (angka) pelanggan pertama.</p></li>
+<li><p><span class="math notranslate nohighlight">\(z_{jf}\)</span>: Nilai peringkat (angka) pelanggan kedua.</p></li>
+<li><p><span class="math notranslate nohighlight">\(R_f\)</span>: Rentang peringkat (Peringkat Max - Peringkat Min).</p></li>
+</ul>
+<p><strong>Perhitungan:</strong></p>
+<ul class="simple">
+<li><p>Nilai C1 = 1 (Month-to-month), C2 = 3 (Two year), <span class="math notranslate nohighlight">\(R_f = 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_4 = \frac{|1 - 3|}{2} = \frac{2}{2} = 1\)</span></p></li>
+</ul>
 </section>
 </section>
-<section id="implementasi-menggunakan-orange-data-mining">
-<h2>Implementasi Menggunakan Orange Data Mining<a class="headerlink" href="#implementasi-menggunakan-orange-data-mining" title="Permalink to this heading">#</a></h2>
-<p>Berikut adalah validasi alur kerja menggunakan Orange Data Mining:</p>
-<p><img alt="Workflow Orange" src="../_images/workflow_campuran.png" /></p>
-<p><img alt="Gower Matrix" src="../_images/gower_matrix.png" /></p>
+<hr class="docutils" />
+<section id="total-jarak-campuran-c1-vs-c2">
+<h2>3. Total Jarak Campuran C1 vs C2<a class="headerlink" href="#total-jarak-campuran-c1-vs-c2" title="Permalink to this heading">#</a></h2>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(Distance(i, j) = \frac{\sum_{f=1}^{n} d_{ij}^{(f)}}{n}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sum d_{ij}^{(f)}\)</span>: Total jumlah jarak dari seluruh fitur.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: Jumlah total fitur yang dihitung (dalam kasus ini ada 4).</p></li>
+</ul>
+<p><strong>Perhitungan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Total Jarak = \frac{0.5 + 1 + 1 + 1}{4}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Total Jarak = \frac{3.5}{4} = 0.875\)</span></p></li>
+</ul>
+<p><strong>Kesimpulan:</strong>
+Jarak ketidakmiripan antara Pelanggan 1 dan Pelanggan 2 adalah <strong>0.875</strong> (atau 87.5%). Nilai yang mendekati 1 ini menunjukkan bahwa karakteristik kedua pelanggan tersebut sangat berbeda secara keseluruhan.</p>
 </section>
 </section>
 
@@ -765,8 +587,17 @@ $<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.5667 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Mengukur Jarak Tipe Data Numerik</p>
+        <p class="prev-next-title">Mengukur Jarak Data Iris</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="pengantar_knn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pengantar Algoritma k-Nearest Neighbors (k-NN)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -784,19 +615,15 @@ $<span class="math notranslate nohighlight">\(d(1,2) = \frac{0 + 1 + 0 + 0.5667 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-perhitungan-jarak">Tujuan Perhitungan Jarak</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deskripsi-atribut">Deskripsi Atribut</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value-dan-penanganan">Missing Value dan Penanganan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subset-dataset-telco-churn-4-tipe-data">1. Subset Dataset Telco Churn (4 Tipe Data)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-manual-pelanggan-1-c1-ke-pelanggan-2-c2">2. Perhitungan Jarak Manual: Pelanggan 1 (C1) ke Pelanggan 2 (C2)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-jarak-fitur-1-monthlycharges-numerik"><strong>A. Jarak Fitur 1: MonthlyCharges (Numerik)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-jarak-fitur-2-churn-biner"><strong>B. Jarak Fitur 2: Churn (Biner)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-jarak-fitur-3-paymentmethod-kategori-nominal"><strong>C. Jarak Fitur 3: PaymentMethod (Kategori/Nominal)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-jarak-fitur-4-contract-ordinal"><strong>D. Jarak Fitur 4: Contract (Ordinal)</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metode-perhitungan-gower-distance">Metode Perhitungan: Gower Distance</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aturan-perhitungan-skor-s-ij-k">Aturan Perhitungan Skor (<span class="math notranslate nohighlight">\(s_{ij}^{(k)}\)</span>):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-pelanggan-1-vs-pelanggan-2">Contoh Perhitungan Manual (Pelanggan 1 vs Pelanggan 2)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretasi-hasil">Interpretasi Hasil</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-menggunakan-orange-data-mining">Implementasi Menggunakan Orange Data Mining</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-jarak-campuran-c1-vs-c2">3. Total Jarak Campuran C1 vs C2</a></li>
 </ul>
   </nav></div>
 

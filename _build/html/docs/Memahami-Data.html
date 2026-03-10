@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Memahami-Data';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Eksplorasi Data Iris (Data Understanding)" href="data_iris.html" />
+    <link rel="next" title="Data Iris (Data Understanding)" href="data_iris.html" />
     <link rel="prev" title="Pengantar Data Mining" href="Pengantar-Data-Mining.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,16 +171,22 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome to My Data Mining Project
+                    Data Diri
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Memahami Karakteristik Data (Data Understanding)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_iris.html">Eksplorasi Data Iris (Data Understanding)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jarak.html">Mengukur Jarak Tipe Data Numerik</a></li>
-<li class="toctree-l1"><a class="reference internal" href="campuran.html">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_iris.html">Data Iris (Data Understanding)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="jarak.html">Mengukur Jarak Data Iris</a></li>
+<li class="toctree-l2"><a class="reference internal" href="campuran.html">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pengantar_knn.html">Pengantar Algoritma k-Nearest Neighbors (k-NN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="missing.html">Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -414,8 +420,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipe-data-campuran-integrasi-data">5. Tipe Data Campuran &amp; Integrasi Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengukuran-jarak-data-campuran"><strong>Pengukuran Jarak Data Campuran</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-sumber-data"><strong>Integrasi Sumber Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pengukuran-jarak-data-campuran-gower-distance"><strong>A. Pengukuran Jarak Data Campuran (Gower Distance)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-integrasi-sumber-data"><strong>B. Integrasi Sumber Data</strong></a></li>
 </ul>
 </li>
 </ul>
@@ -437,14 +443,25 @@ document.write(`
 <h2>1. Ukuran Pemusatan (Central Tendency)<a class="headerlink" href="#ukuran-pemusatan-central-tendency" title="Permalink to this heading">#</a></h2>
 <section id="a-mean-rata-rata">
 <h3><strong>A. Mean (Rata-rata)</strong><a class="headerlink" href="#a-mean-rata-rata" title="Permalink to this heading">#</a></h3>
-<p>Mean adalah nilai rata-rata dari seluruh data. Nilai ini sangat dipengaruhi oleh nilai ekstrem (<em>outlier</em>).
-$<span class="math notranslate nohighlight">\(\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}\)</span><span class="math notranslate nohighlight">\(
-**Keterangan:** \)</span>\bar{x}<span class="math notranslate nohighlight">\( adalah rata-rata, \)</span>x_i<span class="math notranslate nohighlight">\( adalah data ke-\)</span>i<span class="math notranslate nohighlight">\(, dan \)</span>n$ adalah jumlah data.</p>
+<p>Mean adalah nilai rata-rata dari seluruh data. Nilai ini sangat dipengaruhi oleh nilai ekstrem (<em>outlier</em>).</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}\]</div>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Rata-rata (<em>mean</em>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai data ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah data</p></li>
+</ul>
 </section>
 <section id="b-median-nilai-tengah">
 <h3><strong>B. Median (Nilai Tengah)</strong><a class="headerlink" href="#b-median-nilai-tengah" title="Permalink to this heading">#</a></h3>
-<p>Median adalah nilai tengah dari sekumpulan data yang telah diurutkan.
-$<span class="math notranslate nohighlight">\(Me = x_{\frac{n+1}{2}} \text{ (Ganjil)} \quad Me = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2} + 1}}{2} \text{ (Genap)}\)</span>$</p>
+<p>Median adalah nilai tengah dari sekumpulan data yang telah diurutkan.</p>
+<ul class="simple">
+<li><p><strong>Untuk data ganjil:</strong>
+$<span class="math notranslate nohighlight">\(Me = x_{\frac{n+1}{2}}\)</span>$</p></li>
+<li><p><strong>Untuk data genap:</strong>
+$<span class="math notranslate nohighlight">\(Me = \frac{x_{\frac{n}{2}} + x_{\frac{n}{2} + 1}}{2}\)</span>$</p></li>
+</ul>
 </section>
 <section id="c-modus-mode">
 <h3><strong>C. Modus (Mode)</strong><a class="headerlink" href="#c-modus-mode" title="Permalink to this heading">#</a></h3>
@@ -456,14 +473,22 @@ $<span class="math notranslate nohighlight">\(Me = x_{\frac{n+1}{2}} \text{ (Gan
 <h2>2. Ukuran Penyebaran (Dispersion)<a class="headerlink" href="#ukuran-penyebaran-dispersion" title="Permalink to this heading">#</a></h2>
 <section id="a-range-rentang">
 <h3><strong>A. Range (Rentang)</strong><a class="headerlink" href="#a-range-rentang" title="Permalink to this heading">#</a></h3>
+<p>Selisih antara nilai maksimum dan nilai minimum dalam dataset.</p>
 <div class="math notranslate nohighlight">
 \[Range = x_{max} - x_{min}\]</div>
 </section>
 <section id="b-standar-deviasi-simpangan-baku">
 <h3><strong>B. Standar Deviasi (Simpangan Baku)</strong><a class="headerlink" href="#b-standar-deviasi-simpangan-baku" title="Permalink to this heading">#</a></h3>
+<p>Menggambarkan seberapa besar penyimpangan data dari nilai rata-ratanya.</p>
 <div class="math notranslate nohighlight">
 \[s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}}\]</div>
-<p><strong>Keterangan:</strong> <span class="math notranslate nohighlight">\(s\)</span> menggambarkan seberapa besar penyimpangan data dari rata-ratanya.</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s\)</span> : Standar deviasi</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> : Nilai data ke-<span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> : Rata-rata (<em>mean</em>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> : Jumlah data</p></li>
+</ul>
 </section>
 </section>
 <section id="eksplorasi-dataset-iris">
@@ -480,6 +505,7 @@ $<span class="math notranslate nohighlight">\(Me = x_{\frac{n+1}{2}} \text{ (Gan
 <li><p><strong>Missing Values:</strong> Berdasarkan pengecekan, dataset ini memiliki <strong>0 missing values</strong>. Seluruh kolom terisi lengkap.</p></li>
 <li><p><strong>Outliers (Pencilan):</strong> Identifikasi dilakukan dengan visualisasi Boxplot untuk melihat data yang menyimpang jauh dari rata-rata.</p></li>
 </ol>
+<hr class="docutils" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -740,14 +766,14 @@ $<span class="math notranslate nohighlight">\(Me = x_{\frac{n+1}{2}} \text{ (Gan
 <h3><strong>A. Formula Jarak Numerik</strong><a class="headerlink" href="#a-formula-jarak-numerik" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Manhattan Distance (<span class="math notranslate nohighlight">\(L_1\)</span>):</strong>
-$<span class="math notranslate nohighlight">\(d(x,y) = \sum_{i=1}^{n} |x_i - y_i|\)</span><span class="math notranslate nohighlight">\(
-**Keterangan:** Menjumlahkan selisih absolut dari setiap fitur. Contoh: \)</span>|f1_{id1} - f1_{id2}| + |f2_{id1} - f2_{id2}|$.</p></li>
+$<span class="math notranslate nohighlight">\(d(x,y) = \sum_{i=1}^{n} |x_i - y_i|\)</span>$
+<strong>Keterangan:</strong> Menjumlahkan selisih absolut dari setiap fitur.</p></li>
 <li><p><strong>Euclidean Distance (<span class="math notranslate nohighlight">\(L_2\)</span>):</strong>
 $<span class="math notranslate nohighlight">\(d(x,y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}\)</span>$
-<strong>Keterangan:</strong> Jarak garis lurus antar dua titik (menggunakan pangkat 2).</p></li>
+<strong>Keterangan:</strong> Jarak garis lurus antar dua titik menggunakan pangkat 2.</p></li>
 <li><p><strong>Supremum Distance (<span class="math notranslate nohighlight">\(L_\infty\)</span>):</strong>
 $<span class="math notranslate nohighlight">\(d(x,y) = \max_i |x_i - y_i|\)</span>$
-<strong>Keterangan:</strong> Mengambil nilai selisih terbesar dari satu fitur saja.</p></li>
+<strong>Keterangan:</strong> Mengambil nilai selisih absolut terbesar di antara semua fitur.</p></li>
 </ol>
 </section>
 <section id="b-implementasi-distance-matrix">
@@ -856,23 +882,28 @@ Distance Matrix (5 Data Pertama):
 </section>
 <section id="tipe-data-campuran-integrasi-data">
 <h2>5. Tipe Data Campuran &amp; Integrasi Data<a class="headerlink" href="#tipe-data-campuran-integrasi-data" title="Permalink to this heading">#</a></h2>
-<section id="pengukuran-jarak-data-campuran">
-<h3><strong>Pengukuran Jarak Data Campuran</strong><a class="headerlink" href="#pengukuran-jarak-data-campuran" title="Permalink to this heading">#</a></h3>
-<p>Untuk data campuran (Numerik, Kategorikal, Biner), kita menggunakan konsep <strong>Gower Distance</strong>:</p>
-<ul class="simple">
-<li><p><strong>Atribut Nominal:</strong> Jarak 0 jika sama, 1 jika beda.</p></li>
-<li><p><strong>Atribut Numerik:</strong> Jarak = <span class="math notranslate nohighlight">\(|x - y| / (max - min)\)</span>.</p></li>
-<li><p><strong>Atribut Biner:</strong> Dihitung berdasarkan kesamaan atribut (Ya/Tidak).</p></li>
-</ul>
-</section>
-<section id="integrasi-sumber-data">
-<h3><strong>Integrasi Sumber Data</strong><a class="headerlink" href="#integrasi-sumber-data" title="Permalink to this heading">#</a></h3>
-<p>Data dalam eksplorasi ini ditarik dan diintegrasikan dari:</p>
+<section id="a-pengukuran-jarak-data-campuran-gower-distance">
+<h3><strong>A. Pengukuran Jarak Data Campuran (Gower Distance)</strong><a class="headerlink" href="#a-pengukuran-jarak-data-campuran-gower-distance" title="Permalink to this heading">#</a></h3>
+<p>Untuk dataset yang memiliki atribut campuran (Numerik, Kategorikal, dan Biner), kita menggunakan konsep <strong>Gower Distance</strong>. Skor perbedaan (<span class="math notranslate nohighlight">\(s_{ij}\)</span>) dihitung berdasarkan aturan berikut:</p>
 <ol class="arabic simple">
-<li><p><strong>Relational Database:</strong> Menggunakan library <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code> untuk koneksi ke <strong>PostgreSQL</strong> dan <strong>MySQL</strong>.</p></li>
-<li><p><strong>File Eksternal:</strong> Format <strong>JSON</strong> dan <strong>CSV</strong>.</p></li>
-<li><p><strong>Web Statis:</strong> Penguatan metadata melalui referensi web.</p></li>
+<li><p><strong>Atribut Nominal / Kategorikal:</strong>
+$<span class="math notranslate nohighlight">\(s_{ij} = \begin{cases} 0, &amp; \text{jika } x_i = x_j \\ 1, &amp; \text{jika } x_i \neq x_j \end{cases}\)</span>$
+<em>Keterangan: Jarak bernilai 0 jika kategori sama, dan 1 jika kategori berbeda.</em></p></li>
+<li><p><strong>Atribut Numerik:</strong>
+$<span class="math notranslate nohighlight">\(s_{ij} = \frac{|x_i - x_j|}{max - min}\)</span>$
+<em>Keterangan: Selisih absolut dibagi dengan rentang (range) nilai pada atribut tersebut.</em></p></li>
+<li><p><strong>Atribut Biner:</strong>
+Dihitung berdasarkan kesamaan atribut (Ya/Tidak) dengan logika yang sama seperti atribut nominal.</p></li>
 </ol>
+</section>
+<section id="b-integrasi-sumber-data">
+<h3><strong>B. Integrasi Sumber Data</strong><a class="headerlink" href="#b-integrasi-sumber-data" title="Permalink to this heading">#</a></h3>
+<p>Data dalam eksplorasi ini ditarik dan diintegrasikan dari berbagai sumber untuk memastikan kelengkapan informasi:</p>
+<ul class="simple">
+<li><p><strong>Relational Database:</strong> Menggunakan library <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code> untuk melakukan koneksi dan pengambilan data dari <strong>PostgreSQL</strong> dan <strong>MySQL</strong>.</p></li>
+<li><p><strong>File Eksternal:</strong> Pengolahan data yang tersimpan dalam format <strong>CSV</strong> dan <strong>JSON</strong>.</p></li>
+<li><p><strong>Web Statis:</strong> Penguatan metadata melalui referensi web untuk memperkaya konteks analisis data.</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -921,7 +952,7 @@ Distance Matrix (5 Data Pertama):
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Eksplorasi Data Iris (Data Understanding)</p>
+        <p class="prev-next-title">Data Iris (Data Understanding)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -962,8 +993,8 @@ Distance Matrix (5 Data Pertama):
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tipe-data-campuran-integrasi-data">5. Tipe Data Campuran &amp; Integrasi Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengukuran-jarak-data-campuran"><strong>Pengukuran Jarak Data Campuran</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integrasi-sumber-data"><strong>Integrasi Sumber Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pengukuran-jarak-data-campuran-gower-distance"><strong>A. Pengukuran Jarak Data Campuran (Gower Distance)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-integrasi-sumber-data"><strong>B. Integrasi Sumber Data</strong></a></li>
 </ul>
 </li>
 </ul>
