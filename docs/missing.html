@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Simulasi k-NN Imputasi pada Dataset Iris &#8212; Pendata Fahdimas</title>
+    <title>Simulasi k-NN Imputasi pada Data Numerik (Telco Churn) &#8212; Pendata Fahdimas</title>
   
   
   
@@ -181,7 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="jarak.html">Mengukur Jarak Data Iris</a></li>
 <li class="toctree-l2"><a class="reference internal" href="campuran.html">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pengantar_knn.html">Pengantar Algoritma k-Nearest Neighbors (k-NN)</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simulasi k-NN Imputasi pada Dataset Iris</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</a></li>
 </ul>
 </details></li>
 </ul>
@@ -386,7 +386,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Simulasi k-NN Imputasi pada Dataset Iris</h1>
+    <h1>Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -396,9 +396,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-target-id-20">1. Data Target (ID 20)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-ke-populasi-referensi-id-1-19">2. Perhitungan Jarak ke Populasi Referensi (ID 1 - 19)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-tetangga-terdekat-imputasi">3. Pemilihan Tetangga Terdekat &amp; Imputasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-asli-skenario-missing-value">1. Data Asli &amp; Skenario Missing Value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-ke-populasi-referensi">2. Perhitungan Jarak ke Populasi Referensi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-tetangga-terdekat-k-3-imputasi">3. Pemilihan Tetangga Terdekat (<span class="math notranslate nohighlight">\(k=3\)</span>) &amp; Imputasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-evaluasi"><strong>Kesimpulan Evaluasi:</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -410,66 +413,93 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="simulasi-k-nn-imputasi-pada-dataset-iris">
-<h1>Simulasi k-NN Imputasi pada Dataset Iris<a class="headerlink" href="#simulasi-k-nn-imputasi-pada-dataset-iris" title="Permalink to this heading">#</a></h1>
-<p>Untuk membuktikan bagaimana k-NN mengisi <em>missing value</em>, kita menggunakan dataset <strong>Iris asli</strong>. Kita menyembunyikan nilai <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> pada <strong>ID 20</strong> (sebagai Target), dan kita akan mencari nilai estimasinya dengan menghitung kedekatannya terhadap seluruh data sebelumnya, yaitu <strong>ID 1 hingga ID 19</strong> (sebagai Referensi).</p>
-<section id="data-target-id-20">
-<h2>1. Data Target (ID 20)<a class="headerlink" href="#data-target-id-20" title="Permalink to this heading">#</a></h2>
-<p>Data asli <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> pada ID 20 adalah <strong>5.1</strong>. Untuk simulasi ini, kita anggap nilai tersebut hilang (NaN).</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="simulasi-k-nn-imputasi-pada-data-numerik-telco-churn">
+<h1>Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)<a class="headerlink" href="#simulasi-k-nn-imputasi-pada-data-numerik-telco-churn" title="Permalink to this heading">#</a></h1>
+<p>Untuk membuktikan bagaimana algoritma k-NN mengisi kekosongan data (<em>missing value</em>), kita mengambil <strong>6 baris berurutan paling atas</strong> dari dataset asli Kaggle: <strong>Telco Customer Churn</strong> yang sudah kita simpan dalam file <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code>.</p>
+<p>Kita menyimulasikan skenario di mana nilai <code class="docutils literal notranslate"><span class="pre">TotalCharges</span></code> (Total Tagihan) pada pelanggan ke-6 hilang (sebagai Target). Kita akan mencari estimasi nilainya dengan menghitung kedekatannya terhadap 5 pelanggan di atasnya (sebagai Referensi).</p>
+<section id="data-asli-skenario-missing-value">
+<h2>1. Data Asli &amp; Skenario Missing Value<a class="headerlink" href="#data-asli-skenario-missing-value" title="Permalink to this heading">#</a></h2>
+<p>Berdasarkan tabel dari dataset asli, nilai <code class="docutils literal notranslate"><span class="pre">TotalCharges</span></code> pada pelanggan ke-6 (ID: <strong>9305-CDSKC</strong>) sengaja kita hilangkan (NaN) untuk diuji. Nilai aslinya sebelum dihilangkan adalah <strong>820.50</strong>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>ID</p></th>
-<th class="head"><p>sepal_length</p></th>
-<th class="head"><p>sepal_width</p></th>
-<th class="head"><p>petal_length</p></th>
-<th class="head"><p>petal_width</p></th>
+<tr class="row-odd"><th class="head"><p>customerID</p></th>
+<th class="head"><p>tenure</p></th>
+<th class="head"><p>MonthlyCharges</p></th>
+<th class="head"><p>TotalCharges</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>20 (Target)</strong></p></td>
+<tr class="row-even"><td><p><strong>7590-VHVEG (Ref)</strong></p></td>
+<td><p>1</p></td>
+<td><p>29.85</p></td>
+<td><p>29.85</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>5575-GNVDE (Ref)</strong></p></td>
+<td><p>34</p></td>
+<td><p>56.95</p></td>
+<td><p>1889.50</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>3668-QPYBK (Ref)</strong></p></td>
+<td><p>2</p></td>
+<td><p>53.85</p></td>
+<td><p>108.15</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>7795-CFOCW (Ref)</strong></p></td>
+<td><p>45</p></td>
+<td><p>42.30</p></td>
+<td><p>1840.75</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>9237-HQITU (Ref)</strong></p></td>
+<td><p>2</p></td>
+<td><p>70.70</p></td>
+<td><p>151.65</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>9305-CDSKC (Target)</strong></p></td>
+<td><p>8</p></td>
+<td><p>99.65</p></td>
 <td><p><strong><code class="docutils literal notranslate"><span class="pre">?</span></code> (NaN)</strong></p></td>
-<td><p>3.8</p></td>
-<td><p>1.5</p></td>
-<td><p>0.3</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
 <hr class="docutils" />
-<section id="perhitungan-jarak-ke-populasi-referensi-id-1-19">
-<h2>2. Perhitungan Jarak ke Populasi Referensi (ID 1 - 19)<a class="headerlink" href="#perhitungan-jarak-ke-populasi-referensi-id-1-19" title="Permalink to this heading">#</a></h2>
-<p>Sesuai prinsip k-NN, kita menghitung jarak (Euclidean) dari ID 20 ke <strong>seluruh 19 data referensi</strong>. Perhitungan jarak hanya menggunakan 3 kolom yang tersisa (tanpa <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>).</p>
-<p><strong>Rumus (Simulasi di Excel):</strong>
-<code class="docutils literal notranslate"><span class="pre">=SQRT(POWER(Width_Target</span> <span class="pre">-</span> <span class="pre">Width_Ref,</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">POWER(PetalL_Target</span> <span class="pre">-</span> <span class="pre">PetalL_Ref,</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">POWER(PetalW_Target</span> <span class="pre">-</span> <span class="pre">PetalW_Ref,</span> <span class="pre">2))</span></code></p>
-<p><em>Catatan: Daripada menuliskan 19 baris perhitungan manual secara panjang lebar di laporan, berikut adalah contoh perhitungan jarak ke beberapa titik:</em></p>
+<section id="perhitungan-jarak-ke-populasi-referensi">
+<h2>2. Perhitungan Jarak ke Populasi Referensi<a class="headerlink" href="#perhitungan-jarak-ke-populasi-referensi" title="Permalink to this heading">#</a></h2>
+<p>Kita menghitung metrik jarak (Euclidean Distance) dari target ke 5 referensi menggunakan fitur durasi kontrak (<code class="docutils literal notranslate"><span class="pre">tenure</span></code>) dan tagihan bulanan (<code class="docutils literal notranslate"><span class="pre">MonthlyCharges</span></code>).</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(d = \sqrt{(Tenure_{target} - Tenure_{ref})^2 + (Monthly_{target} - Monthly_{ref})^2}\)</span>$</p>
 <ul class="simple">
-<li><p><strong>Jarak ID 20 ke ID 1</strong> <span class="math notranslate nohighlight">\((3.5,\ 1.4,\ 0.2)\)</span>:
-$<span class="math notranslate nohighlight">\(d_{20\rightarrow1} = \sqrt{(3.8 - 3.5)^2 + (1.5 - 1.4)^2 + (0.3 - 0.2)^2} = \sqrt{0.11} \approx 0.331\)</span>$</p></li>
-<li><p><strong>Jarak ID 20 ke ID 11</strong> <span class="math notranslate nohighlight">\((3.7,\ 1.5,\ 0.2)\)</span>:
-$<span class="math notranslate nohighlight">\(d_{20\rightarrow11} = \sqrt{(3.8 - 3.7)^2 + (1.5 - 1.5)^2 + (0.3 - 0.2)^2} = \sqrt{0.01 + 0 + 0.01} = \sqrt{0.02} \approx 0.141\)</span>$</p></li>
-<li><p><strong>Jarak ID 20 ke ID 19</strong> <span class="math notranslate nohighlight">\((3.8,\ 1.7,\ 0.3)\)</span>:
-$<span class="math notranslate nohighlight">\(d_{20\rightarrow19} = \sqrt{(3.8 - 3.8)^2 + (1.5 - 1.7)^2 + (0.3 - 0.3)^2} = \sqrt{0 + 0.04 + 0} = \sqrt{0.04} = 0.200\)</span>$</p></li>
+<li><p><strong>Jarak ke 7590-VHVEG</strong> <span class="math notranslate nohighlight">\((1,\ 29.85)\)</span>:
+$<span class="math notranslate nohighlight">\(d_1 = \sqrt{(8 - 1)^2 + (99.65 - 29.85)^2} = \sqrt{49 + 4872.04} \approx \mathbf{70.15}\)</span>$</p></li>
+<li><p><strong>Jarak ke 5575-GNVDE</strong> <span class="math notranslate nohighlight">\((34,\ 56.95)\)</span>:
+$<span class="math notranslate nohighlight">\(d_2 = \sqrt{(8 - 34)^2 + (99.65 - 56.95)^2} = \sqrt{676 + 1823.29} \approx \mathbf{49.99}\)</span>$</p></li>
+<li><p><strong>Jarak ke 3668-QPYBK</strong> <span class="math notranslate nohighlight">\((2,\ 53.85)\)</span>:
+$<span class="math notranslate nohighlight">\(d_3 = \sqrt{(8 - 2)^2 + (99.65 - 53.85)^2} = \sqrt{36 + 2097.64} \approx \mathbf{46.19}\)</span>$</p></li>
+<li><p><strong>Jarak ke 7795-CFOCW</strong> <span class="math notranslate nohighlight">\((45,\ 42.30)\)</span>:
+$<span class="math notranslate nohighlight">\(d_4 = \sqrt{(8 - 45)^2 + (99.65 - 42.30)^2} = \sqrt{1369 + 3289.02} \approx \mathbf{68.25}\)</span>$</p></li>
+<li><p><strong>Jarak ke 9237-HQITU</strong> <span class="math notranslate nohighlight">\((2,\ 70.70)\)</span>:
+$<span class="math notranslate nohighlight">\(d_5 = \sqrt{(8 - 2)^2 + (99.65 - 70.70)^2} = \sqrt{36 + 838.10} \approx \mathbf{29.56}\)</span>$</p></li>
 </ul>
-<p><em>(Tahap cross-validation perhitungan dari ID 1 hingga ID 19 dilampirkan menggunakan Microsoft Excel).</em></p>
+<p><em>(Tahap cross-validation perhitungan jarak Euclidean ini telah divalidasi menggunakan fungsi komputasi otomatis pada Microsoft Excel).</em></p>
+<p><img alt="Screenshot Perhitungan Excel" src="../_images/ss_excel.png" /></p>
 </section>
 <hr class="docutils" />
-<section id="pemilihan-tetangga-terdekat-imputasi">
-<h2>3. Pemilihan Tetangga Terdekat &amp; Imputasi<a class="headerlink" href="#pemilihan-tetangga-terdekat-imputasi" title="Permalink to this heading">#</a></h2>
-<p>Setelah menghitung jarak ke 19 data referensi, algoritma menyortirnya dari jarak terkecil. Jika kita menggunakan <strong><span class="math notranslate nohighlight">\(k=3\)</span></strong>, maka 3 data yang menempati peringkat teratas (paling mirip dengan ID 20) adalah:</p>
+<section id="pemilihan-tetangga-terdekat-k-3-imputasi">
+<h2>3. Pemilihan Tetangga Terdekat (<span class="math notranslate nohighlight">\(k=3\)</span>) &amp; Imputasi<a class="headerlink" href="#pemilihan-tetangga-terdekat-k-3-imputasi" title="Permalink to this heading">#</a></h2>
+<p>Setelah menghitung jarak, algoritma menyortir 3 pelanggan dengan jarak terdekat (paling mirip profil tagihannya), yaitu:</p>
 <ol class="arabic simple">
-<li><p><strong>Peringkat 1: ID 11</strong> (Jarak = 0.141) <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> asli = 5.4</p></li>
-<li><p><strong>Peringkat 2: ID 19</strong> (Jarak = 0.200) <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> asli = 5.7</p></li>
-<li><p><strong>Peringkat 3: ID 5</strong> (Jarak = 0.245) <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> asli = 5.0</p></li>
+<li><p><strong>Peringkat 1: 9237-HQITU</strong> (Jarak = 29.56) <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">TotalCharges</span></code> = 151.65</p></li>
+<li><p><strong>Peringkat 2: 3668-QPYBK</strong> (Jarak = 46.19) <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">TotalCharges</span></code> = 108.15</p></li>
+<li><p><strong>Peringkat 3: 5575-GNVDE</strong> (Jarak = 49.99) <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">TotalCharges</span></code> = 1889.50</p></li>
 </ol>
 <p><strong>Menghitung Nilai Estimasi (Mean):</strong>
-Untuk mengisi <em>missing value</em> dari target, kita merata-ratakan nilai <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code> dari ketiga tetangga terdekat tersebut.</p>
-<div class="math notranslate nohighlight">
-\[Nilai\_Imputasi = \frac{5.4 + 5.7 + 5.0}{3}\]</div>
-<div class="math notranslate nohighlight">
-\[Nilai\_Imputasi = \frac{16.1}{3} = \mathbf{5.367}\]</div>
-<p><strong>Kesimpulan Evaluasi:</strong>
-Melalui metode k-NN Imputation dengan populasi referensi yang valid (ID 1 - 19) dan nilai tetangga <span class="math notranslate nohighlight">\(k=3\)</span>, nilai yang hilang pada ID 20 diestimasi menjadi <strong>5.37</strong>. Angka ini sangat realistis dan mendekati nilai aslinya yaitu <strong>5.1</strong>, membuktikan bahwa algoritma ini mampu mengenali pola bunga berdasarkan fitur lebar kelopak dan panjang mahkota secara akurat.</p>
+$<span class="math notranslate nohighlight">\(Nilai\_Imputasi = \frac{151.65 + 108.15 + 1889.50}{3}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(Nilai\_Imputasi = \frac{2149.3}{3} = \mathbf{716.43}\)</span>$</p>
+<section id="kesimpulan-evaluasi">
+<h3><strong>Kesimpulan Evaluasi:</strong><a class="headerlink" href="#kesimpulan-evaluasi" title="Permalink to this heading">#</a></h3>
+<p>Melalui metode k-NN Imputation (<span class="math notranslate nohighlight">\(k=3\)</span>), nilai <code class="docutils literal notranslate"><span class="pre">TotalCharges</span></code> yang hilang berhasil diestimasi menjadi <strong>716.43</strong>. Angka ini cukup logis dan mendekati nilai aslinya yaitu <strong>820.50</strong>. Selisih yang terjadi sangat wajar dalam dunia <em>Machine Learning</em> karena data di dunia nyata memiliki variasi yang dinamis, namun k-NN tetap berhasil memberikan rentang tebakan yang rasional berdasarkan pola data terdekatnya.</p>
+</section>
 </section>
 </section>
 
@@ -528,9 +558,12 @@ Melalui metode k-NN Imputation dengan populasi referensi yang valid (ID 1 - 19) 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-target-id-20">1. Data Target (ID 20)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-ke-populasi-referensi-id-1-19">2. Perhitungan Jarak ke Populasi Referensi (ID 1 - 19)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-tetangga-terdekat-imputasi">3. Pemilihan Tetangga Terdekat &amp; Imputasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-asli-skenario-missing-value">1. Data Asli &amp; Skenario Missing Value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-ke-populasi-referensi">2. Perhitungan Jarak ke Populasi Referensi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-tetangga-terdekat-k-3-imputasi">3. Pemilihan Tetangga Terdekat (<span class="math notranslate nohighlight">\(k=3\)</span>) &amp; Imputasi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-evaluasi"><strong>Kesimpulan Evaluasi:</strong></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
