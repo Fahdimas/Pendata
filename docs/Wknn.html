@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Business Understanding &#8212; Pendata Fahdimas</title>
+    <title>Simulasi W-KNN Imputasi pada Data Numerik (JMK) &#8212; Pendata Fahdimas</title>
   
   
   
@@ -62,9 +62,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Bussiness-Understanding';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Wknn';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)" href="missing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -127,8 +130,6 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -173,7 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Memahami-Data.html">Memahami Karakteristik Data (Data Understanding)</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="data_iris.html">Data Iris (Data Understanding)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -185,7 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="missing.html">Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="Wknn.html">Simulasi W-KNN Imputasi pada Data Numerik (JMK)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Simulasi W-KNN Imputasi pada Data Numerik (JMK)</a></li>
 </ul>
 
     </div>
@@ -257,7 +258,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/Fahdimas/Pendata/edit/main/docs/Bussiness-Understanding.ipynb" target="_blank"
+      <li><a href="https://github.com/Fahdimas/Pendata/edit/main/docs/Wknn.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -274,7 +275,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/Fahdimas/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/Bussiness-Understanding.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Fahdimas/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/Wknn.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -304,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/docs/Bussiness-Understanding.ipynb" target="_blank"
+      <li><a href="../_sources/docs/Wknn.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -388,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Business Understanding</h1>
+    <h1>Simulasi W-KNN Imputasi pada Data Numerik (JMK)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -398,10 +399,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-bisnis-business-objectives">1. Menentukan Tujuan Bisnis (Business Objectives)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-assess-situation">2. Menilai Situasi (Assess Situation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-data-mining-data-mining-goals">3. Menentukan Tujuan Data Mining (Data Mining Goals)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-rencana-proyek-project-plan">4. Membuat Rencana Proyek (Project Plan)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-normalisasi-skenario-missing-value">1. Data Normalisasi &amp; Skenario Missing Value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-euclidean-ke-populasi-referensi">2. Perhitungan Jarak Euclidean ke Populasi Referensi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-tetangga-terdekat-perhitungan-bobot">3. Pemilihan Tetangga Terdekat &amp; Perhitungan Bobot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-nilai-jmk">4. Imputasi Nilai JMK</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-evaluasi"><strong>Kesimpulan Evaluasi:</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -413,35 +417,115 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="business-understanding">
-<h1>Business Understanding<a class="headerlink" href="#business-understanding" title="Permalink to this heading">#</a></h1>
-<p>Tahap ini merupakan fase pertama dalam metode CRISP-DM. Fokus pada tahap ini adalah memahami tujuan dan kebutuhan dari perspektif bisnis atau penelitian, kemudian menerjemahkannya ke dalam definisi masalah data mining.</p>
-<section id="menentukan-tujuan-bisnis-business-objectives">
-<h2>1. Menentukan Tujuan Bisnis (Business Objectives)<a class="headerlink" href="#menentukan-tujuan-bisnis-business-objectives" title="Permalink to this heading">#</a></h2>
-<p>Tujuan utama dari analisis dataset Iris ini adalah untuk membangun model klasifikasi yang mampu membedakan jenis bunga Iris secara akurat berdasarkan karakteristik fisiknya. Hal ini penting dalam bidang botani untuk identifikasi spesies secara otomatis.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="simulasi-w-knn-imputasi-pada-data-numerik-jmk">
+<h1>Simulasi W-KNN Imputasi pada Data Numerik (JMK)<a class="headerlink" href="#simulasi-w-knn-imputasi-pada-data-numerik-jmk" title="Permalink to this heading">#</a></h1>
+<p>Untuk membuktikan bagaimana algoritma <em>Weighted k-Nearest Neighbors</em> (W-KNN) mengisi kekosongan data (<em>missing value</em>), kita mengambil <strong>6 baris data</strong> dari dataset preprocessing.</p>
+<p>Kita menyimulasikan skenario di mana nilai <code class="docutils literal notranslate"><span class="pre">JMK</span></code> pada baris ke-7 hilang (sebagai Target). Kita akan mencari estimasi nilainya dengan menghitung kedekatannya terhadap 6 data di atasnya (sebagai Referensi) menggunakan tabel yang telah <strong>dinormalisasi</strong>.</p>
+<section id="data-normalisasi-skenario-missing-value">
+<h2>1. Data Normalisasi &amp; Skenario Missing Value<a class="headerlink" href="#data-normalisasi-skenario-missing-value" title="Permalink to this heading">#</a></h2>
+<p>Berdasarkan tabel normalisasi, nilai <code class="docutils literal notranslate"><span class="pre">JMK</span></code> pada baris ke-7 sengaja kita hilangkan (NaN) untuk diuji. Atribut prediktor yang digunakan untuk menghitung kedekatan adalah <code class="docutils literal notranslate"><span class="pre">IPK</span></code> dan <code class="docutils literal notranslate"><span class="pre">PO</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>IPK</p></th>
+<th class="head"><p>PO</p></th>
+<th class="head"><p>JMK</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>1 (Ref)</strong></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>2 (Ref)</strong></p></td>
+<td><p>0.5</p></td>
+<td><p>0.5</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>3 (Ref)</strong></p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>4 (Ref)</strong></p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>5 (Ref)</strong></p></td>
+<td><p>0.5</p></td>
+<td><p>0.5</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>6 (Ref)</strong></p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>7 (Target)</strong></p></td>
+<td><p>0</p></td>
+<td><p>0.5</p></td>
+<td><p><strong><code class="docutils literal notranslate"><span class="pre">?</span></code> (NaN)</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
-<section id="menilai-situasi-assess-situation">
-<h2>2. Menilai Situasi (Assess Situation)<a class="headerlink" href="#menilai-situasi-assess-situation" title="Permalink to this heading">#</a></h2>
-<p>Dataset Iris yang digunakan adalah dataset standar yang sudah teruji kualitasnya. Tantangan dalam situasi ini adalah adanya kemiripan fitur antara spesies <em>Iris-versicolor</em> dan <em>Iris-virginica</em>, sehingga diperlukan metode analisis yang tepat untuk membedakannya.</p>
-</section>
-<section id="menentukan-tujuan-data-mining-data-mining-goals">
-<h2>3. Menentukan Tujuan Data Mining (Data Mining Goals)<a class="headerlink" href="#menentukan-tujuan-data-mining-data-mining-goals" title="Permalink to this heading">#</a></h2>
-<p>Tujuan teknis dari proyek ini adalah:</p>
+<hr class="docutils" />
+<section id="perhitungan-jarak-euclidean-ke-populasi-referensi">
+<h2>2. Perhitungan Jarak Euclidean ke Populasi Referensi<a class="headerlink" href="#perhitungan-jarak-euclidean-ke-populasi-referensi" title="Permalink to this heading">#</a></h2>
+<p>Kita menghitung metrik jarak (Euclidean Distance) dari target ke 6 referensi menggunakan atribut <code class="docutils literal notranslate"><span class="pre">IPK</span></code> dan <code class="docutils literal notranslate"><span class="pre">PO</span></code>.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(d = \sqrt{(IPK_{target} - IPK_{ref})^2 + (PO_{target} - PO_{ref})^2}\)</span>$</p>
 <ul class="simple">
-<li><p>Melakukan eksplorasi data untuk melihat pola penyebaran spesies.</p></li>
-<li><p>Mengidentifikasi fitur (seperti panjang/lebar mahkota) yang paling berpengaruh terhadap jenis spesies.</p></li>
-<li><p>Membangun model yang memiliki tingkat akurasi tinggi dalam klasifikasi.</p></li>
+<li><p><strong>Jarak ke No. 1</strong> <span class="math notranslate nohighlight">\((0,\ 0)\)</span>:
+$<span class="math notranslate nohighlight">\(d_1 = \sqrt{(0 - 0)^2 + (0.5 - 0)^2} = \sqrt{0 + 0.25} = \mathbf{0.5}\)</span>$</p></li>
+<li><p><strong>Jarak ke No. 2</strong> <span class="math notranslate nohighlight">\((0.5,\ 0.5)\)</span>:
+$<span class="math notranslate nohighlight">\(d_2 = \sqrt{(0 - 0.5)^2 + (0.5 - 0.5)^2} = \sqrt{0.25 + 0} = \mathbf{0.5}\)</span>$</p></li>
+<li><p><strong>Jarak ke No. 3</strong> <span class="math notranslate nohighlight">\((1,\ 0)\)</span>:
+$<span class="math notranslate nohighlight">\(d_3 = \sqrt{(0 - 1)^2 + (0.5 - 0)^2} = \sqrt{1 + 0.25} \approx \mathbf{1.118}\)</span>$</p></li>
+<li><p><strong>Jarak ke No. 4</strong> <span class="math notranslate nohighlight">\((0,\ 0)\)</span>:
+$<span class="math notranslate nohighlight">\(d_4 = \sqrt{(0 - 0)^2 + (0.5 - 0)^2} = \sqrt{0 + 0.25} = \mathbf{0.5}\)</span>$</p></li>
+<li><p><strong>Jarak ke No. 5</strong> <span class="math notranslate nohighlight">\((0.5,\ 0.5)\)</span>:
+$<span class="math notranslate nohighlight">\(d_5 = \sqrt{(0 - 0.5)^2 + (0.5 - 0.5)^2} = \sqrt{0.25 + 0} = \mathbf{0.5}\)</span>$</p></li>
+<li><p><strong>Jarak ke No. 6</strong> <span class="math notranslate nohighlight">\((1,\ 1)\)</span>:
+$<span class="math notranslate nohighlight">\(d_6 = \sqrt{(0 - 1)^2 + (0.5 - 1)^2} = \sqrt{1 + 0.25} \approx \mathbf{1.118}\)</span>$</p></li>
 </ul>
 </section>
-<section id="membuat-rencana-proyek-project-plan">
-<h2>4. Membuat Rencana Proyek (Project Plan)<a class="headerlink" href="#membuat-rencana-proyek-project-plan" title="Permalink to this heading">#</a></h2>
-<p>Langkah-langkah yang akan dilakukan dalam proyek ini meliputi:</p>
-<ol class="arabic simple">
-<li><p><strong>Data Understanding</strong>: Mengenal karakteristik data (Orange &amp; Python).</p></li>
-<li><p><strong>Data Preparation</strong>: Membersihkan atau memformat data jika diperlukan.</p></li>
-<li><p><strong>Modeling</strong>: Menerapkan algoritma klasifikasi.</p></li>
-<li><p><strong>Evaluation</strong>: Menghitung akurasi model.</p></li>
-</ol>
+<hr class="docutils" />
+<section id="pemilihan-tetangga-terdekat-perhitungan-bobot">
+<h2>3. Pemilihan Tetangga Terdekat &amp; Perhitungan Bobot<a class="headerlink" href="#pemilihan-tetangga-terdekat-perhitungan-bobot" title="Permalink to this heading">#</a></h2>
+<p>Setelah menghitung jarak, algoritma mendapati <strong>4 data</strong> dengan jarak terdekat yang sama kuat (<span class="math notranslate nohighlight">\(d = 0.5\)</span>), yaitu data No. 1, 2, 4, dan 5.</p>
+<p>Dalam metode W-KNN, kita perlu memberikan bobot (<span class="math notranslate nohighlight">\(w\)</span>) pada masing-masing tetangga terdekat tersebut berdasarkan jaraknya.</p>
+<p><strong>Rumus Bobot:</strong>
+$<span class="math notranslate nohighlight">\(w = \frac{1}{d^2}\)</span>$</p>
+<p>Karena jarak keempat tetangga sama (0.5), maka bobotnya juga sama:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_1, w_2, w_4, w_5 = \frac{1}{0.5^2} = \frac{1}{0.25} = \mathbf{4}\)</span></p></li>
+</ul>
+<p><strong>Total Bobot</strong> <span class="math notranslate nohighlight">\((\sum w) = 4 + 4 + 4 + 4 = \mathbf{16}\)</span></p>
+</section>
+<hr class="docutils" />
+<section id="imputasi-nilai-jmk">
+<h2>4. Imputasi Nilai JMK<a class="headerlink" href="#imputasi-nilai-jmk" title="Permalink to this heading">#</a></h2>
+<p>Langkah terakhir adalah menghitung nilai estimasi W-KNN dengan mengalikan bobot dan nilai JMK normalisasi dari masing-masing tetangga, lalu membaginya dengan total bobot.</p>
+<ul class="simple">
+<li><p>JMK No. 1 = 0</p></li>
+<li><p>JMK No. 2 = 1</p></li>
+<li><p>JMK No. 4 = 1</p></li>
+<li><p>JMK No. 5 = 0</p></li>
+</ul>
+<p><strong>Menghitung Nilai Estimasi W-KNN:</strong>
+$<span class="math notranslate nohighlight">\(Nilai\_Imputasi = \frac{(w_1 \times JMK_1) + (w_2 \times JMK_2) + (w_4 \times JMK_4) + (w_5 \times JMK_5)}{\sum w}\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[Nilai\_Imputasi = \frac{(4 \times 0) + (4 \times 1) + (4 \times 1) + (4 \times 0)}{16}\]</div>
+<div class="math notranslate nohighlight">
+\[Nilai\_Imputasi = \frac{0 + 4 + 4 + 0}{16} = \frac{8}{16} = \mathbf{0.5}\]</div>
+<section id="kesimpulan-evaluasi">
+<h3><strong>Kesimpulan Evaluasi:</strong><a class="headerlink" href="#kesimpulan-evaluasi" title="Permalink to this heading">#</a></h3>
+<p>Melalui metode W-KNN Imputation, nilai <code class="docutils literal notranslate"><span class="pre">JMK</span></code> normalisasi yang hilang berhasil diestimasi menjadi <strong>0.5</strong>. Jika didenormalisasi kembali ke rentang nilai aslinya (di mana 0 = 2 dan 1 = 3), posisinya berada tepat di angka <strong>2.5</strong>. Mengingat atribut JMK merupakan data diskrit, nilai ini sangat rasional dan siap dibulatkan menjadi <strong>3</strong> atau <strong>2</strong> sesuai dengan kebijakan pembulatan yang diterapkan pada studi kasus.</p>
+</section>
 </section>
 </section>
 
@@ -475,6 +559,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="missing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -491,10 +584,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-bisnis-business-objectives">1. Menentukan Tujuan Bisnis (Business Objectives)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-assess-situation">2. Menilai Situasi (Assess Situation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-data-mining-data-mining-goals">3. Menentukan Tujuan Data Mining (Data Mining Goals)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-rencana-proyek-project-plan">4. Membuat Rencana Proyek (Project Plan)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-normalisasi-skenario-missing-value">1. Data Normalisasi &amp; Skenario Missing Value</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-jarak-euclidean-ke-populasi-referensi">2. Perhitungan Jarak Euclidean ke Populasi Referensi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pemilihan-tetangga-terdekat-perhitungan-bobot">3. Pemilihan Tetangga Terdekat &amp; Perhitungan Bobot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imputasi-nilai-jmk">4. Imputasi Nilai JMK</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-evaluasi"><strong>Kesimpulan Evaluasi:</strong></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
