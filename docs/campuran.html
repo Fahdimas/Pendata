@@ -408,6 +408,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-jarak-campuran-c1-vs-c2">3. Total Jarak Campuran C1 vs C2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-jarak-data-campuran-menggunakan-orange-data-mining">4. Implementasi Jarak Data Campuran menggunakan Orange Data Mining</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-komputasi-distance-matrix"><strong>Hasil Komputasi (Distance Matrix)</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -549,6 +553,25 @@ $<span class="math notranslate nohighlight">\(Distance(i, j) = \frac{\sum_{f=1}^
 <p><strong>Kesimpulan:</strong>
 Jarak ketidakmiripan antara Pelanggan 1 dan Pelanggan 2 adalah <strong>0.875</strong> (atau 87.5%). Nilai yang mendekati 1 ini menunjukkan bahwa karakteristik kedua pelanggan tersebut sangat berbeda secara keseluruhan.</p>
 </section>
+<section id="implementasi-jarak-data-campuran-menggunakan-orange-data-mining">
+<h2>4. Implementasi Jarak Data Campuran menggunakan Orange Data Mining<a class="headerlink" href="#implementasi-jarak-data-campuran-menggunakan-orange-data-mining" title="Permalink to this heading">#</a></h2>
+<p>Selain melakukan perhitungan secara matematis, kita dapat melakukan komputasi jarak untuk data campuran (<em>mixed data</em>) secara otomatis menggunakan <em>tools</em> <strong>Orange Data Mining</strong>. Pada simulasi ini, kita menggunakan dataset <strong>Telco Customer Churn</strong> yang memuat fitur numerik (contoh: <code class="docutils literal notranslate"><span class="pre">tenure</span></code>, <code class="docutils literal notranslate"><span class="pre">MonthlyCharges</span></code>) sekaligus fitur kategorikal (contoh: <code class="docutils literal notranslate"><span class="pre">gender</span></code>, <code class="docutils literal notranslate"><span class="pre">Contract</span></code>, <code class="docutils literal notranslate"><span class="pre">PaymentMethod</span></code>).</p>
+<p>Berikut adalah rancangan <em>workflow</em> yang digunakan:</p>
+<p><img alt="Workflow Orange Data Campuran" src="../_images/orange_workflow.png" /></p>
+<p><strong>Penjelasan Alur Kerja (Workflow):</strong></p>
+<ol class="arabic simple">
+<li><p><strong>File:</strong> Berfungsi untuk memuat dataset <code class="docutils literal notranslate"><span class="pre">missing.csv</span></code>. Orange secara cerdas akan memetakan tipe data secara otomatis (<em>numeric</em> untuk angka dan <em>categorical</em> untuk teks).</p></li>
+<li><p><strong>Data Table:</strong> Digunakan untuk memvalidasi dan melihat sekilas <em>dataset</em> mentah yang telah di-<em>load</em>.</p></li>
+<li><p><strong>Distances:</strong> <em>Widget</em> komputasi utama. Meskipun kita memilih metrik <em>Euclidean</em> atau <em>Manhattan</em>, Orange dirancang untuk menangani data campuran secara hibrida. Untuk fitur numerik, Orange menghitung jarak kuadrat normal, sedangkan untuk fitur kategorikal, Orange menggunakan metrik <em>Overlap</em> (menghasilkan nilai 0 jika kategorinya sama persis, dan 1 jika berbeda).</p></li>
+<li><p><strong>Distance Matrix:</strong> Berfungsi merender hasil perhitungan ke dalam bentuk matriks dua dimensi.</p></li>
+</ol>
+<section id="hasil-komputasi-distance-matrix">
+<h3><strong>Hasil Komputasi (Distance Matrix)</strong><a class="headerlink" href="#hasil-komputasi-distance-matrix" title="Permalink to this heading">#</a></h3>
+<p>Gambar di bawah ini adalah hasil matriks jarak antar pelanggan. Nilai yang semakin kecil (mendekati 0) menunjukkan bahwa sepasang pelanggan tersebut memiliki profil yang sangat mirip, baik dari segi durasi berlangganan, total tagihan, maupun jenis layanan yang mereka gunakan.</p>
+<p><img alt="Hasil Distance Matrix Orange" src="../_images/orange_matrix.png" /></p>
+<p>Dengan memanfaatkan <em>Distance Matrix</em> ini, kita dapat dengan mudah melangkah ke tahap selanjutnya dalam Data Mining, seperti melakukan klasifikasi dengan k-NN maupun mengelompokkan pelanggan menggunakan <em>Clustering</em>.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -624,6 +647,10 @@ Jarak ketidakmiripan antara Pelanggan 1 dan Pelanggan 2 adalah <strong>0.875</st
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#total-jarak-campuran-c1-vs-c2">3. Total Jarak Campuran C1 vs C2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-jarak-data-campuran-menggunakan-orange-data-mining">4. Implementasi Jarak Data Campuran menggunakan Orange Data Mining</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-komputasi-distance-matrix"><strong>Hasil Komputasi (Distance Matrix)</strong></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
