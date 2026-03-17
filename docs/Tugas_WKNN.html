@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Tahap 1: Normalisasi Data (Min-Max) &#8212; Pendata Fahdimas</title>
+    <title>Proyek Missing Values Inputation + Materi Normalisasi data &#8212; Pendata Fahdimas</title>
   
   
   
@@ -67,7 +67,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Tugas_WKNN';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Mengukur Jarak Tipe Data Campuran (Gower Distance)" href="campuran.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -130,6 +129,8 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -174,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Memahami-Data.html">Memahami Karakteristik Data (Data Understanding)</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="data_iris.html">Data Iris (Data Understanding)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -182,11 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="campuran.html">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tahap 1: Normalisasi Data (Min-Max)</a></li>
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="Normalisasi-WKNN.html">Preprocessing Data</a></li>
 </ul>
 
     </div>
@@ -389,7 +386,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tahap 1: Normalisasi Data (Min-Max)</h1>
+    <h1>Proyek Missing Values Inputation + Materi Normalisasi data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -399,10 +396,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tahap 1: Normalisasi Data (Min-Max)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi">Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli">Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-implementasi-wknn-python">Kode Implementasi WKNN Python</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Proyek Missing Values Inputation + Materi Normalisasi data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-1-normalisasi-data-min-max">Tahap 1: Normalisasi Data (Min-Max)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi">Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli">Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-implementasi-wknn-python">Kode Implementasi WKNN Python</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-2-normalisasi-data-materi">Tugas 2. Normalisasi data (materi)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">Preprocessing Data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data">Normalisasi Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-normalization">1. Min-Max Normalization</a></li>
@@ -424,13 +425,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>Proyek Missing Values Inputation + Materi Normalisasi data</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="proyek-missing-values-inputation-materi-normalisasi-data">
+<h1>Proyek Missing Values Inputation + Materi Normalisasi data<a class="headerlink" href="#proyek-missing-values-inputation-materi-normalisasi-data" title="Permalink to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p>Missing values : menyelesaikan dengan WKNN (manual)  + code menghitung WKNN</p></li>
 </ol>
 <p><img alt="image.png" src="data:image/png;base64,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" /></p>
 <section id="tahap-1-normalisasi-data-min-max">
-<h1>Tahap 1: Normalisasi Data (Min-Max)<a class="headerlink" href="#tahap-1-normalisasi-data-min-max" title="Permalink to this heading">#</a></h1>
+<h2>Tahap 1: Normalisasi Data (Min-Max)<a class="headerlink" href="#tahap-1-normalisasi-data-min-max" title="Permalink to this heading">#</a></h2>
 <p>Sebelum menghitung jarak, kita samakan skala data asli menggunakan Normalisasi Min-Max.</p>
 <p><strong>Rumus Normalisasi Min-Max:</strong>
 $<span class="math notranslate nohighlight">\(X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}\)</span>$</p>
@@ -473,7 +475,7 @@ $<span class="math notranslate nohighlight">\(X_{norm} = \frac{X - X_{min}}{X_{m
 <hr class="docutils" />
 </section>
 <section id="tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi">
-<h1>Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)<a class="headerlink" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi" title="Permalink to this heading">#</a></h1>
+<h2>Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)<a class="headerlink" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi" title="Permalink to this heading">#</a></h2>
 <p>Kita gunakan tabel yang <strong>sudah dinormalisasi</strong> untuk memprediksi nilai JML baris ke-7.</p>
 <ul class="simple">
 <li><p><strong>Data Target (Baris 7):</strong> <span class="math notranslate nohighlight">\(X_{target} = (0, 0.5)\)</span></p></li>
@@ -517,7 +519,7 @@ $<span class="math notranslate nohighlight">\(Prediksi = \frac{\sum (w_i \times 
 <hr class="docutils" />
 </section>
 <section id="tahap-3-denormalisasi-mencari-pada-tabel-jml-asli">
-<h1>Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)<a class="headerlink" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli" title="Permalink to this heading">#</a></h1>
+<h2>Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)<a class="headerlink" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli" title="Permalink to this heading">#</a></h2>
 <p><strong>Rumus Denormalisasi:</strong>
 $<span class="math notranslate nohighlight">\(X_{asli} = X_{norm} \times (X_{max} - X_{min}) + X_{min}\)</span>$</p>
 <p>Masukkan nilai prediksi dan nilai Min/Max dari JML asli:</p>
@@ -536,10 +538,10 @@ $<span class="math notranslate nohighlight">\(X_{asli} = X_{norm} \times (X_{max
 <hr class="docutils" />
 </section>
 <section id="kode-implementasi-wknn-python">
-<h1>Kode Implementasi WKNN Python<a class="headerlink" href="#kode-implementasi-wknn-python" title="Permalink to this heading">#</a></h1>
+<h2>Kode Implementasi WKNN Python<a class="headerlink" href="#kode-implementasi-wknn-python" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">euclidean_distances</span>
@@ -555,12 +557,12 @@ $<span class="math notranslate nohighlight">\(X_{asli} = X_{norm} \times (X_{max
 <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># 2. PROSES NORMALISASI MIN-MAX (Menggunakan sklearn)</span>
+<span class="c1"># 2. PROSES NORMALISASI MIN-MAX  </span>
 <span class="n">scaler_X</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;IPK&#39;</span><span class="p">,</span> <span class="s1">&#39;PO&#39;</span><span class="p">]]</span>
 <span class="n">X_norm</span> <span class="o">=</span> <span class="n">scaler_X</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
-<span class="c1"># Normalisasi Target (JML) manual untuk baris 1-6</span>
+<span class="c1"># Normalisasi Target (JML) </span>
 <span class="n">y_train</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;JML&#39;</span><span class="p">][:</span><span class="mi">6</span><span class="p">]</span>
 <span class="n">jml_min</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 <span class="n">jml_max</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
@@ -574,7 +576,7 @@ $<span class="math notranslate nohighlight">\(X_{asli} = X_{norm} \times (X_{max
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">40</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">X_train_norm</span> <span class="o">=</span> <span class="n">X_norm</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
-<span class="n">X_target_norm</span> <span class="o">=</span> <span class="n">X_norm</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span> <span class="c1"># Baris ke-7 (Missing Value)</span>
+<span class="n">X_target_norm</span> <span class="o">=</span> <span class="n">X_norm</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>  
 
 <span class="c1"># 3. MENGHITUNG JARAK EUCLIDEAN</span>
 <span class="n">distances</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">X_target_norm</span><span class="p">,</span> <span class="n">X_train_norm</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -665,14 +667,14 @@ Baris 5 -&gt; Jarak: 0.5000 | Bobot: 2.0000 | JML_Norm: 0.0
 </div>
 </div>
 </div>
-<ol class="arabic simple" start="2">
-<li><p>Normalisasi data (materi)</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tugas-2-normalisasi-data-materi">
+<h1>Tugas 2. Normalisasi data (materi)<a class="headerlink" href="#tugas-2-normalisasi-data-materi" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>macam macam normalisasi data dan beri contoh hasil normalisasi data</p></li>
+<li><p>macam macam normalisasi data dan beri    contoh hasil normalisasi data</p></li>
 <li><p>Gunakan library sklearn untuk melakukan normalisasi data atau membuat fungsi sendiri</p></li>
 </ul>
-</li>
-</ol>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="preprocessing-data">
 <h1>Preprocessing Data<a class="headerlink" href="#preprocessing-data" title="Permalink to this heading">#</a></h1>
@@ -701,20 +703,20 @@ Misalkan terdapat data Umur: <strong>20, 30, 50</strong>.</p>
 <p><strong>Implementasi Code (Menggunakan library <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>):</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
 
-<span class="c1"># Membuat data dummy</span>
+ 
 <span class="n">df_minmax</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Umur&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">]})</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Data Asli ---&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_minmax</span><span class="p">)</span>
 
-<span class="c1"># Menggunakan library MinMaxScaler dari sklearn</span>
+ 
 <span class="n">scaler_minmax</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
 <span class="n">df_minmax</span><span class="p">[</span><span class="s1">&#39;Umur_Norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler_minmax</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_minmax</span><span class="p">[[</span><span class="s1">&#39;Umur&#39;</span><span class="p">]])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Hasil Min-Max Normalization ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Hasil Min-Max Normalization ---&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_minmax</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -725,7 +727,6 @@ Misalkan terdapat data Umur: <strong>20, 30, 50</strong>.</p>
 0    20
 1    30
 2    50
-
 --- Hasil Min-Max Normalization ---
    Umur  Umur_Norm
 0    20   0.000000
@@ -757,20 +758,19 @@ Misalkan terdapat data Nilai: <strong>2, 4, 6</strong>.</p>
 <p><strong>Implementasi Code (Menggunakan library <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>):</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
-
-<span class="c1"># Membuat data dummy</span>
+ 
 <span class="n">df_zscore</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Nilai&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Data Asli ---&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_zscore</span><span class="p">)</span>
 
-<span class="c1"># Menggunakan library StandardScaler dari sklearn</span>
+ 
 <span class="n">scaler_zscore</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 <span class="n">df_zscore</span><span class="p">[</span><span class="s1">&#39;Nilai_Norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler_zscore</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_zscore</span><span class="p">[[</span><span class="s1">&#39;Nilai&#39;</span><span class="p">]])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Hasil Z-Score Normalization ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-- Hasil Z-Score Normalization ---&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_zscore</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -781,8 +781,7 @@ Misalkan terdapat data Nilai: <strong>2, 4, 6</strong>.</p>
 0      2
 1      4
 2      6
-
---- Hasil Z-Score Normalization ---
+-- Hasil Z-Score Normalization ---
    Nilai  Nilai_Norm
 0      2   -1.224745
 1      4    0.000000
@@ -815,19 +814,19 @@ Misalkan terdapat data: <strong>150, 2500, -8500</strong>.</p>
 Karena <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> tidak menyediakan fungsi khusus untuk Decimal Scaling (karena operasinya sangat sederhana), kita bisa membuat fungsinya sendiri menggunakan Pandas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
-<span class="c1"># Membuat data dummy</span>
+ 
 <span class="n">df_decimal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Data&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="o">-</span><span class="mi">8500</span><span class="p">]})</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Data Asli ---&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_decimal</span><span class="p">)</span>
 
-<span class="c1"># Membuat fungsi Decimal Scaling secara manual</span>
+ 
 <span class="k">def</span><span class="w"> </span><span class="nf">decimal_scaling</span><span class="p">(</span><span class="n">kolom</span><span class="p">):</span>
-    <span class="n">max_abs</span> <span class="o">=</span> <span class="n">kolom</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>       <span class="c1"># Mencari angka absolut terbesar</span>
-    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">max_abs</span><span class="p">)))</span>        <span class="c1"># Menghitung jumlah digitnya (j)</span>
-    <span class="k">return</span> <span class="n">kolom</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">j</span><span class="p">)</span>            <span class="c1"># Membagi data dengan 10 pangkat j</span>
+    <span class="n">max_abs</span> <span class="o">=</span> <span class="n">kolom</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>      
+    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">max_abs</span><span class="p">)))</span>        
+    <span class="k">return</span> <span class="n">kolom</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">j</span><span class="p">)</span>             
 
 <span class="n">df_decimal</span><span class="p">[</span><span class="s1">&#39;Data_Norm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">decimal_scaling</span><span class="p">(</span><span class="n">df_decimal</span><span class="p">[</span><span class="s1">&#39;Data&#39;</span><span class="p">])</span>
 
@@ -886,15 +885,6 @@ Karena <code class="docutils literal notranslate"><span class="pre">sklearn</spa
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="campuran.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Mengukur Jarak Tipe Data Campuran (Gower Distance)</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -911,10 +901,14 @@ Karena <code class="docutils literal notranslate"><span class="pre">sklearn</spa
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tahap 1: Normalisasi Data (Min-Max)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi">Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli">Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-implementasi-wknn-python">Kode Implementasi WKNN Python</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Proyek Missing Values Inputation + Materi Normalisasi data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-1-normalisasi-data-min-max">Tahap 1: Normalisasi Data (Min-Max)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi">Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli">Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kode-implementasi-wknn-python">Kode Implementasi WKNN Python</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tugas-2-normalisasi-data-materi">Tugas 2. Normalisasi data (materi)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">Preprocessing Data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data">Normalisasi Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-normalization">1. Min-Max Normalization</a></li>
