@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Laporan Analisis Klasifikasi Kesuburan Tanah &#8212; Pendata Fahdimas</title>
+    <title>UTS PENAMBANGAN DATA &#8212; Pendata Fahdimas</title>
   
   
   
@@ -183,7 +183,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="Normalisasi-WKNN.html">Preprocessing Data</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laporan Analisis Klasifikasi Kesuburan Tanah</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">UTS PENAMBANGAN DATA</a></li>
+
 
 
 
@@ -392,7 +393,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Laporan Analisis Klasifikasi Kesuburan Tanah</h1>
+    <h1>UTS PENAMBANGAN DATA</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -402,7 +403,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Laporan Analisis Klasifikasi Kesuburan Tanah</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">UTS PENAMBANGAN DATA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#laporan-analisis-klasifikasi-kesuburan-tanah">Laporan Analisis Klasifikasi Kesuburan Tanah</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">1. Pendahuluan</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gambaran-awal-dataset-masalah-data">Gambaran Awal Dataset (Masalah Data)</a></li>
 </ul>
@@ -433,17 +435,20 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="laporan-analisis-klasifikasi-kesuburan-tanah">
+  <section id="uts-penambangan-data">
+<h1>UTS PENAMBANGAN DATA<a class="headerlink" href="#uts-penambangan-data" title="Permalink to this heading">#</a></h1>
+</section>
+<section id="laporan-analisis-klasifikasi-kesuburan-tanah">
 <h1>Laporan Analisis Klasifikasi Kesuburan Tanah<a class="headerlink" href="#laporan-analisis-klasifikasi-kesuburan-tanah" title="Permalink to this heading">#</a></h1>
 <p><strong>Metode:</strong> K-Nearest Neighbors (KNN)<br />
-<strong>Tools:</strong> KNIME Analytics Platform &amp; Jupyter Book<br />
+<strong>Tools:</strong> KNIME Analytics Platform
 <strong>Penyusun:</strong> Fahdimas Akmal</p>
 <hr class="docutils" />
 </section>
 <section id="pendahuluan">
 <h1>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Permalink to this heading">#</a></h1>
-<p>Laporan ini disusun untuk mendokumentasikan proses klasifikasi tingkat kesuburan tanah menggunakan dataset agronomis. Dataset ini terdiri dari <strong>2.000 sampel</strong> dengan 10 fitur utama (seperti pH, unsur hara NPK, tekstur tanah, dan kerapatan). Target klasifikasi dibagi menjadi dua kelas: <strong>Subur</strong> dan <strong>Tidak Subur</strong>.
-link File:<a class="reference external" href="https://hackmd.io/&#64;jAmaXS8iRwyGXIDziXEPlw/ryewWKrpWx">https://hackmd.io/&#64;jAmaXS8iRwyGXIDziXEPlw/ryewWKrpWx</a></p>
+<p>Laporan ini disusun untuk mendokumentasikan proses klasifikasi tingkat kesuburan tanah menggunakan dataset agronomis. Dataset ini terdiri dari <strong>2.000 sampel</strong> dengan 10 fitur utama (seperti pH, unsur hara NPK, tekstur tanah, dan kerapatan). Target klasifikasi dibagi menjadi dua kelas: <strong>Subur</strong> dan <strong>Tidak Subur</strong>.</p>
+<p>link File Dataset :  <a class="reference external" href="https://hackmd.io/&#64;jAmaXS8iRwyGXIDziXEPlw/ryewWKrpWx">https://hackmd.io/&#64;jAmaXS8iRwyGXIDziXEPlw/ryewWKrpWx</a></p>
 <section id="gambaran-awal-dataset-masalah-data">
 <h2>Gambaran Awal Dataset (Masalah Data)<a class="headerlink" href="#gambaran-awal-dataset-masalah-data" title="Permalink to this heading">#</a></h2>
 <p>Saat pertama kali data diimpor ke KNIME, ditemukan bahwa data tersebut tidak sempurna. Ada banyak nilai kosong (<em>missing values</em>) yang ditandai dengan tanda tanya (?). Masalah inilah yang menjadi tantangan utama yang harus diselesaikan pada tahap preprocessing.</p>
@@ -639,7 +644,8 @@ $<span class="math notranslate nohighlight">\(F1\text{-Score} = 2 \times \frac{\
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Laporan Analisis Klasifikasi Kesuburan Tanah</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">UTS PENAMBANGAN DATA</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#laporan-analisis-klasifikasi-kesuburan-tanah">Laporan Analisis Klasifikasi Kesuburan Tanah</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">1. Pendahuluan</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gambaran-awal-dataset-masalah-data">Gambaran Awal Dataset (Masalah Data)</a></li>
 </ul>
