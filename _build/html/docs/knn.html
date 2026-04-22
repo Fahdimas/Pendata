@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Tahap 1: Normalisasi Data (Min-Max) &#8212; Pendata Fahdimas</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/knn';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Simulasi W-KNN Imputasi pada Data Numerik (JMK)" href="Wknn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/profil.png" class="logo__image only-light" alt="Pendata Fahdimas - Home"/>
+    <script>document.write(`<img src="../_static/profil.png" class="logo__image only-dark" alt="Pendata Fahdimas - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Data Diri
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Pengantar-Data-Mining.html">Pengantar Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Memahami-Data.html">Memahami Karakteristik Data (Data Understanding)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_iris.html">Data Iris (Data Understanding)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="jarak.html">Mengukur Jarak Data Iris</a></li>
+<li class="toctree-l2"><a class="reference internal" href="campuran.html">Mengukur Jarak Tipe Data Campuran (Gower Distance)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pengantar_knn.html">Pengantar Algoritma k-Nearest Neighbors (k-NN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="missing.html">Simulasi k-NN Imputasi pada Data Numerik (Telco Churn)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="Wknn.html">Simulasi W-KNN Imputasi pada Data Numerik (JMK)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tahap 1: Normalisasi Data (Min-Max)</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Fahdimas/Pendata" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Fahdimas/Pendata/edit/main/docs/knn.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Fahdimas/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/knn.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/knn.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tahap 1: Normalisasi Data (Min-Max)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tahap 1: Normalisasi Data (Min-Max)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi">Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli">Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-normalization-scaling">1. Min-Max Normalization (Scaling)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization-standardization">2. Z-Score Normalization (Standardization)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-normalization">3. Decimal Scaling Normalization</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="tahap-1-normalisasi-data-min-max">
+<h1>Tahap 1: Normalisasi Data (Min-Max)<a class="headerlink" href="#tahap-1-normalisasi-data-min-max" title="Permalink to this heading">#</a></h1>
+<p>Sebelum menghitung jarak, kita samakan skala data asli menggunakan Normalisasi Min-Max.</p>
+<p><strong>Rumus Normalisasi Min-Max:</strong>
+$<span class="math notranslate nohighlight">\(X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}\)</span>$</p>
+<p><strong>1. Tentukan Nilai Min dan Max dari Data Asli (Baris 1-6):</strong></p>
+<ul class="simple">
+<li><p><strong>IPK:</strong> <span class="math notranslate nohighlight">\(Min = 2\)</span>, <span class="math notranslate nohighlight">\(Max = 4\)</span></p></li>
+<li><p><strong>PO:</strong> <span class="math notranslate nohighlight">\(Min = 2000000\)</span>, <span class="math notranslate nohighlight">\(Max = 4000000\)</span></p></li>
+<li><p><strong>JML:</strong> <span class="math notranslate nohighlight">\(Min = 2\)</span>, <span class="math notranslate nohighlight">\(Max = 3\)</span></p></li>
+</ul>
+<p><strong>2. Perhitungan Normalisasi Kolom IPK:</strong></p>
+<ul class="simple">
+<li><p>Baris 1 (IPK=2): $<span class="math notranslate nohighlight">\(IPK_{norm} = \frac{2 - 2}{4 - 2} = \frac{0}{2} = 0\)</span>$</p></li>
+<li><p>Baris 2 (IPK=3): $<span class="math notranslate nohighlight">\(IPK_{norm} = \frac{3 - 2}{4 - 2} = \frac{1}{2} = 0.5\)</span>$</p></li>
+<li><p>Baris 3 (IPK=4): $<span class="math notranslate nohighlight">\(IPK_{norm} = \frac{4 - 2}{4 - 2} = \frac{2}{2} = 1\)</span>$</p></li>
+<li><p>Baris 4 (IPK=2): $<span class="math notranslate nohighlight">\(IPK_{norm} = \frac{2 - 2}{4 - 2} = \frac{0}{2} = 0\)</span>$</p></li>
+<li><p>Baris 5 (IPK=3): $<span class="math notranslate nohighlight">\(IPK_{norm} = \frac{3 - 2}{4 - 2} = \frac{1}{2} = 0.5\)</span>$</p></li>
+<li><p>Baris 6 (IPK=4): $<span class="math notranslate nohighlight">\(IPK_{norm} = \frac{4 - 2}{4 - 2} = \frac{2}{2} = 1\)</span>$</p></li>
+<li><p>Baris 7 (IPK=2): $<span class="math notranslate nohighlight">\(IPK_{norm} = \frac{2 - 2}{4 - 2} = \frac{0}{2} = 0\)</span>$</p></li>
+</ul>
+<p><strong>3. Perhitungan Normalisasi Kolom PO:</strong></p>
+<ul class="simple">
+<li><p>Baris 1 (PO=2000000): $<span class="math notranslate nohighlight">\(PO_{norm} = \frac{2000000 - 2000000}{4000000 - 2000000} = 0\)</span>$</p></li>
+<li><p>Baris 2 (PO=3000000): $<span class="math notranslate nohighlight">\(PO_{norm} = \frac{3000000 - 2000000}{4000000 - 2000000} = 0.5\)</span>$</p></li>
+<li><p>Baris 3 (PO=2000000): $<span class="math notranslate nohighlight">\(PO_{norm} = \frac{2000000 - 2000000}{4000000 - 2000000} = 0\)</span>$</p></li>
+<li><p>Baris 4 (PO=2000000): $<span class="math notranslate nohighlight">\(PO_{norm} = \frac{2000000 - 2000000}{4000000 - 2000000} = 0\)</span>$</p></li>
+<li><p>Baris 5 (PO=3000000): $<span class="math notranslate nohighlight">\(PO_{norm} = \frac{3000000 - 2000000}{4000000 - 2000000} = 0.5\)</span>$</p></li>
+<li><p>Baris 6 (PO=4000000): $<span class="math notranslate nohighlight">\(PO_{norm} = \frac{4000000 - 2000000}{4000000 - 2000000} = 1\)</span>$</p></li>
+<li><p>Baris 7 (PO=3000000): $<span class="math notranslate nohighlight">\(PO_{norm} = \frac{3000000 - 2000000}{4000000 - 2000000} = 0.5\)</span>$</p></li>
+</ul>
+<p><strong>4. Perhitungan Normalisasi Kolom JML:</strong></p>
+<ul class="simple">
+<li><p>Baris 1 (JML=2): $<span class="math notranslate nohighlight">\(JML_{norm} = \frac{2 - 2}{3 - 2} = \frac{0}{1} = 0\)</span>$</p></li>
+<li><p>Baris 2 (JML=3): $<span class="math notranslate nohighlight">\(JML_{norm} = \frac{3 - 2}{3 - 2} = \frac{1}{1} = 1\)</span>$</p></li>
+<li><p>Baris 3 (JML=2): $<span class="math notranslate nohighlight">\(JML_{norm} = \frac{2 - 2}{3 - 2} = \frac{0}{1} = 0\)</span>$</p></li>
+<li><p>Baris 4 (JML=3): $<span class="math notranslate nohighlight">\(JML_{norm} = \frac{3 - 2}{3 - 2} = \frac{1}{1} = 1\)</span>$</p></li>
+<li><p>Baris 5 (JML=2): $<span class="math notranslate nohighlight">\(JML_{norm} = \frac{2 - 2}{3 - 2} = \frac{0}{1} = 0\)</span>$</p></li>
+<li><p>Baris 6 (JML=3): $<span class="math notranslate nohighlight">\(JML_{norm} = \frac{3 - 2}{3 - 2} = \frac{1}{1} = 1\)</span>$</p></li>
+<li><p>Baris 7 (JML=?): Belum diketahui, akan dicari dengan WKNN.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi">
+<h1>Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)<a class="headerlink" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi" title="Permalink to this heading">#</a></h1>
+<p>Kita gunakan tabel yang <strong>sudah dinormalisasi</strong> untuk memprediksi nilai JML baris ke-7. Target JML yang digunakan juga yang sudah dinormalisasi.</p>
+<ul class="simple">
+<li><p><strong>Data Target (Baris 7):</strong> <span class="math notranslate nohighlight">\(X_{target} = (0, 0.5)\)</span></p></li>
+<li><p><strong>Data Latih (Baris 1-6):</strong></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(X_1 = (0, 0)\)</span>, <span class="math notranslate nohighlight">\(Y_1 = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_2 = (0.5, 0.5)\)</span>, <span class="math notranslate nohighlight">\(Y_2 = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_3 = (1, 0)\)</span>, <span class="math notranslate nohighlight">\(Y_3 = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_4 = (0, 0)\)</span>, <span class="math notranslate nohighlight">\(Y_4 = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_5 = (0.5, 0.5)\)</span>, <span class="math notranslate nohighlight">\(Y_5 = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_6 = (1, 1)\)</span>, <span class="math notranslate nohighlight">\(Y_6 = 1\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Langkah 1: Hitung Jarak Euclidean (<span class="math notranslate nohighlight">\(d\)</span>)</strong>
+Hitung jarak dari <span class="math notranslate nohighlight">\(X_{target}\)</span> ke semua data latih: <span class="math notranslate nohighlight">\(d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d_1 = \sqrt{(0 - 0)^2 + (0 - 0.5)^2} = \sqrt{0 + 0.25} = 0.5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_2 = \sqrt{(0.5 - 0)^2 + (0.5 - 0.5)^2} = \sqrt{0.25 + 0} = 0.5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_3 = \sqrt{(1 - 0)^2 + (0 - 0.5)^2} = \sqrt{1 + 0.25} \approx 1.118\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_4 = \sqrt{(0 - 0)^2 + (0 - 0.5)^2} = \sqrt{0 + 0.25} = 0.5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_5 = \sqrt{(0.5 - 0)^2 + (0.5 - 0.5)^2} = \sqrt{0.25 + 0} = 0.5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d_6 = \sqrt{(1 - 0)^2 + (1 - 0.5)^2} = \sqrt{1 + 0.25} \approx 1.118\)</span></p></li>
+</ul>
+<p><strong>Langkah 2: Tentukan Nilai K dan Hitung Bobot (<span class="math notranslate nohighlight">\(w\)</span>)</strong>
+Terdapat <strong>4 data</strong> dengan jarak terdekat yang sama persis (Baris 1, 2, 4, 5 dengan <span class="math notranslate nohighlight">\(d = 0.5\)</span>). Maka kita gunakan <span class="math notranslate nohighlight">\(K=4\)</span>.
+Hitung bobot dengan rumus <span class="math notranslate nohighlight">\(w = \frac{1}{d}\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_1 = \frac{1}{0.5} = 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w_2 = \frac{1}{0.5} = 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w_4 = \frac{1}{0.5} = 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w_5 = \frac{1}{0.5} = 2\)</span></p></li>
+</ul>
+<p><strong>Langkah 3: Hitung Prediksi (Weighted Average)</strong>
+Kalikan bobot dengan target JML Normalisasi (<span class="math notranslate nohighlight">\(Y\)</span>), lalu bagi dengan total bobot.
+$<span class="math notranslate nohighlight">\(Prediksi = \frac{\sum (w_i \times Y_i)}{\sum w_i}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(Prediksi = \frac{(w_1 \times Y_1) + (w_2 \times Y_2) + (w_4 \times Y_4) + (w_5 \times Y_5)}{w_1 + w_2 + w_4 + w_5}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(Prediksi = \frac{(2 \times 0) + (2 \times 1) + (2 \times 1) + (2 \times 0)}{2 + 2 + 2 + 2}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(Prediksi = \frac{0 + 2 + 2 + 0}{8} = \frac{4}{8} = 0.5\)</span>$</p>
+<blockquote>
+<div><p><strong>Hasil:</strong> Tanda “?” pada kolom <strong>Normalisasi JML (kanan)</strong> adalah <strong>0.5</strong>.</p>
+</div></blockquote>
+<hr class="docutils" />
+</section>
+<section id="tahap-3-denormalisasi-mencari-pada-tabel-jml-asli">
+<h1>Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)<a class="headerlink" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli" title="Permalink to this heading">#</a></h1>
+<p>Karena hasil prediksi dari WKNN tadi bentuknya masih normalisasi (<span class="math notranslate nohighlight">\(0.5\)</span>), kita kembalikan ke bentuk angka numerik asli untuk mengisi tabel sebelah kiri.</p>
+<p><strong>Rumus Denormalisasi:</strong>
+$<span class="math notranslate nohighlight">\(X_{asli} = X_{norm} \times (X_{max} - X_{min}) + X_{min}\)</span>$</p>
+<p>Kita masukkan nilai prediksi dan nilai Min/Max dari data JML asli:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_{norm} = 0.5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_{min} = 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X_{max} = 3\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[JML_{asli} = 0.5 \times (3 - 2) + 2\]</div>
+<div class="math notranslate nohighlight">
+\[JML_{asli} = 0.5 \times (1) + 2\]</div>
+<div class="math notranslate nohighlight">
+\[JML_{asli} = 0.5 + 2 = 2.5\]</div>
+<blockquote>
+<div><p><strong>Hasil:</strong> Tanda “?” pada kolom <strong>JML asli (kiri)</strong> adalah <strong>2.5</strong>.</p>
+</div></blockquote>
+<p>Code Menggunakan Normalisasi Min-Max</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">euclidean_distances</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 1. DEFINISI DATA</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Baris ke-7 pada kolom JML kita isi dengan np.nan (kosong/missing value)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;IPK&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="s1">&#39;PO&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2000000</span><span class="p">,</span> <span class="mi">3000000</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">,</span> <span class="mi">2000000</span><span class="p">,</span> <span class="mi">3000000</span><span class="p">,</span> <span class="mi">4000000</span><span class="p">,</span> <span class="mi">3000000</span><span class="p">],</span>
+    <span class="s1">&#39;JML&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> 
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- 1. DATA ASLI ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Pisahkan Fitur (X) dan Target (Y)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;IPK&#39;</span><span class="p">,</span> <span class="s1">&#39;PO&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;JML&#39;</span><span class="p">]</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 2. PROSES NORMALISASI MIN-MAX</span>
+<span class="c1"># ==========================================</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="c1"># Fit dan transform seluruh data X (baris 1-7)</span>
+<span class="n">X_norm_array</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+
+<span class="c1"># Masukkan ke DataFrame baru khusus agar rapi saat di-print</span>
+<span class="n">df_norm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_norm_array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;IPK_Norm&#39;</span><span class="p">,</span> <span class="s1">&#39;PO_Norm&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- 2. HASIL NORMALISASI MIN-MAX (FITUR X) ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_norm</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Pisahkan Data Latih (baris 1-6) dan Target yang mau ditebak (baris 7)</span>
+<span class="n">X_train_norm</span> <span class="o">=</span> <span class="n">X_norm_array</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>    <span class="c1"># Ambil baris index 0 sampai 5</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>                    <span class="c1"># Target JML asli baris 1-6</span>
+<span class="n">X_target_norm</span> <span class="o">=</span> <span class="n">X_norm_array</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>   <span class="c1"># Ambil baris index 6 (baris ke-7)</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 3. MENGHITUNG JARAK EUCLIDEAN</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Hitung jarak dari baris ke-7 ke semua data latih (baris 1-6)</span>
+<span class="n">jarak</span> <span class="o">=</span> <span class="n">euclidean_distances</span><span class="p">(</span><span class="n">X_target_norm</span><span class="p">,</span> <span class="n">X_train_norm</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- 3. JARAK EUCLIDEAN (TARGET KE DATA LATIH) ---&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">jarak</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Jarak ke Baris </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> (d</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 4. PREDIKSI DENGAN WKNN</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Inisialisasi model WKNN (k=4, weights=&#39;distance&#39; agar jadi WKNN)</span>
+<span class="n">wknn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">)</span>
+<span class="n">wknn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_norm</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Lakukan prediksi</span>
+<span class="n">prediksi_jml</span> <span class="o">=</span> <span class="n">wknn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_target_norm</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- 4. HASIL AKHIR PREDIKSI WKNN ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi nilai JML (Asli) untuk baris ke-7 adalah : </span><span class="si">{</span><span class="n">prediksi_jml</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Opsional: Jika ingin menampilkan nilai Normalisasi JML-nya juga</span>
+<span class="n">jml_min</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">jml_max</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">jml_norm_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">prediksi_jml</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">jml_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">jml_max</span> <span class="o">-</span> <span class="n">jml_min</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Nilai Normalisasi JML untuk baris ke-7 adalah   : </span><span class="si">{</span><span class="n">jml_norm_pred</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--- 1. DATA ASLI ---
+   IPK       PO  JML
+0    2  2000000  2.0
+1    3  3000000  3.0
+2    4  2000000  2.0
+3    2  2000000  3.0
+4    3  3000000  2.0
+5    4  4000000  3.0
+6    2  3000000  NaN
+------------------------------ 
+
+--- 2. HASIL NORMALISASI MIN-MAX (FITUR X) ---
+   IPK_Norm  PO_Norm
+0       0.0      0.0
+1       0.5      0.5
+2       1.0      0.0
+3       0.0      0.0
+4       0.5      0.5
+5       1.0      1.0
+6       0.0      0.5
+------------------------------ 
+
+--- 3. JARAK EUCLIDEAN (TARGET KE DATA LATIH) ---
+Jarak ke Baris 1 (d1): 0.5000
+Jarak ke Baris 2 (d2): 0.5000
+Jarak ke Baris 3 (d3): 1.1180
+Jarak ke Baris 4 (d4): 0.5000
+Jarak ke Baris 5 (d5): 0.5000
+Jarak ke Baris 6 (d6): 1.1180
+------------------------------ 
+
+--- 4. HASIL AKHIR PREDIKSI WKNN ---
+Prediksi nilai JML (Asli) untuk baris ke-7 adalah : 2.5
+Nilai Normalisasi JML untuk baris ke-7 adalah   : 0.5
+------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="min-max-normalization-scaling">
+<h1>1. Min-Max Normalization (Scaling)<a class="headerlink" href="#min-max-normalization-scaling" title="Permalink to this heading">#</a></h1>
+<p>Metode ini paling sering dipakai untuk mengubah rentang data menjadi skala <strong>0 sampai 1</strong>. Angka terkecil akan menjadi 0, dan angka terbesar akan menjadi 1.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_{norm}\)</span>: Nilai data baru setelah dinormalisasi (hasil).</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span>: Nilai data asli yang sedang dihitung.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_{min}\)</span>: Nilai paling kecil dari seluruh data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_{max}\)</span>: Nilai paling besar dari seluruh data.</p></li>
+</ul>
+<p><strong>Contoh Perhitungan Manual:</strong>
+Misal kita punya data Umur: <strong>20, 30, 50</strong>.</p>
+<ul class="simple">
+<li><p>Cari <span class="math notranslate nohighlight">\(X_{min} = 20\)</span></p></li>
+<li><p>Cari <span class="math notranslate nohighlight">\(X_{max} = 50\)</span></p></li>
+</ul>
+<p>Sekarang kita masukkan ke rumus satu per satu:</p>
+<ul class="simple">
+<li><p>Untuk umur <strong>20</strong>: $<span class="math notranslate nohighlight">\(X_{norm} = \frac{20 - 20}{50 - 20} = \frac{0}{30} = 0\)</span>$</p></li>
+<li><p>Untuk umur <strong>30</strong>: $<span class="math notranslate nohighlight">\(X_{norm} = \frac{30 - 20}{50 - 20} = \frac{10}{30} \approx 0.333\)</span>$</p></li>
+<li><p>Untuk umur <strong>50</strong>: $<span class="math notranslate nohighlight">\(X_{norm} = \frac{50 - 20}{50 - 20} = \frac{30}{30} = 1\)</span>$</p></li>
+</ul>
+<p>Hasil akhir datanya menjadi: <strong>0, 0.333, 1</strong>.</p>
+<p><strong>Pembuktian dengan Code (Sklearn &amp; Manual):</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Umur&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">]})</span>
+
+<span class="c1"># 1. Bikin Fungsi Manual</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">minmax_manual</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Manual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">minmax_manual</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Umur&#39;</span><span class="p">])</span>
+
+<span class="c1"># 2. Pakai Library Sklearn</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sklearn&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Umur&#39;</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Umur    Manual   Sklearn
+0    20  0.000000  0.000000
+1    30  0.333333  0.333333
+2    50  1.000000  1.000000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="z-score-normalization-standardization">
+<h1>2. Z-Score Normalization (Standardization)<a class="headerlink" href="#z-score-normalization-standardization" title="Permalink to this heading">#</a></h1>
+<p>Metode ini mengubah data berdasarkan rata-rata dan sebaran datanya. Hasil akhirnya akan membuat data memiliki <strong>rata-rata = 0</strong> dan <strong>standar deviasi = 1</strong>. Data yang nilainya di bawah rata-rata akan bernilai minus, dan yang di atas rata-rata bernilai plus.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(Z = \frac{X - \mu}{\sigma}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Z\)</span>: Nilai data baru setelah dinormalisasi (Z-score).</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span>: Nilai data asli yang sedang dihitung.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> (<em>mu</em>): Rata-rata (<em>Mean</em>) dari seluruh data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> (<em>sigma</em>): Standar Deviasi dari seluruh data.</p></li>
+</ul>
+<p><strong>Contoh Perhitungan Manual:</strong>
+Misal kita punya data Nilai: <strong>2, 4, 6</strong>.</p>
+<ul class="simple">
+<li><p>Cari Rata-rata (<span class="math notranslate nohighlight">\(\mu\)</span>): $<span class="math notranslate nohighlight">\((2 + 4 + 6) / 3 = 4\)</span>$</p></li>
+<li><p>Cari Varian: $<span class="math notranslate nohighlight">\(((2-4)^2 + (4-4)^2 + (6-4)^2) / 3 = (4 + 0 + 4) / 3 = 2.667\)</span>$</p></li>
+<li><p>Cari Standar Deviasi (<span class="math notranslate nohighlight">\(\sigma\)</span>): $<span class="math notranslate nohighlight">\(\sqrt{2.667} \approx 1.633\)</span>$</p></li>
+</ul>
+<p>Sekarang kita hitung Z-score-nya:</p>
+<ul class="simple">
+<li><p>Untuk nilai <strong>2</strong>: $<span class="math notranslate nohighlight">\(Z = \frac{2 - 4}{1.633} = \frac{-2}{1.633} \approx -1.22\)</span>$</p></li>
+<li><p>Untuk nilai <strong>4</strong>: $<span class="math notranslate nohighlight">\(Z = \frac{4 - 4}{1.633} = \frac{0}{1.633} = 0\)</span>$</p></li>
+<li><p>Untuk nilai <strong>6</strong>: $<span class="math notranslate nohighlight">\(Z = \frac{6 - 4}{1.633} = \frac{2}{1.633} \approx 1.22\)</span>$</p></li>
+</ul>
+<p>Hasil akhir datanya menjadi: <strong>-1.22, 0, 1.22</strong>.</p>
+<p><strong>Pembuktian dengan Code (Sklearn &amp; Manual):</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Nilai&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="c1"># 1. Bikin Fungsi Manual</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">zscore_manual</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># ddof=0 agar sama persis dengan perhitungan populasi Sklearn</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Manual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zscore_manual</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Nilai&#39;</span><span class="p">])</span>
+
+<span class="c1"># 2. Pakai Library Sklearn</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Sklearn&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Nilai&#39;</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Nilai    Manual   Sklearn
+0      2 -1.224745 -1.224745
+1      4  0.000000  0.000000
+2      6  1.224745  1.224745
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decimal-scaling-normalization">
+<h1>3. Decimal Scaling Normalization<a class="headerlink" href="#decimal-scaling-normalization" title="Permalink to this heading">#</a></h1>
+<p>Metode ini sangat praktis jika datanya berupa angka ribuan/jutaan. Kita hanya perlu menggeser koma desimal ke kiri berdasarkan jumlah digit dari angka terbesarnya.</p>
+<p><strong>Rumus:</strong>
+$<span class="math notranslate nohighlight">\(X_{norm} = \frac{X}{10^j}\)</span>$</p>
+<p><strong>Keterangan:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_{norm}\)</span>: Nilai data baru setelah dinormalisasi.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span>: Nilai data asli yang sedang dihitung.</p></li>
+<li><p><span class="math notranslate nohighlight">\(j\)</span>: Jumlah digit dari angka <em>absolut</em> (positif) yang paling besar di dalam data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(10^j\)</span>: Angka pembaginya.</p></li>
+</ul>
+<p><strong>Contoh Perhitungan Manual:</strong>
+Misal kita punya data Harga: <strong>150, 2500, -8500</strong>.</p>
+<ul class="simple">
+<li><p>Cari angka absolut terbesar: Antara 150, 2500, dan 8500 (minus diabaikan). Yang terbesar adalah <strong>8500</strong>.</p></li>
+<li><p>Cari jumlah digit (<span class="math notranslate nohighlight">\(j\)</span>): Angka 8500 memiliki <strong>4 digit</strong>. Maka <span class="math notranslate nohighlight">\(j = 4\)</span>.</p></li>
+<li><p>Angka pembagi (<span class="math notranslate nohighlight">\(10^j\)</span>): <span class="math notranslate nohighlight">\(10^4 = 10000\)</span>.</p></li>
+</ul>
+<p>Sekarang kita bagi setiap data dengan 10.000:</p>
+<ul class="simple">
+<li><p>Untuk harga <strong>150</strong>: $<span class="math notranslate nohighlight">\(X_{norm} = \frac{150}{10000} = 0.015\)</span>$</p></li>
+<li><p>Untuk harga <strong>2500</strong>: $<span class="math notranslate nohighlight">\(X_{norm} = \frac{2500}{10000} = 0.25\)</span>$</p></li>
+<li><p>Untuk harga <strong>-8500</strong>: $<span class="math notranslate nohighlight">\(X_{norm} = \frac{-8500}{10000} = -0.85\)</span>$</p></li>
+</ul>
+<p>Hasil akhir datanya menjadi: <strong>0.015, 0.25, -0.85</strong>.</p>
+<p><strong>Pembuktian dengan Code (Fungsi Manual):</strong>
+<em>(Catatan: Sklearn tidak menyediakan fungsi bawaan untuk Decimal Scaling karena sangat sederhana, jadi kita murni buat fungsinya sendiri).</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Harga&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="o">-</span><span class="mi">8500</span><span class="p">]})</span>
+
+<span class="c1"># Bikin Fungsi Manual</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">decimal_scaling</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">max_abs</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>       <span class="c1"># Cari angka absolut terbesar (8500)</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">max_abs</span><span class="p">)))</span>    <span class="c1"># Hitung digitnya (4)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">j</span><span class="p">)</span>            <span class="c1"># Bagi data dengan 10^j</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Manual&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">decimal_scaling</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Harga  Manual
+0    150   0.015
+1   2500   0.250
+2  -8500  -0.850
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Wknn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Simulasi W-KNN Imputasi pada Data Numerik (JMK)</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tahap 1: Normalisasi Data (Min-Max)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-2-menghitung-wknn-mencari-pada-tabel-normalisasi">Tahap 2: Menghitung WKNN (Mencari “?” pada Tabel Normalisasi)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tahap-3-denormalisasi-mencari-pada-tabel-jml-asli">Tahap 3: Denormalisasi (Mencari “?” pada Tabel JML Asli)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#min-max-normalization-scaling">1. Min-Max Normalization (Scaling)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#z-score-normalization-standardization">2. Z-Score Normalization (Standardization)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#decimal-scaling-normalization">3. Decimal Scaling Normalization</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Fahdimas akmal
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
