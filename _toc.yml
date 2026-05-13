@@ -8,5 +8,6 @@ chapters:
       - file: docs/jarak
       - file: docs/campuran
   - file: docs/Normalisasi-WKNN
-  # Menambahkan file UTS Analisis Kesuburan Tanah
   - file: docs/UTS_Pendata
+  - file: docs/Baiyes
+  - file: docs/Tree

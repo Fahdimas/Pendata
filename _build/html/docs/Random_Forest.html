@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Business Understanding &#8212; Pendata Fahdimas</title>
+    <title>Topik: Implementasi Klasifikasi &amp; Regresi Random Forest &#8212; Pendata Fahdimas</title>
   
   
   
@@ -62,7 +62,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Bussiness-Understanding';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Random_Forest';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -182,13 +184,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="Normalisasi-WKNN.html">Preprocessing Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="UTS_Pendata.html">Laporan Analisis Klasifikasi Kesuburan Tanah</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UTS_Pendata.html">UTS PENAMBANGAN DATA</a></li>
 
 
 
 
 
 
+
+<li class="toctree-l1"><a class="reference internal" href="Baiyes.html">Tugas Naive Baiyes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tree.html">Tugas Decision Tree</a></li>
 </ul>
 
     </div>
@@ -260,7 +265,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/Fahdimas/Pendata/edit/main/docs/Bussiness-Understanding.ipynb" target="_blank"
+      <li><a href="https://github.com/Fahdimas/Pendata/edit/main/docs/Random_Forest.ipynb" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -277,7 +282,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/Fahdimas/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/Bussiness-Understanding.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/Fahdimas/Pendata/issues/new?title=Issue%20on%20page%20%2Fdocs/Random_Forest.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -307,7 +312,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/docs/Bussiness-Understanding.ipynb" target="_blank"
+      <li><a href="../_sources/docs/Random_Forest.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -391,7 +396,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Business Understanding</h1>
+    <h1>Topik: Implementasi Klasifikasi & Regresi Random Forest</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -401,10 +406,25 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-bisnis-business-objectives">1. Menentukan Tujuan Bisnis (Business Objectives)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-assess-situation">2. Menilai Situasi (Assess Situation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-data-mining-data-mining-goals">3. Menentukan Tujuan Data Mining (Data Mining Goals)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-rencana-proyek-project-plan">4. Membuat Rencana Proyek (Project Plan)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-knime-analytics-platform">Menggunakan KNIME Analytics Platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#landasan-teori-random-forest">1. Landasan Teori: Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-implementasi-pada-knime">2. Tahapan Implementasi pada KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-konfigurasi-table-partitioner-data-splitting">A. Konfigurasi Table Partitioner (Data Splitting)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-konfigurasi-random-forest-learner-model-training">B. Konfigurasi Random Forest Learner (Model Training)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulasi-perhitungan-manual-gini-impurity">3. Simulasi Perhitungan Manual (Gini Impurity)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-gini-impurity">Rumus Gini Impurity:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-perhitungan-data-keseluruhan">Langkah Perhitungan (Data Keseluruhan):</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-multi-scorer">4. Evaluasi Multi-Scorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-bag-oob-scorer">1. Out-of-Bag (OOB) Scorer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer-klasifikasi-data-testing">2. Scorer Klasifikasi (Data Testing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-scorer-line-plot-regresi-wind">3. Numeric Scorer &amp; Line Plot (Regresi Wind)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-hasil-akhir">5. Analisis Hasil Akhir</a></li>
 </ul>
             </nav>
         </div>
@@ -416,35 +436,115 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="business-understanding">
-<h1>Business Understanding<a class="headerlink" href="#business-understanding" title="Permalink to this heading">#</a></h1>
-<p>Tahap ini merupakan fase pertama dalam metode CRISP-DM. Fokus pada tahap ini adalah memahami tujuan dan kebutuhan dari perspektif bisnis atau penelitian, kemudian menerjemahkannya ke dalam definisi masalah data mining.</p>
-<section id="menentukan-tujuan-bisnis-business-objectives">
-<h2>1. Menentukan Tujuan Bisnis (Business Objectives)<a class="headerlink" href="#menentukan-tujuan-bisnis-business-objectives" title="Permalink to this heading">#</a></h2>
-<p>Tujuan utama dari analisis dataset Iris ini adalah untuk membangun model klasifikasi yang mampu membedakan jenis bunga Iris secara akurat berdasarkan karakteristik fisiknya. Hal ini penting dalam bidang botani untuk identifikasi spesies secara otomatis.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="topik-implementasi-klasifikasi-regresi-random-forest">
+<h1>Topik: Implementasi Klasifikasi &amp; Regresi Random Forest<a class="headerlink" href="#topik-implementasi-klasifikasi-regresi-random-forest" title="Permalink to this heading">#</a></h1>
+<section id="menggunakan-knime-analytics-platform">
+<h2>Menggunakan KNIME Analytics Platform<a class="headerlink" href="#menggunakan-knime-analytics-platform" title="Permalink to this heading">#</a></h2>
+<p><strong>Oleh: Fahdimas Akmal (Dimas)</strong></p>
 </section>
-<section id="menilai-situasi-assess-situation">
-<h2>2. Menilai Situasi (Assess Situation)<a class="headerlink" href="#menilai-situasi-assess-situation" title="Permalink to this heading">#</a></h2>
-<p>Dataset Iris yang digunakan adalah dataset standar yang sudah teruji kualitasnya. Tantangan dalam situasi ini adalah adanya kemiripan fitur antara spesies <em>Iris-versicolor</em> dan <em>Iris-virginica</em>, sehingga diperlukan metode analisis yang tepat untuk membedakannya.</p>
-</section>
-<section id="menentukan-tujuan-data-mining-data-mining-goals">
-<h2>3. Menentukan Tujuan Data Mining (Data Mining Goals)<a class="headerlink" href="#menentukan-tujuan-data-mining-data-mining-goals" title="Permalink to this heading">#</a></h2>
-<p>Tujuan teknis dari proyek ini adalah:</p>
+<hr class="docutils" />
+<section id="landasan-teori-random-forest">
+<h2>1. Landasan Teori: Random Forest<a class="headerlink" href="#landasan-teori-random-forest" title="Permalink to this heading">#</a></h2>
+<p>Dalam tugas ini, saya menerapkan algoritma <strong>Random Forest</strong>, yaitu metode <em>ensemble learning</em> yang membangun banyak pohon keputusan (Decision Trees) secara acak untuk mendapatkan hasil prediksi yang lebih stabil dan akurat.</p>
+<p>Beberapa konsep kunci yang saya terapkan adalah:</p>
 <ul class="simple">
-<li><p>Melakukan eksplorasi data untuk melihat pola penyebaran spesies.</p></li>
-<li><p>Mengidentifikasi fitur (seperti panjang/lebar mahkota) yang paling berpengaruh terhadap jenis spesies.</p></li>
-<li><p>Membangun model yang memiliki tingkat akurasi tinggi dalam klasifikasi.</p></li>
+<li><p><strong>Bootstrapping:</strong> Proses pengambilan sampel data secara acak dengan pengembalian untuk melatih setiap pohon individu.</p></li>
+<li><p><strong>Feature Randomness:</strong> Setiap pohon hanya melihat subset acak dari fitur yang ada, sehingga pohon-pohon tersebut tidak saling berkorelasi.</p></li>
+<li><p><strong>Majority Voting:</strong> Untuk klasifikasi, hasil akhir diambil dari suara terbanyak dari seluruh pohon.</p></li>
 </ul>
 </section>
-<section id="membuat-rencana-proyek-project-plan">
-<h2>4. Membuat Rencana Proyek (Project Plan)<a class="headerlink" href="#membuat-rencana-proyek-project-plan" title="Permalink to this heading">#</a></h2>
-<p>Langkah-langkah yang akan dilakukan dalam proyek ini meliputi:</p>
+<hr class="docutils" />
+<section id="tahapan-implementasi-pada-knime">
+<h2>2. Tahapan Implementasi pada KNIME<a class="headerlink" href="#tahapan-implementasi-pada-knime" title="Permalink to this heading">#</a></h2>
+<p>Berikut adalah rincian tahapan yang saya lakukan dalam <em>workflow</em> ini berdasarkan <em>screenshot</em> konfigurasi:</p>
+<section id="a-konfigurasi-table-partitioner-data-splitting">
+<h3>A. Konfigurasi Table Partitioner (Data Splitting)<a class="headerlink" href="#a-konfigurasi-table-partitioner-data-splitting" title="Permalink to this heading">#</a></h3>
+<p>Pada node ini, saya membagi dataset menjadi dua bagian utama untuk menjamin objektivitas pengujian model.</p>
+<p>![image_72245e.png - Screenshot Table Partitioner Settings]</p>
+<ul class="simple">
+<li><p><strong>Relative Size (80%):</strong> Saya menetapkan 80% data untuk <em>Training</em> (pembelajaran) dan sisanya 20% untuk <em>Testing</em> (pengujian).</p></li>
+<li><p><strong>Stratified Sampling:</strong> Saya memilih strategi ini pada kolom “Play Tennis” agar proporsi kelas (Yes/No) di data latih dan data uji tetap seimbang, mencegah model menjadi bias.</p></li>
+</ul>
+</section>
+<section id="b-konfigurasi-random-forest-learner-model-training">
+<h3>B. Konfigurasi Random Forest Learner (Model Training)<a class="headerlink" href="#b-konfigurasi-random-forest-learner-model-training" title="Permalink to this heading">#</a></h3>
+<p>Pada node ini, saya menentukan atribut apa saja yang akan dipelajari oleh “hutan” pohon keputusan saya.</p>
+<p>![image_7223df.png - Screenshot RF Learner Classification Settings]</p>
+<ul class="simple">
+<li><p><strong>Target Column:</strong> “Play Tennis” (Variabel yang ingin ditebak).</p></li>
+<li><p><strong>Training Attributes:</strong> Saya memasukkan fitur <em>Day</em>, <em>Outlook</em>, dan <em>Temp</em> sebagai prediktor.</p></li>
+<li><p><strong>Split Criterion (Gini Index):</strong> Saya menggunakan kriteria Gini untuk menentukan seberapa “murni” sebuah cabang pohon.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="simulasi-perhitungan-manual-gini-impurity">
+<h2>3. Simulasi Perhitungan Manual (Gini Impurity)<a class="headerlink" href="#simulasi-perhitungan-manual-gini-impurity" title="Permalink to this heading">#</a></h2>
+<p>Untuk memahami bagaimana pohon dalam Random Forest membelah data, saya melakukan perhitungan manual <strong>Gini Impurity</strong> pada akar pohon (<em>root node</em>) menggunakan dataset “Play Tennis” (14 baris).</p>
+<section id="rumus-gini-impurity">
+<h3>Rumus Gini Impurity:<a class="headerlink" href="#rumus-gini-impurity" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[Gini(S) = 1 - \sum_{i=1}^{n} (p_i)^2\]</div>
+<p><strong>Keterangan Simbol:</strong></p>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(Gini(S)\)</span></strong>: Nilai ketidakmurnian data. Semakin mendekati 0, maka data semakin murni (homogen).</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(1\)</span></strong>: Melambangkan total probabilitas maksimal.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\sum\)</span></strong>: Simbol penjumlahan untuk seluruh kelas yang ada.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(p_i\)</span></strong>: Probabilitas kemunculan kelas <span class="math notranslate nohighlight">\(i\)</span> (Jumlah data kelas <span class="math notranslate nohighlight">\(i\)</span> dibagi total data).</p></li>
+</ul>
+</section>
+<section id="langkah-perhitungan-data-keseluruhan">
+<h3>Langkah Perhitungan (Data Keseluruhan):<a class="headerlink" href="#langkah-perhitungan-data-keseluruhan" title="Permalink to this heading">#</a></h3>
+<p>Berdasarkan gambar data, terdapat 14 baris data dengan hasil: <strong>9 Yes</strong> dan <strong>5 No</strong>.</p>
 <ol class="arabic simple">
-<li><p><strong>Data Understanding</strong>: Mengenal karakteristik data (Orange &amp; Python).</p></li>
-<li><p><strong>Data Preparation</strong>: Membersihkan atau memformat data jika diperlukan.</p></li>
-<li><p><strong>Modeling</strong>: Menerapkan algoritma klasifikasi.</p></li>
-<li><p><strong>Evaluation</strong>: Menghitung akurasi model.</p></li>
+<li><p><strong>Hitung Probabilitas:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p_{Yes} = 9/14 = 0.642\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{No} = 5/14 = 0.357\)</span></p></li>
+</ul>
+</li>
+<li><p><strong>Masukkan ke Rumus:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Gini(S) = 1 - [(0.642)^2 + (0.357)^2]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Gini(S) = 1 - [0.412 + 0.127]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Gini(S) = 1 - 0.539 = \mathbf{0.461}\)</span></p></li>
+</ul>
+</li>
 </ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="evaluasi-multi-scorer">
+<h2>4. Evaluasi Multi-Scorer<a class="headerlink" href="#evaluasi-multi-scorer" title="Permalink to this heading">#</a></h2>
+<p>Saya menggunakan tiga jenis evaluasi untuk melihat performa model dari berbagai sudut pandang:</p>
+<section id="out-of-bag-oob-scorer">
+<h3>1. Out-of-Bag (OOB) Scorer<a class="headerlink" href="#out-of-bag-oob-scorer" title="Permalink to this heading">#</a></h3>
+<p>Scorer ini mengevaluasi model menggunakan data yang tidak terpilih saat proses <em>bootstrapping</em> (validasi internal).</p>
+<p>![image_71ca46.png - Screenshot Confusion Matrix OOB]</p>
+<ul class="simple">
+<li><p><strong>Accuracy:</strong> <strong>36.364%</strong>. Akurasi ini rendah karena dataset yang digunakan sangat kecil (14 sampel), sehingga model kesulitan melakukan generalisasi secara internal.</p></li>
+</ul>
+</section>
+<section id="scorer-klasifikasi-data-testing">
+<h3>2. Scorer Klasifikasi (Data Testing)<a class="headerlink" href="#scorer-klasifikasi-data-testing" title="Permalink to this heading">#</a></h3>
+<p>Ini adalah pengujian sesungguhnya menggunakan 20% data yang belum pernah dilihat model.</p>
+<p>![image_71cabb.png - Screenshot Confusion Matrix Testing]</p>
+<ul class="simple">
+<li><p><strong>Accuracy:</strong> <strong>66.667%</strong>. Dari 3 data uji, 2 berhasil diprediksi dengan benar. Ini menunjukkan performa yang cukup baik untuk dataset skala kecil.</p></li>
+</ul>
+</section>
+<section id="numeric-scorer-line-plot-regresi-wind">
+<h3>3. Numeric Scorer &amp; Line Plot (Regresi Wind)<a class="headerlink" href="#numeric-scorer-line-plot-regresi-wind" title="Permalink to this heading">#</a></h3>
+<p>Selain klasifikasi, saya juga melatih model regresi untuk memprediksi nilai numerik “Wind”.</p>
+<p>![image_71c9c6.png - Screenshot Numeric Scorer Settings]</p>
+<p>Visualisasi di bawah membandingkan nilai <strong>Actual</strong> (biru) dengan <strong>Prediction</strong> (ungu/merah). Terlihat adanya selisih (<em>error</em>) yang wajar dalam model regresi.</p>
+<p>![image_71c6e3.png - Screenshot Line Plot Regression]</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="analisis-hasil-akhir">
+<h2>5. Analisis Hasil Akhir<a class="headerlink" href="#analisis-hasil-akhir" title="Permalink to this heading">#</a></h2>
+<p>Dalam tugas ini, saya menyimpulkan bahwa <strong>Random Forest</strong> memberikan fleksibilitas tinggi karena bisa menangani kasus klasifikasi dan regresi sekaligus. Penggunaan <strong>Normalisasi</strong> di awal <em>workflow</em> sangat membantu menyetarakan bobot fitur numerik. Meskipun akurasi testing mencapai <strong>66.67%</strong>, nilai OOB yang rendah mengingatkan saya bahwa algoritma Random Forest akan jauh lebih maksimal jika digunakan pada dataset yang memiliki jumlah baris ribuan atau lebih.</p>
 </section>
 </section>
 
@@ -494,10 +594,25 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-bisnis-business-objectives">1. Menentukan Tujuan Bisnis (Business Objectives)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menilai-situasi-assess-situation">2. Menilai Situasi (Assess Situation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-tujuan-data-mining-data-mining-goals">3. Menentukan Tujuan Data Mining (Data Mining Goals)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-rencana-proyek-project-plan">4. Membuat Rencana Proyek (Project Plan)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-knime-analytics-platform">Menggunakan KNIME Analytics Platform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#landasan-teori-random-forest">1. Landasan Teori: Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-implementasi-pada-knime">2. Tahapan Implementasi pada KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-konfigurasi-table-partitioner-data-splitting">A. Konfigurasi Table Partitioner (Data Splitting)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-konfigurasi-random-forest-learner-model-training">B. Konfigurasi Random Forest Learner (Model Training)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulasi-perhitungan-manual-gini-impurity">3. Simulasi Perhitungan Manual (Gini Impurity)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-gini-impurity">Rumus Gini Impurity:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-perhitungan-data-keseluruhan">Langkah Perhitungan (Data Keseluruhan):</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-multi-scorer">4. Evaluasi Multi-Scorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-bag-oob-scorer">1. Out-of-Bag (OOB) Scorer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer-klasifikasi-data-testing">2. Scorer Klasifikasi (Data Testing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-scorer-line-plot-regresi-wind">3. Numeric Scorer &amp; Line Plot (Regresi Wind)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-hasil-akhir">5. Analisis Hasil Akhir</a></li>
 </ul>
   </nav></div>
 
