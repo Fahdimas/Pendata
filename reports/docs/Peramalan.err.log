@@ -26,7 +26,10 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-# Install library openeo terlebih dahulu
-!pip install openeo
+import openeo
+
+# Konek ke server Copernicus dan autentikasi
+# Nanti akan muncul link, klik link tersebut dan login pakai akun Copernicus kamu
+connection = openeo.connect("openeo.dataspace.copernicus.eu").authenticate_oidc()
 -------------------
 
