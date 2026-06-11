@@ -12,3 +12,6 @@ chapters:
   - file: docs/Baiyes
   - file: docs/Tree
   - file: docs/Random
+  - file: docs/Linear
+  - file: docs/Peramalan
+  - file: docs/Analisa_Data
